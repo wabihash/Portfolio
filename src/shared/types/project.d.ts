@@ -12,7 +12,7 @@ export interface Project {
   techStack: string[];
   accentColor: AccentColor;
   liveUrl: string;
-  githubUrl: string;
+  githubUrl?: string;
   featured: boolean;
   image: string;
   imageAlt: string;

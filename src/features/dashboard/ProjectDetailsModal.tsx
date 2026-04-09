@@ -207,15 +207,17 @@ export function ProjectDetailsModal({
                       Live Demo
                     </a>
 
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/10"
-                    >
-                      <FaGithub className="h-4 w-4" />
-                      GitHub
-                    </a>
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/10"
+                      >
+                        <FaGithub className="h-4 w-4" />
+                        GitHub
+                      </a>
+                    )}
                   </div>
                 </div>
 

@@ -16,7 +16,7 @@ const QUICK_LINKS: FooterLink[] = [
   { id: 'contact', label: 'Contact', href: '/#contact' },
 ];
 
-const FOOTER_SOCIAL_IDS = new Set(['github', 'linkedin', 'email']);
+const FOOTER_SOCIAL_IDS = new Set(['whatsapp', 'email']);
 
 function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
   return (

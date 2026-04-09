@@ -5,6 +5,7 @@ export type ContactItem = {
   label: string;
   value: string;
   icon: ContactIcon;
+  href?: string;
 };
 
 export const CONTACT_ITEMS: ContactItem[] = [
@@ -13,12 +14,14 @@ export const CONTACT_ITEMS: ContactItem[] = [
     label: 'Email',
     value: 'wabidagim280@gmail.com',
     icon: 'email',
+    href: 'mailto:wabidagim280@gmail.com',
   },
   {
     id: 'phone',
     label: 'Phone',
     value: '+251983488579',
     icon: 'phone',
+    href: 'tel:+251983488579',
   },
   {
     id: 'location',
@@ -29,7 +32,8 @@ export const CONTACT_ITEMS: ContactItem[] = [
   {
     id: 'whatsapp',
     label: 'WhatsApp',
-    value: 'Will update later',
+    value: '+251983488579',
     icon: 'whatsapp',
+    href: 'https://wa.me/251983488579',
   },
 ];

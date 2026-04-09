@@ -128,14 +128,16 @@ export function ProjectCard({ onOpenDetails, project }: ProjectCardProps): React
           Live Demo
         </a>
 
-        <a
-          href={project.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition duration-300 hover:scale-[1.03] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-        >
-          GitHub
-        </a>
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition duration-300 hover:scale-[1.03] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          >
+            GitHub
+          </a>
+        )}
       </div>
     </motion.article>
   );

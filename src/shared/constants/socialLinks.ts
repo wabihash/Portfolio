@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import { FaEnvelope, FaGithub, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
+import { FaEnvelope, FaWhatsapp } from 'react-icons/fa6';
 
 export type SocialLink = {
   id: string;
@@ -10,22 +10,10 @@ export type SocialLink = {
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    id: 'github',
-    label: 'GitHub',
-    href: 'https://github.com/',
-    icon: FaGithub,
-  },
-  {
-    id: 'linkedin',
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/',
-    icon: FaLinkedinIn,
-  },
-  {
-    id: 'twitter',
-    label: 'Twitter',
-    href: 'https://x.com/',
-    icon: FaXTwitter,
+    id: 'whatsapp',
+    label: 'WhatsApp',
+    href: 'https://wa.me/251983488579',
+    icon: FaWhatsapp,
   },
   {
     id: 'email',

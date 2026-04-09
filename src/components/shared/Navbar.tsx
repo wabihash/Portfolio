@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 
 const NAV_LINKS = [
@@ -15,6 +15,7 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   // Disable scroll when mobile menu is open
   useEffect(() => {
@@ -36,9 +37,14 @@ export function Navbar() {
       <div className="mx-auto flex h-12 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6">
         {/* Left: Logo */}
         <Link href="/#home" className="group flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-linear-to-br from-cyan-300 to-blue-500 text-sm font-black text-[#04101f] shadow-[0_10px_22px_rgba(34,211,238,0.35)] transition-transform duration-300 group-hover:scale-110 sm:h-8 sm:w-8 sm:text-lg">
+          <motion.div
+            whileHover={shouldReduceMotion ? undefined : { rotate: -10, scale: 1.08, y: -1 }}
+            whileTap={shouldReduceMotion ? undefined : { rotate: 10, scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 420, damping: 18 }}
+            className="flex h-7 w-7 origin-center items-center justify-center rounded-lg bg-linear-to-br from-cyan-300 to-blue-500 text-sm font-black text-[#04101f] shadow-[0_10px_22px_rgba(34,211,238,0.35)] transition-transform duration-300 group-hover:scale-110 sm:h-8 sm:w-8 sm:text-lg"
+          >
             W
-          </div>
+          </motion.div>
           <span className="bg-linear-to-r from-white to-cyan-100/80 bg-clip-text text-base font-extrabold tracking-[-0.01em] text-transparent sm:text-xl">
             Wabi
           </span>
