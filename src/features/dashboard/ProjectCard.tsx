@@ -8,6 +8,7 @@ import type { Project } from '@/shared/types/project';
 const FALLBACK_IMAGE = '/window.svg';
 
 type ProjectCardProps = {
+  onOpenDetails: (project: Project) => void;
   project: Project;
 };
 
@@ -44,10 +45,12 @@ const ACCENT_THEME: Record<Project['accentColor'], { ring: string; badge: string
   },
 };
 
-export function ProjectCard({ project }: ProjectCardProps): ReactElement {
+export function ProjectCard({ onOpenDetails, project }: ProjectCardProps): ReactElement {
   const accent = ACCENT_THEME[project.accentColor];
   const [imageSrc, setImageSrc] = useState<string>(project.image || FALLBACK_IMAGE);
   const shouldReduceMotion = useReducedMotion();
+
+  const openDetails = () => onOpenDetails(project);
 
   const handleCardKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.currentTarget !== event.target) {
@@ -56,7 +59,7 @@ export function ProjectCard({ project }: ProjectCardProps): ReactElement {
 
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
+      openDetails();
     }
   };
 
@@ -66,10 +69,7 @@ export function ProjectCard({ project }: ProjectCardProps): ReactElement {
       whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.22 }}
       transition={{ duration: 0.45, ease: 'easeOut' }}
-      tabIndex={0}
-      onKeyDown={handleCardKeyDown}
-      aria-label={`${project.title} project preview. Press Enter to open the live demo.`}
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_14px_36px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_44px_rgba(0,0,0,0.45)] focus-within:ring-2 focus-within:ring-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_14px_36px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_44px_rgba(0,0,0,0.45)] focus-within:ring-2 focus-within:ring-white/30"
     >
       <div className={`pointer-events-none absolute -top-20 -right-16 w-64 h-64 bg-linear-to-b ${accent.ring} blur-3xl`} />
 
@@ -86,9 +86,15 @@ export function ProjectCard({ project }: ProjectCardProps): ReactElement {
         />
         <div className="absolute inset-0 bg-linear-to-t from-black/45 via-transparent to-transparent" />
         <div className="absolute inset-0 flex items-end justify-end p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <span className="rounded-full border border-white/20 bg-black/45 px-3 py-1 text-[11px] font-medium tracking-wide text-white/90 backdrop-blur-sm">
-            View Project
-          </span>
+          <button
+            type="button"
+            onClick={openDetails}
+            onKeyDown={handleCardKeyDown}
+            aria-label={`Open the ${project.title} case study`}
+            className="cursor-pointer rounded-full border border-cyan-300/25 bg-[#03101d]/75 px-3 py-1 text-[11px] font-medium tracking-wide text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.18)] backdrop-blur-sm transition hover:border-cyan-200/40 hover:bg-[#071726]/90 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/50"
+          >
+            View Case Study
+          </button>
         </div>
         {project.featured && (
           <span className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-semibold border ${accent.badge}`}>

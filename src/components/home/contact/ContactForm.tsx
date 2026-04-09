@@ -1,6 +1,7 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { CheckCircle2, Loader2, Send, TriangleAlert } from 'lucide-react';
 
 type ContactFormValues = {
@@ -26,11 +27,51 @@ function isValidEmail(value: string): boolean {
 }
 
 export function ContactForm() {
+  const searchParams = useSearchParams();
   const [values, setValues] = useState<ContactFormValues>(INITIAL_VALUES);
   const [errors, setErrors] = useState<ContactFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const source = searchParams.get('source');
+    const prefills = {
+      subject: searchParams.get('subject')?.trim() ?? '',
+      message: searchParams.get('message')?.trim() ?? '',
+    };
+
+    if (source === 'resume') {
+      setValues((prev) => {
+        const nextValues = {
+          ...prev,
+          subject: prefills.subject || 'Resume Inquiry',
+          message: '',
+        };
+
+        return nextValues.subject === prev.subject && nextValues.message === prev.message
+          ? prev
+          : nextValues;
+      });
+      return;
+    }
+
+    if (!prefills.subject && !prefills.message) {
+      return;
+    }
+
+    setValues((prev) => {
+      const nextValues = {
+        ...prev,
+        subject: prev.subject || prefills.subject,
+        message: prev.message || prefills.message,
+      };
+
+      return nextValues.subject === prev.subject && nextValues.message === prev.message
+        ? prev
+        : nextValues;
+    });
+  }, [searchParams]);
 
   function validate(currentValues: ContactFormValues): ContactFormErrors {
     const nextErrors: ContactFormErrors = {};

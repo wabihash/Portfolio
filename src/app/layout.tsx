@@ -1,15 +1,10 @@
-import type { Metadata } from "next";
-import { Sora } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
+import SceneWrapper from "@/components/layout/SceneWrapper";
+import { rootMetadata } from "@/lib/metadata";
 
-const sora = Sora({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Wabi Portfolio",
-  description: "Personal portfolio showcase.",
-};
+export const metadata = rootMetadata;
 
 export default function RootLayout({
   children,
@@ -18,9 +13,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${sora.className} flex min-h-screen flex-col bg-[#020a1f] text-[#dbe8ff] antialiased`}>
+      <body className="flex min-h-screen flex-col bg-[#020a1f] text-[#dbe8ff] antialiased">
         <Navbar />
-        <div className="min-h-screen flex-1 pt-20">{children}</div>
+        <div className="min-h-screen flex-1 pt-20">
+          <SceneWrapper>{children}</SceneWrapper>
+        </div>
         <Footer />
       </body>
     </html>

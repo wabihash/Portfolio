@@ -27,7 +27,7 @@ export function ContactSection() {
         className="mx-auto w-full max-w-3xl rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-lg md:p-8"
       >
         <header className="text-center">
-          <h2 id="contact-heading" className="text-2xl font-bold text-white md:text-3xl">
+          <h2 id="contact-heading" className="text-2xl font-bold text-white sm:text-[1.75rem] md:text-3xl">
             Get In <span className="text-[#fbbf24]">Touch</span>
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-[#c8d8f7] md:text-base">

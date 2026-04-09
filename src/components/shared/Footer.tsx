@@ -59,7 +59,7 @@ export function Footer() {
   return (
     <footer className="relative mt-14 w-full overflow-hidden border-t border-white/10 bg-linear-to-b from-[#040c22] via-[#030914] to-[#01050c]">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-cyan-300/60 to-transparent" />
-      <div className="pointer-events-none absolute -top-16 left-1/2 h-32 w-[42rem] -translate-x-1/2 rounded-full bg-cyan-300/10 blur-3xl" />
+      <div className="pointer-events-none absolute -top-16 left-1/2 h-32 w-2xl -translate-x-1/2 rounded-full bg-cyan-300/10 blur-3xl" />
 
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}

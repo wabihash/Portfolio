@@ -36,7 +36,7 @@ export function ServicesSection() {
         transition={{ duration: 0.45, ease: 'easeOut' }}
         className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-lg md:p-8"
       >
-        <h2 id="services-heading" className="text-2xl font-bold text-white md:text-3xl">
+        <h2 id="services-heading" className="text-2xl font-bold text-white sm:text-[1.75rem] md:text-3xl">
           Interactive <span className="text-[#34d399]">Services</span>
         </h2>
 
@@ -80,7 +80,7 @@ export function ServicesSection() {
                     return <ActiveIcon className="mt-1 h-7 w-7 text-[#86efac]" />;
                   })()}
                   <div>
-                    <h3 className="text-xl font-semibold text-white">{activeService.title}</h3>
+                    <h3 className="text-lg font-semibold text-white sm:text-xl">{activeService.title}</h3>
                     <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#c8d8f7]">{activeService.description}</p>
                   </div>
                 </div>

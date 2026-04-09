@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import AmbientIntelligence from '@/components/layout/AmbientIntelligence';
 
 export const sceneVariants = {
   initial: {
@@ -33,17 +34,20 @@ export default function SceneWrapper({ children }: { children: React.ReactNode }
   const pathname = usePathname();
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.main
-        key={pathname}
-        variants={sceneVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        className="relative z-10 w-full min-h-screen py-24 px-6 md:px-12 lg:px-24"
-      >
-        {children}
-      </motion.main>
-    </AnimatePresence>
+    <div className="relative isolate w-full min-h-screen">
+      <AmbientIntelligence />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={pathname}
+          variants={sceneVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          className="relative z-10 w-full min-h-screen"
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 }

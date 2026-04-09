@@ -85,7 +85,7 @@ export function FutureStackSection() {
         className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-lg md:p-8"
       >
         <div className="flex flex-wrap items-center gap-3">
-          <h2 id="future-skills-heading" className="text-2xl font-bold text-white md:text-3xl">
+          <h2 id="future-skills-heading" className="text-2xl font-bold text-white sm:text-[1.75rem] md:text-3xl">
             Future <span className="text-cyan-300">Skills</span>
           </h2>
           <span className="rounded-full border border-cyan-300/30 bg-cyan-400/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-cyan-200">
@@ -114,7 +114,7 @@ export function FutureStackSection() {
                   </span>
                 </div>
 
-                <h3 className="text-base font-semibold text-white md:text-lg">{skill.title}</h3>
+                <h3 className="text-base font-semibold text-white sm:text-[1.05rem] md:text-lg">{skill.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-white/70">{skill.description}</p>
               </article>
             );
@@ -136,7 +136,7 @@ export function FutureStackSection() {
                 <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-purple-200">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-3 text-base font-semibold text-white md:text-lg">{item.title}</h3>
+                <h3 className="mt-3 text-base font-semibold text-white sm:text-[1.05rem] md:text-lg">{item.title}</h3>
                 <p className="mt-2 pr-20 text-sm leading-relaxed text-white/70">{item.description}</p>
               </article>
             );

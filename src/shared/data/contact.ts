@@ -17,7 +17,7 @@ export const CONTACT_ITEMS: ContactItem[] = [
   {
     id: 'phone',
     label: 'Phone',
-    value: '0983488579',
+    value: '+251983488579',
     icon: 'phone',
   },
   {

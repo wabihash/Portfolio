@@ -5,6 +5,10 @@ export interface Project {
   title: string;
   tagline?: string;
   description: string;
+  challenge: string;
+  solution: string;
+  impact: string;
+  highlights: string[];
   techStack: string[];
   accentColor: AccentColor;
   liveUrl: string;

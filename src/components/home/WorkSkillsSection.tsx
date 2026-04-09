@@ -3,7 +3,8 @@
 import { useRef } from 'react';
 import type { ComponentType, ReactNode } from 'react';
 import { Code2, Globe, PenTool } from 'lucide-react';
-import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useInView } from 'framer-motion';
 import { WORK_SKILLS, type WorkSkillIcon } from '@/shared/data/homeSections';
 
 type SkillBarProps = {

@@ -1,0 +1,193 @@
+'use client';
+
+import { useEffect, useMemo, useRef, useState } from 'react';
+import Image from 'next/image';
+import { motion, useInView, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { PROJECTS } from '@/shared/data/projects';
+import type { Project } from '@/shared/types/project';
+
+const STORY_PROJECTS = PROJECTS.filter((project) => project.featured).slice(0, 3);
+
+function KineticWords({ text, active }: { text: string; active: boolean }) {
+  const shouldReduceMotion = useReducedMotion();
+  const words = useMemo(() => text.split(' '), [text]);
+
+  return (
+    <span className="inline">
+      {words.map((word, index) => (
+        <motion.span
+          key={`${word}-${index}`}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 8, rotateX: -22 }}
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : active
+                ? { opacity: 1, y: 0, rotateX: 0 }
+                : { opacity: 0.65, y: 2, rotateX: -10 }
+          }
+          transition={{ duration: 0.35, delay: shouldReduceMotion ? 0 : index * 0.015, ease: 'easeOut' }}
+          className="inline-block"
+        >
+          {word}
+          {index < words.length - 1 ? ' ' : ''}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+function StoryStep({
+  project,
+  index,
+  isActive,
+  onActive,
+}: {
+  project: Project;
+  index: number;
+  isActive: boolean;
+  onActive: (index: number) => void;
+}) {
+  const stepRef = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(stepRef, { amount: 0.6, margin: '-10% 0px -30% 0px' });
+  const shouldReduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (inView) {
+      onActive(index);
+    }
+  }, [index, inView, onActive]);
+
+  return (
+    <motion.article
+      ref={stepRef}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.35 }}
+      transition={{ duration: 0.42, ease: 'easeOut' }}
+      className={`rounded-2xl border p-5 backdrop-blur-md transition-colors duration-300 md:p-6 ${
+        isActive
+          ? 'border-cyan-300/40 bg-cyan-300/10 shadow-[0_20px_48px_rgba(34,211,238,0.14)]'
+          : 'border-white/10 bg-white/5'
+      }`}
+    >
+      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+        Step {index + 1}
+      </p>
+      <h3 className="mt-3 text-2xl font-semibold text-white">
+        <KineticWords text={project.title} active={isActive} />
+      </h3>
+      {project.tagline && <p className="mt-2 text-sm text-slate-300">{project.tagline}</p>}
+
+      <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300">
+        <p>
+          <span className="font-semibold text-cyan-100">Challenge:</span> {project.challenge}
+        </p>
+        <p>
+          <span className="font-semibold text-cyan-100">Solution:</span> {project.solution}
+        </p>
+        <p>
+          <span className="font-semibold text-cyan-100">Outcome:</span> {project.impact}
+        </p>
+      </div>
+    </motion.article>
+  );
+}
+
+export function ProjectStorySection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeProject = STORY_PROJECTS[activeIndex] ?? STORY_PROJECTS[0];
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const maskRight = useTransform(scrollYProgress, [0, 1], ['85%', '0%']);
+  const liveClipPath = useTransform(maskRight, (right) => `inset(0 ${right} 0 0 round 0)`);
+
+  useMotionValueEvent(scrollYProgress, 'change', (value) => {
+    const nextIndex = Math.min(STORY_PROJECTS.length - 1, Math.floor(value * STORY_PROJECTS.length));
+    setActiveIndex((current) => (current === nextIndex ? current : nextIndex));
+  });
+
+  if (!activeProject) {
+    return null;
+  }
+
+  return (
+    <section
+      id="project-story"
+      ref={sectionRef}
+      aria-labelledby="project-story-heading"
+      className="relative z-0 mx-auto mb-4 w-full max-w-6xl px-4 py-8 md:mb-8 md:px-8 md:py-12"
+    >
+      <div className="mb-6 text-center md:mb-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.26em] text-cyan-200/75">Scrollytelling</p>
+        <h2 id="project-story-heading" className="mt-3 text-3xl font-bold text-white md:text-4xl">
+          From Code View to Live Impact
+        </h2>
+        <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
+          Scroll through featured project stories to see how each build moves from technical decisions to user-facing outcomes.
+        </p>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[1fr_1.05fr] lg:gap-8">
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-950/75 backdrop-blur-md">
+            <div className="border-b border-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-slate-300">
+              {activeProject.title} Preview
+            </div>
+
+            <div className="relative h-72 w-full md:h-96">
+              <div className="absolute inset-0 grayscale">
+                <Image
+                  src={activeProject.image}
+                  alt={`${activeProject.imageAlt} in code view`}
+                  fill
+                  className="object-cover opacity-55"
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                />
+              </div>
+
+              <motion.div
+                style={shouldReduceMotion ? undefined : { clipPath: liveClipPath }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={activeProject.image}
+                  alt={activeProject.imageAlt}
+                  fill
+                  className="object-cover saturate-125"
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                />
+              </motion.div>
+
+              <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#020814]/85 via-transparent to-[#020814]/20" />
+
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <div className="rounded-xl border border-cyan-200/20 bg-[#03101d]/75 p-3 font-mono text-xs text-cyan-100 backdrop-blur-sm">
+                  <p className="text-cyan-200/80">// Code View</p>
+                  <p className="mt-1">const outcome = "{activeProject.impact}";</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-5">
+          {STORY_PROJECTS.map((project, index) => (
+            <StoryStep
+              key={project.id}
+              project={project}
+              index={index}
+              isActive={activeIndex === index}
+              onActive={setActiveIndex}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
