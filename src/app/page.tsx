@@ -36,7 +36,7 @@ export default function Home() {
             width={1536}
             height={1024}
             priority
-            className="h-auto w-full object-cover saturate-125 contrast-110"
+            className="h-136 w-full object-cover saturate-125 contrast-110 sm:h-auto"
           />
           <div
             aria-hidden="true"

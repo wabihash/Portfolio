@@ -1,7 +1,7 @@
 import { CONTACT_ITEMS } from '@/shared/data/contact';
 import { CORE_EXPERTISE_BADGES } from '@/shared/data/homeSections';
 import { PROJECTS } from '@/shared/data/projects';
-import { RESUME_FOCUS_AREAS, RESUME_SUMMARY } from '@/shared/data/resume';
+import { RESUME_EDUCATION, RESUME_EXPERIENCE, RESUME_FOCUS_AREAS, RESUME_SUMMARY } from '@/shared/data/resume';
 
 const PAGE_WIDTH = 612;
 const PAGE_HEIGHT = 792;
@@ -156,11 +156,11 @@ function buildResumePages() {
   const pages = [createPage()];
   const publicContactItems = CONTACT_ITEMS.filter((item) => item.id !== 'whatsapp');
 
-  addTextBlock(pages, 'Wabi', {
+  addTextBlock(pages, 'Wabi Dagim', {
     font: 'F2',
     size: 24,
   });
-  addTextBlock(pages, 'Fullstack Developer', {
+  addTextBlock(pages, 'Full-Stack Developer', {
     font: 'F2',
     size: 15,
     spacingAfter: 6,
@@ -177,13 +177,10 @@ function buildResumePages() {
   );
 
   addSectionTitle(pages, 'Core Skills');
-  addTextBlock(pages, CORE_EXPERTISE_BADGES.join(' | '), {
+  addTextBlock(pages, CORE_EXPERTISE_BADGES.slice(0, 6).join(', '), {
     size: 11,
     spacingAfter: 6,
   });
-
-  addSectionTitle(pages, 'Focus');
-  addBulletList(pages, [...RESUME_FOCUS_AREAS]);
 
   addSectionTitle(pages, 'Selected Projects');
 
@@ -209,10 +206,35 @@ function buildResumePages() {
     });
 
     addBulletList(pages, project.highlights.slice(0, 2), PAGE_LEFT + 16);
+  }
 
-    addTextBlock(pages, `Tech: ${project.techStack.slice(0, 4).join(', ')}`, {
-      size: 10,
-      spacingAfter: 4,
+  addSectionTitle(pages, 'Focus');
+  addBulletList(pages, [...RESUME_FOCUS_AREAS]);
+
+  addSectionTitle(pages, 'Experience');
+  for (const item of RESUME_EXPERIENCE) {
+    addTextBlock(pages, `${item.role} | ${item.organization} (${item.period})`, {
+      font: 'F2',
+      size: 11,
+      spacingBefore: 2,
+      spacingAfter: 1,
+    });
+    addBulletList(pages, [...item.highlights], PAGE_LEFT + 16);
+  }
+
+  addSectionTitle(pages, 'Education');
+  for (const item of RESUME_EDUCATION) {
+    addTextBlock(pages, `${item.title} | ${item.institution} (${item.period})`, {
+      font: 'F2',
+      size: 11,
+      spacingBefore: 2,
+      spacingAfter: 1,
+    });
+    addTextBlock(pages, item.details, {
+      size: 10.5,
+      x: PAGE_LEFT + 16,
+      maxWidth: PAGE_WIDTH - (PAGE_LEFT + 16) - PAGE_RIGHT,
+      spacingAfter: 2,
     });
   }
 

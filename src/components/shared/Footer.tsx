@@ -1,7 +1,8 @@
 'use client';
 
-import Link from 'next/link';
+import type { ComponentType } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { SectionLink } from '@/components/shared/SectionLink';
 import { SOCIAL_LINKS } from '@/shared/constants/socialLinks';
 
 type FooterLink = {
@@ -16,7 +17,7 @@ const QUICK_LINKS: FooterLink[] = [
   { id: 'contact', label: 'Contact', href: '/#contact' },
 ];
 
-const FOOTER_SOCIAL_IDS = new Set(['whatsapp', 'email']);
+const FOOTER_SOCIAL_IDS = new Set(['whatsapp', 'email', 'telegram', 'x']);
 
 function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -34,7 +35,7 @@ function SocialIcon({
 }: {
   href: string;
   label: string;
-  icon: (props: { className?: string }) => React.ReactNode;
+  icon: ComponentType<{ className?: string }>;
 }) {
   return (
     <motion.a
@@ -83,12 +84,12 @@ export function Footer() {
               <ul className="flex flex-col gap-2.5 text-sm text-gray-300">
                 {QUICK_LINKS.map((link) => (
                   <li key={link.id}>
-                    <Link
+                    <SectionLink
                       href={link.href}
                       className="transition duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/50"
                     >
                       {link.label}
-                    </Link>
+                    </SectionLink>
                   </li>
                 ))}
               </ul>

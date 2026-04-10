@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import { FaEnvelope, FaWhatsapp } from 'react-icons/fa6';
+import { FaEnvelope, FaTelegram, FaWhatsapp, FaXTwitter } from 'react-icons/fa6';
 
 export type SocialLink = {
   id: string;
@@ -18,7 +18,19 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     id: 'email',
     label: 'Email',
-    href: 'mailto:wabidagim280@gmail.com',
+    href: 'https://mail.google.com/mail/?view=cm&fs=1&to=wabidagim280@gmail.com',
     icon: FaEnvelope,
+  },
+  {
+    id: 'telegram',
+    label: 'Telegram',
+    href: 'https://t.me/Focusrehobot',
+    icon: FaTelegram,
+  },
+  {
+    id: 'x',
+    label: 'X',
+    href: 'https://x.com/AgituG632',
+    icon: FaXTwitter,
   },
 ];

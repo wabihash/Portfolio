@@ -4,7 +4,7 @@ import type { ComponentType } from 'react';
 import { Mail, MapPin, MessageCircle, PhoneCall } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ContactCard } from '@/components/home/contact/ContactCard';
-import { ContactForm } from '@/components/home/contact/ContactForm';
+import { PullMessageComposer } from '@/components/home/contact/PullMessageComposer';
 import { CONTACT_ITEMS, type ContactIcon } from '@/shared/data/contact';
 
 const CONTACT_ICONS: Record<ContactIcon, ComponentType<{ className?: string }>> = {
@@ -24,7 +24,7 @@ export function ContactSection() {
         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="mx-auto w-full max-w-3xl rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-lg md:p-8"
+        className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-lg sm:p-5 md:p-8"
       >
         <header className="text-center">
           <h2 id="contact-heading" className="text-2xl font-bold text-white sm:text-[1.75rem] md:text-3xl">
@@ -35,7 +35,7 @@ export function ContactSection() {
           </p>
         </header>
 
-        <div className="mt-6 space-y-4">
+        <div className="mt-6 space-y-3 sm:space-y-4">
           {CONTACT_ITEMS.map((item, index) => {
             const Icon = CONTACT_ICONS[item.icon];
 
@@ -57,14 +57,7 @@ export function ContactSection() {
           })}
         </div>
 
-        <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-          whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={shouldReduceMotion ? undefined : { duration: 0.4, delay: 0.1, ease: 'easeOut' }}
-        >
-          <ContactForm />
-        </motion.div>
+        <PullMessageComposer />
       </motion.div>
     </section>
   );

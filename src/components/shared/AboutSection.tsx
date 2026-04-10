@@ -41,9 +41,9 @@ export function AboutSection() {
         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md md:p-8"
+        className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md sm:p-5 md:p-8"
       >
-        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[280px_1fr] md:gap-10">
+        <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[280px_1fr] md:gap-10">
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.97 }}
             whileInView={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
@@ -64,7 +64,7 @@ export function AboutSection() {
                     }
               }
               transition={{ type: 'spring', stiffness: 180, damping: 18, mass: 0.9 }}
-              className="group relative h-56 w-44 transform-3d transform-[rotateX(20deg)_rotateY(-20deg)_rotateZ(10deg)] md:h-72 md:w-56"
+              className="group relative h-48 w-40 transform-3d transform-[rotateX(20deg)_rotateY(-20deg)_rotateZ(10deg)] sm:h-56 sm:w-44 md:h-72 md:w-56"
             >
               <div className="pointer-events-none absolute inset-6 rounded-[1.75rem] bg-cyan-400/25 blur-3xl shadow-[0_0_60px_rgba(34,211,238,0.35)]" />
               <div className="pointer-events-none absolute inset-x-10 bottom-2 h-16 rounded-full bg-orange-400/20 blur-2xl shadow-[0_0_50px_rgba(251,146,60,0.25)]" />
@@ -106,7 +106,7 @@ export function AboutSection() {
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ delay: 0.16, duration: 0.35 }}
-              className="text-3xl font-bold text-white md:text-4xl"
+              className="text-2xl font-bold text-white sm:text-3xl md:text-4xl"
             >
               Wabi
             </motion.h2>
@@ -116,13 +116,13 @@ export function AboutSection() {
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ delay: 0.2, duration: 0.35 }}
-              className="mt-1 text-lg font-medium text-[#8cb0ff] md:text-xl"
+              className="mt-1 text-base font-medium text-[#8cb0ff] sm:text-lg md:text-xl"
             >
               <span className="text-white/70">Role:</span>{' '}
               <span
                 aria-live="polite"
                 aria-atomic="true"
-                className="relative inline-flex min-h-7 min-w-56 items-center align-middle"
+                className="relative inline-flex min-h-7 min-w-[11rem] items-center align-middle sm:min-w-56"
               >
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.span
@@ -144,7 +144,7 @@ export function AboutSection() {
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ delay: 0.24, duration: 0.4 }}
-              className="mt-4 max-w-2xl text-base leading-relaxed text-[#ccdaf7]"
+              className="mt-4 max-w-2xl text-sm leading-relaxed text-[#ccdaf7] sm:text-base"
             >
               I build modern fullstack products, from AI-powered web apps and social platforms to responsive
               dashboards and productivity tools. My approach blends thoughtful frontend design with reliable

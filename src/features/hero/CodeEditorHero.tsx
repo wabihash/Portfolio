@@ -10,7 +10,7 @@ const CODE_TO_COPY = [
   'const portfolio = {',
   '  name: "Wabi Dagim",',
   '  title: "UI/UX Designer & Developer",',
-  '  skills: ["React", "TypeScript", "AI/ML", "Figma", "Node", "Next.js"],',
+  '  skills: ["React", "Python", "TypeScript", "AI/ML", "Figma", "Node", "Next.js"],',
   '};',
   '',
   FULL_CONSOLE_LINE,
@@ -22,10 +22,7 @@ export function CodeEditorHero() {
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
-    if (shouldReduceMotion) {
-      setTypedText(FULL_CONSOLE_LINE);
-      return;
-    }
+    if (shouldReduceMotion) return;
 
     let active = true;
     let timeoutId: ReturnType<typeof setTimeout>;
@@ -147,14 +144,14 @@ export function CodeEditorHero() {
 
               <p className="pl-4">
                 <span className="text-slate-200">name</span>
-                <span className="text-slate-300">:</span> <span className="text-amber-300">"Wabi Dagim"</span>
+                <span className="text-slate-300">:</span> <span className="text-amber-300">&quot;Wabi Dagim&quot;</span>
                 <span className="text-slate-300">,</span>
               </p>
 
               <p className="pl-4">
                 <span className="text-slate-200">title</span>
                 <span className="text-slate-300">:</span>{' '}
-                <span className="text-amber-300">"UI/UX Designer &amp; Developer"</span>
+                <span className="text-amber-300">&quot;UI/UX Designer &amp; Developer&quot;</span>
                 <span className="text-slate-300">,</span>
               </p>
 
@@ -162,17 +159,19 @@ export function CodeEditorHero() {
                 <span className="text-slate-200">skills</span>
                 <span className="text-slate-300">:</span>{' '}
                 <span className="text-slate-200">[</span>
-                <span className="text-amber-300">"React"</span>
+                <span className="text-amber-300">&quot;React&quot;</span>
                 <span className="text-slate-300">, </span>
-                <span className="text-amber-300">"TypeScript"</span>
+                <span className="text-amber-300">&quot;Python&quot;</span>
                 <span className="text-slate-300">, </span>
-                <span className="text-amber-300">"AI/ML"</span>
+                <span className="text-amber-300">&quot;TypeScript&quot;</span>
                 <span className="text-slate-300">, </span>
-                <span className="text-amber-300">"Figma"</span>
+                <span className="text-amber-300">&quot;AI/ML&quot;</span>
                 <span className="text-slate-300">, </span>
-                <span className="text-amber-300">"Node"</span>
+                <span className="text-amber-300">&quot;Figma&quot;</span>
                 <span className="text-slate-300">, </span>
-                <span className="text-amber-300">"Next.js"</span>
+                <span className="text-amber-300">&quot;Node&quot;</span>
+                <span className="text-slate-300">, </span>
+                <span className="text-amber-300">&quot;Next.js&quot;</span>
                 <span className="text-slate-200">]</span>
                 <span className="text-slate-300">,</span>
               </p>
@@ -181,7 +180,7 @@ export function CodeEditorHero() {
                 <span className="text-slate-200">{'};'}</span>
               </p>
 
-              <p className="pt-1 text-emerald-300/70">// runtime preview</p>
+              <p className="pt-1 text-emerald-300/70">{`//`} runtime preview</p>
 
               <p>
                 <span className="text-blue-400">console</span>

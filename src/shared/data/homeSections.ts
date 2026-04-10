@@ -1,6 +1,7 @@
 export const CORE_EXPERTISE_BADGES = [
   'UI/UX Design',
   'React',
+  'Python',
   'TypeScript',
   'Next.js',
   'Tailwind CSS',
@@ -48,9 +49,9 @@ export const SERVICES = [
 export type WorkSkillIcon = 'figma' | 'wordpress' | 'code';
 
 export const WORK_SKILLS = [
-  { id: 'figma', name: 'Figma', level: 99, icon: 'figma' as WorkSkillIcon },
+  { id: 'figma', name: 'Figma', level: 85, icon: 'figma' as WorkSkillIcon },
   { id: 'wordpress', name: 'WordPress', level: 70, icon: 'wordpress' as WorkSkillIcon },
-  { id: 'coding', name: 'Coding', level: 85, icon: 'code' as WorkSkillIcon },
+  { id: 'coding', name: 'Coding', level: 93, icon: 'code' as WorkSkillIcon },
 ] as const;
 
 export const PROOF_BADGES = [

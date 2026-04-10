@@ -4,12 +4,12 @@ import { buildPageMetadata } from '@/lib/metadata';
 import { CORE_EXPERTISE_BADGES } from '@/shared/data/homeSections';
 import { CONTACT_ITEMS } from '@/shared/data/contact';
 import { PROJECTS } from '@/shared/data/projects';
-import { RESUME_FOCUS_AREAS, RESUME_SUMMARY } from '@/shared/data/resume';
+import { RESUME_EDUCATION, RESUME_EXPERIENCE, RESUME_FOCUS_AREAS, RESUME_SUMMARY } from '@/shared/data/resume';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Resume',
   description:
-    'Resume overview for Wabi, fullstack developer focused on modern web products and AI-ready experiences.',
+    'Resume of Wabi Dagim, a Full-Stack developer focused on modern web products, clean code architecture, and AI-ready user experiences.',
   path: '/resume',
 });
 
@@ -42,11 +42,10 @@ export default function ResumePage() {
 
             <div className="mt-5 space-y-4">
               <ResumeField label="Name" value="Wabi Dagim" />
-              <ResumeField label="Date of Birth" value="2004" />
               {publicContactItems.map((item) => (
                 <ResumeField key={item.id} label={item.label} value={item.value} />
               ))}
-              <ResumeField label="Role" value="Fullstack Developer" />
+              <ResumeField label="Role" value="Full-Stack Developer" />
               <ResumeField label="Focus" value="UI/UX, Frontend, AI-ready products" />
             </div>
 
@@ -95,12 +94,54 @@ export default function ResumePage() {
             </section>
 
             <section className="mt-6 border-t-2 border-slate-400 pt-5">
-              <h2 className="text-base font-extrabold uppercase tracking-[0.2em] text-slate-900">Work Focus</h2>
+              <h2 className="text-base font-extrabold uppercase tracking-[0.2em] text-slate-900">Focus</h2>
               <ul className="mt-3 space-y-2 text-sm text-slate-800">
                 {RESUME_FOCUS_AREAS.map((item) => (
                   <li key={item}>• {item}</li>
                 ))}
               </ul>
+            </section>
+
+            <section className="mt-6 border-t-2 border-slate-400 pt-5">
+              <h2 className="text-base font-extrabold uppercase tracking-[0.2em] text-slate-900">Experience</h2>
+              <div className="mt-4 space-y-4">
+                {RESUME_EXPERIENCE.map((item) => (
+                  <article key={`${item.role}-${item.period}`}>
+                    <div className="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
+                      <div>
+                        <h3 className="text-lg font-bold text-slate-900">{item.role}</h3>
+                        <p className="text-sm text-slate-700">{item.organization}</p>
+                      </div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-600">{item.period}</p>
+                    </div>
+
+                    <ul className="mt-2 space-y-1.5 text-sm text-slate-800">
+                      {item.highlights.map((highlight) => (
+                        <li key={highlight}>• {highlight}</li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="mt-6 border-t-2 border-slate-400 pt-5">
+              <h2 className="text-base font-extrabold uppercase tracking-[0.2em] text-slate-900">Education</h2>
+              <div className="mt-4 space-y-4">
+                {RESUME_EDUCATION.map((item) => (
+                  <article key={`${item.title}-${item.period}`}>
+                    <div className="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
+                      <div>
+                        <h3 className="text-lg font-bold text-slate-900">{item.title}</h3>
+                        <p className="text-sm text-slate-700">{item.institution}</p>
+                      </div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-600">{item.period}</p>
+                    </div>
+
+                    <p className="mt-2 text-sm leading-relaxed text-slate-800">{item.details}</p>
+                  </article>
+                ))}
+              </div>
             </section>
           </div>
         </div>

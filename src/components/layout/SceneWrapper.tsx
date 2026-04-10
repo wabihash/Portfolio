@@ -1,10 +1,12 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import AmbientIntelligence from '@/components/layout/AmbientIntelligence';
 
-export const sceneVariants = {
+const sceneEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+export const sceneVariants: Variants = {
   initial: {
     opacity: 0,
     y: 10,
@@ -16,7 +18,7 @@ export const sceneVariants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
+      ease: sceneEase,
     },
   },
   exit: {
@@ -25,7 +27,7 @@ export const sceneVariants = {
     scale: 0.99,
     transition: {
       duration: 0.3,
-      ease: [0.22, 1, 0.36, 1],
+      ease: sceneEase,
     },
   },
 };

@@ -2,7 +2,8 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { CheckCircle2, Loader2, Send, TriangleAlert } from 'lucide-react';
+import { Loader2, Send, TriangleAlert } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 type ContactFormValues = {
   name: string;
@@ -12,6 +13,11 @@ type ContactFormValues = {
 };
 
 type ContactFormErrors = Partial<Record<keyof ContactFormValues, string>>;
+
+type ContactFormProps = {
+  autoFocusName?: boolean;
+  onSubmitSuccess?: (message: string) => void;
+};
 
 const INITIAL_VALUES: ContactFormValues = {
   name: '',
@@ -26,12 +32,11 @@ function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-export function ContactForm() {
+export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactFormProps) {
   const searchParams = useSearchParams();
   const [values, setValues] = useState<ContactFormValues>(INITIAL_VALUES);
   const [errors, setErrors] = useState<ContactFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -103,7 +108,6 @@ export function ContactForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatusMessage(null);
     setSubmitError(null);
 
     const nextErrors = validate(values);
@@ -135,7 +139,7 @@ export function ContactForm() {
 
       setValues(INITIAL_VALUES);
       setErrors({});
-      setStatusMessage('Message sent successfully. I will get back to you soon.');
+      onSubmitSuccess?.('Message sent successfully. I will get back to you soon.');
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : 'Something went wrong while sending your message.');
     } finally {
@@ -160,6 +164,7 @@ export function ContactForm() {
             type="text"
             value={values.name}
             onChange={(event) => handleChange('name', event.target.value)}
+            autoFocus={autoFocusName}
             placeholder="John Doe"
             className="w-full rounded-xl border border-gray-800 bg-black/50 px-4 py-3 text-sm text-white placeholder:text-gray-500 transition focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
             aria-describedby={errors.name ? 'contact-name-error' : undefined}
@@ -256,18 +261,23 @@ export function ContactForm() {
         {isSubmitting ? 'Sending...' : 'Send Message'}
       </button>
 
-      {statusMessage ? (
-        <p className="mt-3 inline-flex items-center gap-2 rounded-lg border border-emerald-400/25 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-300" role="status" aria-live="polite">
-          <CheckCircle2 className="h-4 w-4" />
-          {statusMessage}
-        </p>
-      ) : null}
-      {submitError ? (
-        <p className="mt-3 inline-flex items-center gap-2 rounded-lg border border-rose-400/25 bg-rose-500/10 px-3 py-2 text-sm text-rose-300" role="alert" aria-live="assertive">
-          <TriangleAlert className="h-4 w-4" />
-          {submitError}
-        </p>
-      ) : null}
+      <AnimatePresence mode="wait" initial={false}>
+        {submitError ? (
+          <motion.p
+            key="contact-error"
+            initial={{ opacity: 0, y: 8, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.985 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="mt-3 inline-flex items-center gap-2 rounded-lg border border-rose-400/25 bg-rose-500/10 px-3 py-2 text-sm text-rose-300"
+            role="alert"
+            aria-live="assertive"
+          >
+            <TriangleAlert className="h-4 w-4" />
+            {submitError}
+          </motion.p>
+        ) : null}
+      </AnimatePresence>
     </form>
   );
 }

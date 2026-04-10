@@ -34,13 +34,13 @@ export function ServicesSection() {
         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-lg md:p-8"
+        className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-lg sm:p-5 md:p-8"
       >
         <h2 id="services-heading" className="text-2xl font-bold text-white sm:text-[1.75rem] md:text-3xl">
           Interactive <span className="text-[#34d399]">Services</span>
         </h2>
 
-        <div className="mt-5 grid grid-cols-2 gap-4 md:hidden">
+        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 md:hidden sm:gap-4">
           {SERVICES.map((service, index) => {
             const Icon = ICONS[service.icon];
             const isActive = index === activeIndex;
@@ -57,7 +57,7 @@ export function ServicesSection() {
               >
                 <Icon className="mb-3 h-5 w-5 text-[#9ae6c7]" />
                 <p className="text-sm font-semibold text-white">{service.title}</p>
-                <p className="mt-1 text-xs text-[#c8d8f7]">{service.description}</p>
+                <p className="mt-1 text-xs leading-5 text-[#c8d8f7]">{service.description}</p>
               </button>
             );
           })}
@@ -107,7 +107,7 @@ export function ServicesSection() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
           animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="mt-6 rounded-full bg-linear-to-r from-teal-400 to-pink-500 px-5 py-2.5 text-sm font-semibold text-[#041224] shadow-[0_10px_24px_rgba(45,212,191,0.28)]"
+          className="mt-6 w-full rounded-full bg-linear-to-r from-teal-400 to-pink-500 px-5 py-2.5 text-sm font-semibold text-[#041224] shadow-[0_10px_24px_rgba(45,212,191,0.28)] sm:w-auto"
         >
           Explore {activeService.title}
         </motion.button>

@@ -1,21 +1,25 @@
 import type { Metadata, MetadataRoute } from 'next';
 
 const SITE_NAME = 'Wabi Portfolio';
-const SITE_AUTHOR = 'Wabi';
+const SITE_AUTHOR = 'Wabi Dagim';
 const SOCIAL_IMAGE_PATH = '/images/fire.png';
 const SITE_DESCRIPTION =
-  'Portfolio of Wabi, a fullstack developer building modern React, Next.js, and AI-ready web experiences with polished UI and practical backend systems.';
+  'Portfolio of Wabi Dagim, a Full-Stack developer building modern React and Next.js experiences with clean architecture, practical backend systems, and AI-ready features.';
 const SITE_SOCIAL_DESCRIPTION =
-  'Modern full-stack portfolio showcasing polished interfaces, practical backend architecture, and AI-powered product features.';
+  'Full-Stack portfolio showcasing polished interfaces, practical backend architecture, and AI-powered product features.';
 const SITE_KEYWORDS = [
-  'Wabi',
+  'Wabi Dagim',
   'Wabi portfolio',
-  'fullstack developer',
+  'full-stack developer',
+  'frontend engineer',
+  'backend development',
   'frontend developer',
   'Next.js portfolio',
   'React developer',
   'Tailwind CSS',
   'Node.js',
+  'TypeScript',
+  'portfolio website',
   'AI integrations',
 ];
 
@@ -87,6 +91,7 @@ export function buildPageMetadata({
       card: socialImage ? 'summary_large_image' : 'summary',
       title,
       description,
+      creator: '@AgituG632',
       ...(socialImage ? { images: [socialImage] } : {}),
     },
   };
@@ -120,6 +125,7 @@ export const rootMetadata: Metadata = {
     card: socialImage ? 'summary_large_image' : 'summary',
     title: SITE_NAME,
     description: SITE_SOCIAL_DESCRIPTION,
+    creator: '@AgituG632',
     ...(socialImage ? { images: [socialImage] } : {}),
   },
   robots: {

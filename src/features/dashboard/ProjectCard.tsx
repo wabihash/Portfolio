@@ -69,11 +69,11 @@ export function ProjectCard({ onOpenDetails, project }: ProjectCardProps): React
       whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.22 }}
       transition={{ duration: 0.45, ease: 'easeOut' }}
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_14px_36px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_44px_rgba(0,0,0,0.45)] focus-within:ring-2 focus-within:ring-white/30"
+      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 shadow-[0_14px_36px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_44px_rgba(0,0,0,0.45)] focus-within:ring-2 focus-within:ring-white/30 sm:p-5"
     >
       <div className={`pointer-events-none absolute -top-20 -right-16 w-64 h-64 bg-linear-to-b ${accent.ring} blur-3xl`} />
 
-      <div className="relative mb-4 h-48 w-full overflow-hidden rounded-xl">
+      <div className="relative mb-4 aspect-[16/10] w-full overflow-hidden rounded-xl sm:aspect-[16/9]">
         <Image
           src={imageSrc}
           alt={project.imageAlt}
@@ -118,12 +118,12 @@ export function ProjectCard({ onOpenDetails, project }: ProjectCardProps): React
         ))}
       </div>
 
-      <div className="flex gap-3 mt-4">
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row">
         <a
           href={project.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className={`rounded-md px-4 py-2 text-sm font-medium text-black shadow-[0_10px_24px_rgba(251,146,60,0.28)] transition duration-300 hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${accent.primaryButton}`}
+          className={`inline-flex w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-black shadow-[0_10px_24px_rgba(251,146,60,0.28)] transition duration-300 hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:w-auto ${accent.primaryButton}`}
         >
           Live Demo
         </a>
@@ -133,7 +133,7 @@ export function ProjectCard({ onOpenDetails, project }: ProjectCardProps): React
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition duration-300 hover:scale-[1.03] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            className="inline-flex w-full items-center justify-center rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition duration-300 hover:scale-[1.03] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:w-auto"
           >
             GitHub
           </a>

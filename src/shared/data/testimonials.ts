@@ -17,45 +17,45 @@ export type FeedbackStat = {
 export const TESTIMONIALS = [
   {
     id: 'testimonial-1',
-    name: 'Maya Collins',
-    role: 'Product Lead',
-    company: 'Northstar Studio',
+    name: 'Clean Code First',
+    role: 'Engineering Standard',
+    company: 'Codebase Quality',
     quote:
-      'Wabi turned a rough product brief into a clean, production-ready interface that felt polished from the first review.',
-    initials: 'MC',
+      'I keep components readable, naming consistent, and logic split clearly so projects stay easy to maintain and extend.',
+    initials: 'CC',
     accentClass: 'bg-linear-to-br from-yellow-500/35 via-amber-500/20 to-orange-500/15',
     rating: 5,
   },
   {
     id: 'testimonial-2',
-    name: 'Daniel Reid',
-    role: 'Founder',
-    company: 'BrightWave Labs',
+    name: 'Strong File Structure',
+    role: 'Project Organization',
+    company: 'Scalable Architecture',
     quote:
-      'Communication stayed sharp, feedback loops were fast, and every update came back cleaner than the last.',
-    initials: 'DR',
+      'I organize files and folders by feature and responsibility so new features can be added without creating confusion.',
+    initials: 'FS',
     accentClass: 'bg-linear-to-br from-cyan-500/30 via-sky-500/20 to-blue-500/15',
     rating: 5,
   },
   {
     id: 'testimonial-3',
-    name: 'Sara Nguyen',
-    role: 'Operations Director',
-    company: 'Atlas Commerce',
+    name: 'Reliable Delivery',
+    role: 'Execution Process',
+    company: 'Milestone Workflow',
     quote:
-      'The redesign made our product feel faster and more trustworthy, and the attention to detail raised the whole experience.',
-    initials: 'SN',
+      'I break work into clear milestones, share updates consistently, and keep delivery predictable from start to finish.',
+    initials: 'RD',
     accentClass: 'bg-linear-to-br from-emerald-500/30 via-teal-500/20 to-green-500/15',
     rating: 5,
   },
   {
     id: 'testimonial-4',
-    name: 'Tomas Lee',
-    role: 'Engineering Manager',
-    company: 'Orbit Systems',
+    name: 'Clear Collaboration',
+    role: 'Client Communication',
+    company: 'Feedback Loop',
     quote:
-      'The build quality was solid, the handoff was easy, and the final codebase has stayed simple to maintain after launch.',
-    initials: 'TL',
+      'I use straightforward communication and fast iteration cycles to align quickly and reduce back-and-forth friction.',
+    initials: 'CL',
     accentClass: 'bg-linear-to-br from-rose-500/30 via-pink-500/20 to-fuchsia-500/15',
     rating: 5,
   },
@@ -63,19 +63,19 @@ export const TESTIMONIALS = [
 
 export const FEEDBACK_STATS = [
   {
-    title: '100% Satisfaction',
-    detail: 'Clear communication and reliable delivery from start to finish.',
+    title: 'Clean Code',
+    detail: 'Readable components, reusable patterns, and maintainable structure.',
   },
   {
-    title: 'On-Time Delivery',
-    detail: 'Milestones stayed predictable with smooth handoffs at each step.',
+    title: 'Good Structure',
+    detail: 'Feature-based organization with clear separation of concerns.',
   },
   {
-    title: 'Quality Code',
-    detail: 'Clean structure, maintainable patterns, and attention to detail.',
+    title: 'Fast Iteration',
+    detail: 'Consistent updates and practical revisions focused on outcomes.',
   },
   {
-    title: 'Post-Support',
-    detail: 'Follow-up support that keeps the product stable after launch.',
+    title: 'Reliable Handoff',
+    detail: 'Clear documentation and smooth transition for future changes.',
   },
 ] satisfies readonly FeedbackStat[];

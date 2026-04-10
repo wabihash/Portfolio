@@ -73,19 +73,22 @@ export function TestimonialsSection() {
         <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-yellow-500/10 blur-3xl" />
 
         <div className="relative text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#9db3e3]">Client Feedback</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#9db3e3]">How I Work</p>
           <h2 id="feedback-heading" className="mt-3 text-3xl font-bold tracking-tight text-white md:text-4xl">
-            <span className="text-[#fbbf24]">Client</span> Feedback
+            <span className="text-[#fbbf24]">How</span> I Work
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[#c6d5f4] md:text-base">
-            What clients say about my work
+            I focus on clean code and good file structure so every project is easier to scale and maintain.
+          </p>
+          <p className="mx-auto mt-2 max-w-2xl text-xs leading-relaxed text-white/55 md:text-sm">
+            Client testimonials will be added as collaborations grow.
           </p>
         </div>
 
         <div className="relative mt-8">
           <div className="pointer-events-none absolute inset-x-6 top-6 h-28 rounded-full bg-yellow-500/10 blur-3xl" />
 
-          <div className="relative mx-auto min-h-[28rem] w-full max-w-4xl">
+          <div className="relative mx-auto min-h-[24rem] w-full max-w-4xl sm:min-h-[28rem]">
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={activeTestimonial.id}

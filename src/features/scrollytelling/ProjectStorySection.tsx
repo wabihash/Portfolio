@@ -64,7 +64,7 @@ function StoryStep({
       whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.42, ease: 'easeOut' }}
-      className={`rounded-2xl border p-5 backdrop-blur-md transition-colors duration-300 md:p-6 ${
+      className={`rounded-2xl border p-4 backdrop-blur-md transition-colors duration-300 sm:p-5 md:p-6 ${
         isActive
           ? 'border-cyan-300/40 bg-cyan-300/10 shadow-[0_20px_48px_rgba(34,211,238,0.14)]'
           : 'border-white/10 bg-white/5'
@@ -73,12 +73,12 @@ function StoryStep({
       <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
         Step {index + 1}
       </p>
-      <h3 className="mt-3 text-2xl font-semibold text-white">
+      <h3 className="mt-3 text-xl font-semibold text-white sm:text-2xl">
         <KineticWords text={project.title} active={isActive} />
       </h3>
       {project.tagline && <p className="mt-2 text-sm text-slate-300">{project.tagline}</p>}
 
-      <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300">
+      <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300 sm:text-[0.95rem]">
         <p>
           <span className="font-semibold text-cyan-100">Challenge:</span> {project.challenge}
         </p>
@@ -133,14 +133,14 @@ export function ProjectStorySection() {
         </p>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_1.05fr] lg:gap-8">
+      <div className="grid gap-5 lg:grid-cols-[1fr_1.05fr] lg:gap-8">
         <div className="lg:sticky lg:top-24 lg:self-start">
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-950/75 backdrop-blur-md">
             <div className="border-b border-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-slate-300">
               {activeProject.title} Preview
             </div>
 
-            <div className="relative h-72 w-full md:h-96">
+            <div className="relative h-60 w-full sm:h-72 md:h-96">
               <div className="absolute inset-0 grayscale">
                 <Image
                   src={activeProject.image}
@@ -166,10 +166,12 @@ export function ProjectStorySection() {
 
               <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#020814]/85 via-transparent to-[#020814]/20" />
 
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <div className="rounded-xl border border-cyan-200/20 bg-[#03101d]/75 p-3 font-mono text-xs text-cyan-100 backdrop-blur-sm">
-                  <p className="text-cyan-200/80">// Code View</p>
-                  <p className="mt-1">const outcome = "{activeProject.impact}";</p>
+              <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-4">
+                <div className="rounded-xl border border-cyan-200/20 bg-[#03101d]/75 p-2.5 font-mono text-[10px] leading-5 text-cyan-100 backdrop-blur-sm sm:p-3 sm:text-xs sm:leading-6">
+                  <p className="text-cyan-200/80">{`//`} Code View</p>
+                  <p className="mt-0.5 sm:mt-1">
+                    const outcome = &quot;{activeProject.impact}&quot;;
+                  </p>
                 </div>
               </div>
             </div>
