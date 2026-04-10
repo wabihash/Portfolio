@@ -73,7 +73,7 @@ export function ProjectCard({ onOpenDetails, project }: ProjectCardProps): React
     >
       <div className={`pointer-events-none absolute -top-20 -right-16 w-64 h-64 bg-linear-to-b ${accent.ring} blur-3xl`} />
 
-      <div className="relative mb-4 aspect-[16/10] w-full overflow-hidden rounded-xl sm:aspect-[16/9]">
+      <div className="relative mb-4 aspect-16/10 w-full overflow-hidden rounded-xl sm:aspect-video">
         <Image
           src={imageSrc}
           alt={project.imageAlt}

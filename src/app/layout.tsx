@@ -4,6 +4,7 @@ import { Footer } from "@/components/shared/Footer";
 import SceneWrapper from "@/components/layout/SceneWrapper";
 import { HashScrollManager } from "@/components/layout/HashScrollManager";
 import { rootMetadata } from "@/lib/metadata";
+import { DigitalTwin } from "@/features/assistant/DigitalTwin";
 
 export const metadata = rootMetadata;
 
@@ -20,6 +21,7 @@ export default function RootLayout({
         <div className="min-h-screen flex-1 pt-12 sm:pt-20">
           <SceneWrapper>{children}</SceneWrapper>
         </div>
+        <DigitalTwin />
         <Footer />
       </body>
     </html>

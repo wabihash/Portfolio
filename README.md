@@ -38,6 +38,24 @@ Notes:
 - Do not use your normal Gmail account password.
 - `CONTACT_TO_EMAIL` is the inbox that receives portfolio messages.
 
+## AI Chatbot (Free-First Setup)
+
+The site now includes a floating portfolio chatbot wired to `POST /api/assistant`.
+
+Create or update `.env.local` with:
+
+```bash
+GITHUB_MODELS_API_KEY=your_github_pat
+GITHUB_MODELS_MODEL=openai/gpt-4.1-mini
+# Optional override (normally do not change)
+# GITHUB_MODELS_API_URL=https://models.github.ai/inference/chat/completions
+```
+
+Notes:
+- Keep `GITHUB_MODELS_API_KEY` server-side only. Do not expose it to the browser.
+- Use a GitHub Personal Access Token with access for GitHub Models.
+- The API route has a simple in-memory rate limit to protect free-tier usage.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses Next.js App Router with Tailwind CSS for styling.

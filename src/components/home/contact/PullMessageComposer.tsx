@@ -26,6 +26,110 @@ export function PullMessageComposer() {
   const autoCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const successHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const successRevealTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+
+  function playOpenPopVoiceCue() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const AudioContextCtor = window.AudioContext || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    if (!AudioContextCtor) {
+      return;
+    }
+
+    if (!audioContextRef.current) {
+      audioContextRef.current = new AudioContextCtor();
+    }
+
+    const ctx = audioContextRef.current;
+    if (ctx.state === 'suspended') {
+      void ctx.resume();
+    }
+
+    const now = ctx.currentTime;
+    const baseFrequency = 240 + Math.random() * 90;
+    const glideTarget = baseFrequency * (1.4 + Math.random() * 0.12);
+
+    const masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0.0001, now);
+    masterGain.gain.exponentialRampToValueAtTime(0.11, now + 0.02);
+    masterGain.gain.exponentialRampToValueAtTime(0.045, now + 0.12);
+    masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.34);
+
+    const toneFilter = ctx.createBiquadFilter();
+    toneFilter.type = 'lowpass';
+    toneFilter.frequency.setValueAtTime(2200, now);
+    toneFilter.frequency.exponentialRampToValueAtTime(880, now + 0.3);
+    toneFilter.Q.setValueAtTime(0.7, now);
+
+    masterGain.connect(toneFilter);
+    toneFilter.connect(ctx.destination);
+
+    const leadOsc = ctx.createOscillator();
+    leadOsc.type = 'triangle';
+    leadOsc.frequency.setValueAtTime(baseFrequency, now);
+    leadOsc.frequency.exponentialRampToValueAtTime(glideTarget, now + 0.18);
+
+    const bodyOsc = ctx.createOscillator();
+    bodyOsc.type = 'sine';
+    bodyOsc.frequency.setValueAtTime(baseFrequency * 0.5, now);
+    bodyOsc.frequency.exponentialRampToValueAtTime(baseFrequency * 0.76, now + 0.22);
+
+    const vibrato = ctx.createOscillator();
+    vibrato.type = 'sine';
+    vibrato.frequency.setValueAtTime(6.2 + Math.random() * 1.1, now);
+
+    const vibratoGain = ctx.createGain();
+    vibratoGain.gain.setValueAtTime(5.5 + Math.random() * 1.8, now);
+    vibrato.connect(vibratoGain);
+    vibratoGain.connect(leadOsc.frequency);
+
+    const airNoise = ctx.createBufferSource();
+    const airBuffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.12), ctx.sampleRate);
+    const airData = airBuffer.getChannelData(0);
+    for (let i = 0; i < airData.length; i += 1) {
+      airData[i] = (Math.random() * 2 - 1) * (1 - i / airData.length);
+    }
+    airNoise.buffer = airBuffer;
+
+    const airFilter = ctx.createBiquadFilter();
+    airFilter.type = 'bandpass';
+    airFilter.frequency.setValueAtTime(1400 + Math.random() * 400, now);
+    airFilter.Q.setValueAtTime(0.95, now);
+
+    const airGain = ctx.createGain();
+    airGain.gain.setValueAtTime(0.0001, now);
+    airGain.gain.exponentialRampToValueAtTime(0.03, now + 0.018);
+    airGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.11);
+
+    airNoise.connect(airFilter);
+    airFilter.connect(airGain);
+    airGain.connect(masterGain);
+
+    leadOsc.connect(masterGain);
+    bodyOsc.connect(masterGain);
+
+    leadOsc.start(now);
+    bodyOsc.start(now);
+    vibrato.start(now);
+    airNoise.start(now);
+
+    const stopAt = now + 0.34;
+    leadOsc.stop(stopAt);
+    bodyOsc.stop(stopAt);
+    vibrato.stop(stopAt);
+    airNoise.stop(now + 0.12);
+
+    leadOsc.onended = () => {
+      vibrato.disconnect();
+      vibratoGain.disconnect();
+      airGain.disconnect();
+      airFilter.disconnect();
+      toneFilter.disconnect();
+      masterGain.disconnect();
+    };
+  }
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(MOBILE_BREAKPOINT);
@@ -44,6 +148,10 @@ export function PullMessageComposer() {
       }
       if (successRevealTimerRef.current) {
         clearTimeout(successRevealTimerRef.current);
+      }
+      if (audioContextRef.current) {
+        void audioContextRef.current.close();
+        audioContextRef.current = null;
       }
     };
   }, []);
@@ -89,6 +197,9 @@ export function PullMessageComposer() {
     setIsPullHintActive(false);
 
     if (info.offset.y >= effectivePullOpenThreshold || info.velocity.y >= 640) {
+      if (!isFormOpen) {
+        playOpenPopVoiceCue();
+      }
       setIsFormOpen(true);
       return;
     }
@@ -159,7 +270,7 @@ export function PullMessageComposer() {
 
       <div className="mt-8 flex flex-col items-center">
         <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-200/75 sm:text-xs sm:tracking-[0.22em]">
-          Ready to send a message?
+          Want to reach out?
         </p>
 
         <motion.div
@@ -239,10 +350,10 @@ export function PullMessageComposer() {
 
         <p className="mt-3 text-xs text-indigo-100/70">
           {isPullHintActive
-            ? 'Release to apply.'
+            ? 'Nice pull. Release to open the message composer.'
             : isFormOpen
               ? 'Pull up to close.'
-              : 'Pull down to open.'}
+              : 'Pull down to open the message composer.'}
         </p>
       </div>
 
