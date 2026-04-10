@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Loader2, Send, TriangleAlert } from 'lucide-react';
+import { CheckCircle2, Loader2, Send, TriangleAlert } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 type ContactFormValues = {
@@ -37,6 +37,7 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
   const [values, setValues] = useState<ContactFormValues>(INITIAL_VALUES);
   const [errors, setErrors] = useState<ContactFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -139,6 +140,8 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
 
       setValues(INITIAL_VALUES);
       setErrors({});
+      setIsSuccess(true);
+      setTimeout(() => setIsSuccess(false), 3000);
       onSubmitSuccess?.('Message sent successfully. I will get back to you soon.');
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : 'Something went wrong while sending your message.');
@@ -254,11 +257,21 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
 
       <button
         type="submit"
-        disabled={isSubmitting}
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-purple-700 active:scale-95 disabled:cursor-not-allowed disabled:bg-purple-700/60 disabled:opacity-75"
+        disabled={isSubmitting || isSuccess}
+        className={`mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-white transition active:scale-95 disabled:cursor-not-allowed ${
+          isSuccess 
+            ? 'bg-emerald-600 hover:bg-emerald-600' 
+            : 'bg-purple-600 hover:bg-purple-700 disabled:bg-purple-700/60 disabled:opacity-75'
+        }`}
       >
-        {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-        {isSubmitting ? 'Sending...' : 'Send Message'}
+        {isSubmitting ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : isSuccess ? (
+          <CheckCircle2 className="h-4 w-4" />
+        ) : (
+          <Send className="h-4 w-4" />
+        )}
+        {isSubmitting ? 'Sending...' : isSuccess ? 'Sent!' : 'Send Message'}
       </button>
 
       <AnimatePresence mode="wait" initial={false}>

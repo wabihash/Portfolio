@@ -9,7 +9,7 @@ import React from 'react';
 // Utility: parse message and replace /#route or /route with anchor buttons
 function renderMessageWithLinks(content: string) {
   // Regex: match /#section or /section or /resume (not inside a word)
-  const routeRegex = /(^|\s)(\/#[a-zA-Z0-9_-]+|\/resume|\/projects|\/services|\/skills|\/about|\/contact)(?=\s|\.|,|$)/g;
+  const routeRegex = /(^|[\s:(\[])(\/#[a-zA-Z0-9_-]+|\/resume|\/projects|\/services|\/skills|\/about|\/contact)(?=\s|\.|,|!|\?|$|[)\]])/g;
   const parts: React.ReactNode[] = [];
   let lastIndex = 0;
   let match;
@@ -95,8 +95,8 @@ export function AssistantChatPanel({
               transition={{ duration: 0.2, ease: 'easeOut' }}
               className={
                 message.role === 'user'
-                  ? 'ml-6 rounded-2xl rounded-tr-md bg-cyan-500/20 px-2.5 py-2 text-xs text-cyan-50 sm:ml-8 sm:px-3 sm:text-sm'
-                  : 'mr-6 rounded-2xl rounded-tl-md bg-white/8 px-2.5 py-2 text-xs text-white/90 sm:mr-8 sm:px-3 sm:text-sm'
+                  ? 'ml-6 rounded-2xl rounded-tr-md bg-cyan-500/20 px-2.5 py-2 text-xs text-cyan-50 sm:ml-8 sm:px-3 sm:text-sm whitespace-pre-wrap'
+                  : 'mr-6 rounded-2xl rounded-tl-md bg-white/8 px-2.5 py-2 text-xs text-white/90 sm:mr-8 sm:px-3 sm:text-sm whitespace-pre-wrap'
               }
             >
               {message.role === 'assistant'

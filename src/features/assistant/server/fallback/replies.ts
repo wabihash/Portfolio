@@ -109,8 +109,9 @@ function buildAvailabilityReply(): string {
 
 function buildContactReply(): string {
   return [
-    'The best way to hire or contact Wabi is to use the "Send Message" form in the Contact section of the portfolio. This will deliver your inquiry directly.',
-    `For more details or to start a conversation, click the ${ROUTES.contact} link in the chat or navigate to the Contact tab.`,
+    'To hire Wabi or start a project, the best next step is to go to the Contact section and send a message through the form.',
+    'This ensures your inquiry is delivered directly to Wabi\'s inbox.',
+    `Click here to go to the form: ${ROUTES.contact}`,
   ].join('\n');
 }
 

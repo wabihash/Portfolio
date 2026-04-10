@@ -264,10 +264,7 @@ export function detectFallbackIntent(message: string): { intent: FallbackIntent;
     return { intent: 'general' };
   }
 
-  if (includesAny(normalized, OUT_OF_SCOPE_KEYWORDS)) {
-    return { intent: 'out-of-scope' };
-  }
-
+  // Check for greetings first as they are very short and common
   if (includesAny(normalized, GREETING_KEYWORDS) && normalized.length < 40) {
     return { intent: 'greeting' };
   }
@@ -276,51 +273,69 @@ export function detectFallbackIntent(message: string): { intent: FallbackIntent;
     return { intent: 'farewell' };
   }
 
-  // CONTACT_KEYWORDS check moved up for priority
+  // PRIORITIZE PORTFOLIO INTENTS to avoid false out-of-scope matches
+  // CONTACT check
   if (includesAny(normalized, CONTACT_KEYWORDS)) {
     return { intent: 'contact' };
   }
 
+  // SERVICES check
+  if (includesAny(normalized, SERVICE_KEYWORDS)) {
+    return { intent: 'services' };
+  }
+
+  // SKILLS check
+  if (includesAny(normalized, SKILL_KEYWORDS)) {
+    return { intent: 'skills' };
+  }
+
+  // IDENTITY / OVERVIEW check (Moved up to prevent 'about' matching 'adult')
   if (
     includesAny(normalized, IDENTITY_KEYWORDS) ||
     normalized === 'wabi' ||
     normalized === 'who is wabi' ||
-    normalized === "who's wabi"
+    normalized === "who's wabi" ||
+    includesAny(normalized, OVERVIEW_KEYWORDS) ||
+    normalized.includes('about')
   ) {
     return { intent: 'overview' };
   }
 
+  // PROJECT DETAILS check
   const projectTitle = getMentionedProjectTitle(normalized);
   if (projectTitle) {
     return { intent: 'project-details', projectTitle };
   }
 
-  if (
-    includesAny(normalized, OVERVIEW_KEYWORDS) ||
-    normalized.includes('under 80 words') ||
-    normalized.includes('in 80 words')
-  ) {
-    return { intent: 'overview' };
-  }
-
-  if (includesAny(normalized, PROJECT_RECOMMEND_KEYWORDS)) {
-    return { intent: 'project-recommendation' };
-  }
-
-  if (includesAny(normalized, SERVICE_KEYWORDS)) {
-    return { intent: 'services' };
-  }
-
-  if (includesAny(normalized, SKILL_KEYWORDS)) {
-    return { intent: 'skills' };
-  }
-
+  // EXPERIENCE check
   if (includesAny(normalized, EXPERIENCE_KEYWORDS)) {
     return { intent: 'experience' };
   }
 
+  // AVAILABILITY check
   if (includesAny(normalized, AVAILABILITY_KEYWORDS)) {
     return { intent: 'availability' };
+  }
+
+  // PROJECT RECOMMENDATION check
+  if (includesAny(normalized, PROJECT_RECOMMEND_KEYWORDS)) {
+    return { intent: 'project-recommendation' };
+  }
+
+  // NOW check out-of-scope, but with strict matching for short sensitive words
+  const isStrictOutOfScope = OUT_OF_SCOPE_KEYWORDS.some((keyword) => {
+    // If the keyword is short (<= 5 chars like 'adult', 'hack', 'bet'), require exact word match
+    // This prevents 'about' from matching 'adult' or 'stack' matching 'stock'
+    if (keyword.length <= 5) {
+      const words = normalized.split(' ');
+      return words.includes(keyword);
+    }
+    // For longer words, use the standard includesAny logic (fuzzy)
+    return includesAny(normalized, [keyword]);
+  });
+
+  if (isStrictOutOfScope) {
+    return { intent: 'out-of-scope' };
   }
 
   return { intent: 'general' };

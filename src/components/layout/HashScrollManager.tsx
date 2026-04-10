@@ -32,7 +32,7 @@ export function HashScrollManager() {
         return;
       }
 
-      const hashSection = window.location.hash.replace(/^#/, '');
+      const hashSection = window.location.hash.split('#').filter(Boolean).pop() || '';
       if (hashSection) {
         applySectionWithReplays(hashSection, 'auto');
       }
@@ -60,7 +60,7 @@ export function HashScrollManager() {
     }
 
     const onHashChange = () => {
-      const hashSection = window.location.hash.replace(/^#/, '');
+      const hashSection = window.location.hash.split('#').filter(Boolean).pop() || '';
       if (!hashSection) {
         return;
       }

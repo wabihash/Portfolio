@@ -33,16 +33,18 @@ export function SectionLink({ href, className, children, onNavigate }: SectionLi
       return;
     }
 
-    event.preventDefault();
-    onNavigate?.();
-
+    // If we are NOT on the home page, use standard location assignment to force a clean navigation.
+    // This is the most reliable way to ensure the home page mounts and scrolls on the first click.
     if (pathname !== '/') {
-      setPendingSectionScroll(sectionId);
-      router.push(`/#${sectionId}`);
+      onNavigate?.();
+      window.location.assign(href);
       return;
     }
 
-    window.history.replaceState(null, '', `/#${sectionId}`);
+    event.preventDefault();
+    onNavigate?.();
+
+    window.history.pushState(null, '', `#${sectionId}`);
     queueSectionScroll(sectionId);
   }
 

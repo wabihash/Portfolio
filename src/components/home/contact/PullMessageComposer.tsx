@@ -219,36 +219,16 @@ export function PullMessageComposer() {
     <>
       <AnimatePresence initial={false}>
         {successNotice ? (
-          <motion.p
-            key="contact-success-notice"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-500/12 px-3 py-2 text-center text-sm text-emerald-200"
-            role="status"
-            aria-live="polite"
-          >
-            <CheckCircle2 className="h-4 w-4" />
-            {successNotice}
-          </motion.p>
-        ) : null}
-      </AnimatePresence>
-
-      <AnimatePresence initial={false}>
-        {successNotice ? (
           <motion.div
-            key="contact-success-floating"
-            initial={{ opacity: 0, y: 12, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="pointer-events-none fixed inset-x-3 bottom-3 z-70 flex justify-center sm:inset-x-4 sm:bottom-6"
-            role="status"
-            aria-live="polite"
+            key="contact-success-inline"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="mb-10 flex justify-center w-full"
           >
-            <p className="inline-flex w-full max-w-xl items-center justify-center gap-2 rounded-xl border border-emerald-300/35 bg-emerald-500/18 px-3 py-2 text-center text-sm font-medium text-emerald-100 shadow-[0_14px_35px_rgba(16,185,129,0.2)] backdrop-blur-md sm:w-auto sm:px-4">
-              <CheckCircle2 className="h-4 w-4" />
+            <p className="inline-flex items-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-500/12 px-4 py-2.5 text-center text-sm font-medium text-emerald-100 shadow-[0_12px_30px_rgba(16,185,129,0.15)]" role="status" aria-live="polite">
+              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
               {successNotice}
             </p>
           </motion.div>
@@ -348,7 +328,7 @@ export function PullMessageComposer() {
           </div>
         </motion.div>
 
-        <p className="mt-3 text-xs text-indigo-100/70">
+        <p className="mt-3 text-xs text-indigo-100/70 text-center">
           {isPullHintActive
             ? 'Nice pull. Release to open the message composer.'
             : isFormOpen
