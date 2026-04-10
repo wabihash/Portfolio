@@ -50,8 +50,45 @@ const IDENTITY_KEYWORDS = [
   'introduce yourself',
 ];
 const OVERVIEW_KEYWORDS = ['overview', 'summary', 'quick overview', 'wabi overview'];
-const SERVICE_KEYWORDS = ['service', 'offer', 'what do you do'];
-const SKILL_KEYWORDS = ['skill', 'stack', 'technology', 'tech'];
+const SERVICE_KEYWORDS = [
+  'service',
+  'services',
+  'offer',
+  'offers',
+  'what do you do',
+  'tech stack',
+  'technology stack',
+  'what services',
+  'which services',
+  'what stack',
+  'which stack',
+  'supports those services',
+  'stack of wabi',
+  'give me the stack',
+  'give me stack',
+  'wabi stack',
+  'stack wabi',
+  "wabi's stack",
+  "wabi's services",
+  'stack for wabi',
+  'services for wabi',
+];
+const SKILL_KEYWORDS = [
+  'skill',
+  'skills',
+  'stack',
+  'technology',
+  'tech',
+  'give me the skills',
+  'give me skills',
+  'skills of wabi',
+  'wabi skills',
+  'skills wabi',
+  "wabi's skills",
+  'skills for wabi',
+  "wabi's stack",
+  'stack for wabi',
+];
 const PROJECT_RECOMMEND_KEYWORDS = [
   'best project',
   'best projects',
@@ -70,6 +107,16 @@ const AVAILABILITY_KEYWORDS = ['available', 'availability', 'open to', 'internsh
 const CONTACT_KEYWORDS = [
   'contact',
   'hire',
+  'hire or contact',
+  'hire contact',
+  'hire wabi',
+  'how to hire wabi',
+  'how can i hire wabi',
+  'how do i hire wabi',
+  'contact wabi',
+  'how to contact wabi',
+  'how can i contact wabi',
+  'how do i contact wabi',
   'email',
   'phone',
   'whatsapp',
@@ -95,6 +142,8 @@ const CONTACT_KEYWORDS = [
   'collaborate with',
   'start a project',
   'start collaboration',
+  'for a project',
+  'include the best next step',
 ];
 
 const TYPO_CORRECTIONS: Record<string, string> = {
