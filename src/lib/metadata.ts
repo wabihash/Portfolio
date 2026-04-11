@@ -49,18 +49,22 @@ function normalizeSiteUrl(url?: string) {
 }
 
 function resolveSiteUrl() {
-  return normalizeSiteUrl(
+  // Use VERCEL_PROJECT_PRODUCTION_URL or NEXT_PUBLIC_SITE_URL to get the canonical domain
+  const rawUrl = 
     process.env.NEXT_PUBLIC_SITE_URL ??
-      process.env.SITE_URL ??
-      process.env.VERCEL_PROJECT_PRODUCTION_URL ??
-      process.env.VERCEL_URL ??
-      'https://portfolio-wabihashs-projects.vercel.app'
-  );
+    process.env.SITE_URL ??
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ??
+    // process.env.VERCEL_URL is often a deployment URL (branch-xyz.vercel.app)
+    // We only use it as a last resort before the hardcoded production fallback
+    process.env.VERCEL_URL ??
+    'https://portfolio-wabihashs-projects.vercel.app';
+    
+  return normalizeSiteUrl(rawUrl);
 }
 
 export const siteUrl = resolveSiteUrl();
 export const metadataBase = siteUrl ? new URL(siteUrl) : undefined;
-export const socialImage = metadataBase ? SOCIAL_IMAGE_PATH : undefined;
+export const socialImage = SOCIAL_IMAGE_PATH; // Keep as relative for helper
 
 type PageMetadataConfig = {
   title: string;
@@ -73,27 +77,36 @@ export function buildPageMetadata({
   description,
   path,
 }: PageMetadataConfig): Metadata {
+  const absoluteUrl = siteUrl ? `${siteUrl}${path}` : path;
+  const absoluteImageUrl = siteUrl ? `${siteUrl}${socialImage}` : socialImage;
+
   return {
     title,
     description,
-    alternates: metadataBase ? { canonical: path } : undefined,
+    alternates: siteUrl ? { canonical: absoluteUrl } : undefined,
     openGraph: {
       title,
       description,
       type: 'website',
-      url: path,
+      url: absoluteUrl,
       siteName: SITE_NAME,
       locale: 'en_US',
-      ...(socialImage
-        ? { images: [{ url: socialImage, alt: `${SITE_NAME} preview` }] }
-        : {}),
+      images: [
+        {
+          url: absoluteImageUrl,
+          width: 1200,
+          height: 1200,
+          alt: `${SITE_NAME} preview`,
+        },
+      ],
     },
     twitter: {
-      card: socialImage ? 'summary_large_image' : 'summary',
+      card: 'summary_large_image',
       title,
       description,
       creator: '@AgituG632',
-      ...(socialImage ? { images: [socialImage] } : {}),
+      site: '@AgituG632',
+      images: [absoluteImageUrl],
     },
   };
 }
@@ -110,24 +123,30 @@ export const rootMetadata: Metadata = {
   publisher: SITE_AUTHOR,
   category: 'technology',
   metadataBase,
-  alternates: metadataBase ? { canonical: '/' } : undefined,
+  alternates: siteUrl ? { canonical: siteUrl } : undefined,
   openGraph: {
     title: SITE_NAME,
     description: SITE_SOCIAL_DESCRIPTION,
     type: 'website',
     siteName: SITE_NAME,
     locale: 'en_US',
-    url: '/',
-    ...(socialImage
-      ? { images: [{ url: socialImage, alt: `${SITE_NAME} preview` }] }
-      : {}),
+    url: siteUrl || '/',
+    images: [
+      {
+        url: siteUrl ? `${siteUrl}${socialImage}` : socialImage,
+        width: 1200,
+        height: 1200,
+        alt: `${SITE_NAME} preview`,
+      },
+    ],
   },
   twitter: {
-    card: socialImage ? 'summary_large_image' : 'summary',
+    card: 'summary_large_image',
     title: SITE_NAME,
     description: SITE_SOCIAL_DESCRIPTION,
     creator: '@AgituG632',
-    ...(socialImage ? { images: [socialImage] } : {}),
+    site: '@AgituG632',
+    images: [siteUrl ? `${siteUrl}${socialImage}` : socialImage],
   },
   robots: {
     index: true,
