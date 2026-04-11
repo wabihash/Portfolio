@@ -94,23 +94,23 @@ export function CodeEditorHero() {
         transition={{ duration: 6.2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
         className="absolute -bottom-4 left-2 z-20"
       >
-        <div className="flex h-11 w-11 items-center justify-center rounded-md border border-fuchsia-200/45 bg-fuchsia-500/80 text-[var(--text-primary)] shadow-[0_12px_28px_rgba(217,70,239,0.3)]">
+        <div className="flex h-11 w-11 items-center justify-center rounded-md border border-fuchsia-200/45 bg-fuchsia-500/80 text-(--text-primary) shadow-[0_12px_28px_rgba(217,70,239,0.3)]">
           <Zap className="h-5 w-5" />
         </div>
       </motion.div>
 
       <div className="relative rounded-[1.3rem] bg-linear-to-br from-cyan-300/45 via-emerald-200/10 to-lime-400/45 p-px shadow-[0_26px_58px_rgba(2,8,20,0.6)]">
-        <div className="relative overflow-hidden rounded-[1.25rem] border border-[var(--border-subtle)] bg-[var(--bg-subtle)] backdrop-blur-md">
+        <div className="relative overflow-hidden rounded-[1.25rem] border border-(--border-subtle) bg-(--bg-subtle) backdrop-blur-md">
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[14px_14px]" />
 
-          <div className="relative flex items-center justify-between border-b border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-4 py-3">
+          <div className="relative flex items-center justify-between border-b border-(--border-subtle) bg-(--bg-subtle) px-4 py-3">
             <div className="flex items-center gap-2">
               <span className="h-3 w-3 rounded-full bg-red-400" />
               <span className="h-3 w-3 rounded-full bg-yellow-300" />
               <span className="h-3 w-3 rounded-full bg-green-400" />
             </div>
             <div className="flex items-center gap-2">
-              <span className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--text-primary)]">
+              <span className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-(--text-primary)">
                 active
               </span>
               <p className="text-sm font-semibold tracking-wide text-lime-200">portfolio.tsx</p>
@@ -118,14 +118,14 @@ export function CodeEditorHero() {
             <button
               type="button"
               onClick={handleCopy}
-              className="inline-flex items-center gap-1.5 rounded-md border border-cyan-200/40 bg-cyan-200/10 px-2.5 py-1.5 text-xs font-medium text-[var(--text-primary)] transition hover:bg-cyan-200/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70"
+              className="inline-flex items-center gap-1.5 rounded-md border border-cyan-200/40 bg-cyan-200/10 px-2.5 py-1.5 text-xs font-medium text-(--text-primary) transition hover:bg-cyan-200/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70"
             >
               {isCopied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
               {isCopied ? 'Copied' : 'Copy Code'}
             </button>
           </div>
 
-          <div className="relative grid grid-cols-[26px_1fr] gap-3 px-4 py-4 font-mono text-xs leading-6 text-[var(--text-primary)] sm:px-5 sm:text-sm">
+          <div className="relative grid grid-cols-[26px_1fr] gap-3 px-4 py-4 font-mono text-xs leading-6 text-(--text-primary) sm:px-5 sm:text-sm">
             <div className="select-none pt-0.5 text-right text-[11px] text-slate-500">
               <p>1</p>
               <p>2</p>
@@ -139,54 +139,54 @@ export function CodeEditorHero() {
             <div className="space-y-0.5">
               <p>
                 <span className="text-blue-400">const</span> <span className="text-cyan-300">portfolio</span>{' '}
-                <span className="text-[var(--text-secondary)]">=</span> <span className="text-[var(--text-primary)]">{'{'}</span>
+                <span className="text-(--text-secondary)">=</span> <span className="text-(--text-primary)">{'{'}</span>
               </p>
 
               <p className="pl-4">
-                <span className="text-[var(--text-primary)]">name</span>
-                <span className="text-[var(--text-secondary)]">:</span> <span className="text-amber-300">&quot;Wabi Dagim&quot;</span>
-                <span className="text-[var(--text-secondary)]">,</span>
+                <span className="text-(--text-primary)">name</span>
+                <span className="text-(--text-secondary)">:</span> <span className="text-amber-300">&quot;Wabi Dagim&quot;</span>
+                <span className="text-(--text-secondary)">,</span>
               </p>
 
               <p className="pl-4">
-                <span className="text-[var(--text-primary)]">title</span>
-                <span className="text-[var(--text-secondary)]">:</span>{' '}
+                <span className="text-(--text-primary)">title</span>
+                <span className="text-(--text-secondary)">:</span>{' '}
                 <span className="text-amber-300">&quot;UI/UX Designer &amp; Developer&quot;</span>
-                <span className="text-[var(--text-secondary)]">,</span>
+                <span className="text-(--text-secondary)">,</span>
               </p>
 
               <p className="pl-4">
-                <span className="text-[var(--text-primary)]">skills</span>
-                <span className="text-[var(--text-secondary)]">:</span>{' '}
-                <span className="text-[var(--text-primary)]">[</span>
+                <span className="text-(--text-primary)">skills</span>
+                <span className="text-(--text-secondary)">:</span>{' '}
+                <span className="text-(--text-primary)">[</span>
                 <span className="text-amber-300">&quot;React&quot;</span>
-                <span className="text-[var(--text-secondary)]">, </span>
+                <span className="text-(--text-secondary)">, </span>
                 <span className="text-amber-300">&quot;Python&quot;</span>
-                <span className="text-[var(--text-secondary)]">, </span>
+                <span className="text-(--text-secondary)">, </span>
                 <span className="text-amber-300">&quot;TypeScript&quot;</span>
-                <span className="text-[var(--text-secondary)]">, </span>
+                <span className="text-(--text-secondary)">, </span>
                 <span className="text-amber-300">&quot;AI/ML&quot;</span>
-                <span className="text-[var(--text-secondary)]">, </span>
+                <span className="text-(--text-secondary)">, </span>
                 <span className="text-amber-300">&quot;Figma&quot;</span>
-                <span className="text-[var(--text-secondary)]">, </span>
+                <span className="text-(--text-secondary)">, </span>
                 <span className="text-amber-300">&quot;Node&quot;</span>
                 <span className="text-[var(--text-secondary)]">, </span>
                 <span className="text-amber-300">&quot;Next.js&quot;</span>
-                <span className="text-[var(--text-primary)]">]</span>
-                <span className="text-[var(--text-secondary)]">,</span>
+                <span className="text-(--text-primary)">]</span>
+                <span className="text-(--text-secondary)">,</span>
               </p>
 
               <p>
-                <span className="text-[var(--text-primary)]">{'};'}</span>
+                <span className="text-(--text-primary)">{'};'}</span>
               </p>
 
               <p className="pt-1 text-emerald-300/70">{`//`} runtime preview</p>
 
               <p>
                 <span className="text-blue-400">console</span>
-                <span className="text-[var(--text-primary)]">.</span>
+                <span className="text-(--text-primary)">.</span>
                 <span className="text-cyan-300">log</span>
-                <span className="text-[var(--text-primary)]">(</span>
+                <span className="text-(--text-primary)">(</span>
                 <span className="text-slate-100">{typedText}</span>
                 <motion.span
                   aria-hidden="true"
@@ -196,7 +196,7 @@ export function CodeEditorHero() {
                 >
                   {cursor}
                 </motion.span>
-                <span className="text-[var(--text-primary)]">)</span>
+                <span className="text-(--text-primary)">)</span>
               </p>
             </div>
 
