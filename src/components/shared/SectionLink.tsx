@@ -3,7 +3,7 @@
 import type { MouseEvent, ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { queueSectionScroll, setPendingSectionScroll } from '@/lib/sectionScroll';
+import { queueSectionScroll } from '@/lib/sectionScroll';
 
 type SectionLinkProps = {
   href: string;

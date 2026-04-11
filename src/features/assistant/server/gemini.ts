@@ -50,11 +50,11 @@ export async function generateGeminiReply(messages: { role: string; content: str
 
     console.log(`[Gemini] Successfully generated reply (${text.length} chars)`);
     return text;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Gemini API Error details:', {
-      message: error.message,
-      stack: error.stack,
-      status: error.status,
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      status: (error as { status?: number })?.status,
     });
     return null;
   }

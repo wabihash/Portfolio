@@ -1,4 +1,3 @@
-import { CONTACT_ITEMS } from '@/shared/data/contact';
 import { HERO_OPEN_TO_ROLES, SERVICES, CORE_EXPERTISE_BADGES } from '@/shared/data/homeSections';
 import { PROJECTS } from '@/shared/data/projects';
 import { RESUME_EXPERIENCE, RESUME_SUMMARY } from '@/shared/data/resume';
@@ -13,10 +12,6 @@ const ROUTES = {
   contact: '/#contact',
   resume: '/resume',
 } as const;
-
-function getContactValue(label: string): string {
-  return CONTACT_ITEMS.find((item) => item.label.toLowerCase() === label.toLowerCase())?.value || '';
-}
 
 function underWordLimit(text: string, maxWords: number): string {
   const words = text.split(/\s+/).filter(Boolean);

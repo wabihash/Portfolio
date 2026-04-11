@@ -5,6 +5,7 @@ export function useTypewriterText(text: string, enabled: boolean, speedMs: numbe
 
   useEffect(() => {
     if (!enabled) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTyped('');
       return;
     }

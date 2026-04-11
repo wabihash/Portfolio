@@ -15,7 +15,7 @@ function renderMessageWithLinks(content: string) {
   let match;
   let key = 0;
   while ((match = routeRegex.exec(content)) !== null) {
-    const [fullMatch, pre, route] = match;
+    const [fullMatch, , route] = match;
     // Push text before the match
     if (match.index > lastIndex) {
       parts.push(content.slice(lastIndex, match.index));

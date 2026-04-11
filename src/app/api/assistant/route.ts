@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server';
-import { buildPortfolioContext } from '@/features/assistant/server/portfolioContext';
 import { checkRateLimit } from '@/features/assistant/server/rateLimit';
 import { ASSISTANT_SERVER_CONFIG } from '@/features/assistant/server/config';
 import { buildLocalFallbackReply } from '@/features/assistant/server/localFallback';
 import type { AssistantRequestBody } from '@/features/assistant/types';
 
 import { getClientIp, normalizeUserMessages } from '@/features/assistant/server/requestUtils';
-
-const systemPrompt = ASSISTANT_SERVER_CONFIG.systemPromptParts.join(' ');
 
 export async function POST(request: Request) {
   try {

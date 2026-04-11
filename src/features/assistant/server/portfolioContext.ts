@@ -1,5 +1,5 @@
 import { CONTACT_ITEMS } from '@/shared/data/contact';
-import { CORE_EXPERTISE_BADGES, SERVICES } from '@/shared/data/homeSections';
+import { SERVICES } from '@/shared/data/homeSections';
 import { PROJECTS } from '@/shared/data/projects';
 import {
   RESUME_EXPERIENCE,
