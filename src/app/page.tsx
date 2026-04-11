@@ -16,7 +16,7 @@ import { CodeEditorHero } from '../features/hero/CodeEditorHero';
 import { ProjectStorySection } from '../features/scrollytelling/ProjectStorySection';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Wabi Dagim | Fullstack Craftsman & AI Engineer',
+  title: 'Wabi Dagim | Fullstack Developer & AI Enthusiast',
   description:
     "Explore Wabi's portfolio of full-stack products, modern UI systems, AI-powered experiences, and polished case-study work.",
   path: '/',
