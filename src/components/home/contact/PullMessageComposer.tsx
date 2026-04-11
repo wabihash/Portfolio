@@ -227,8 +227,8 @@ export function PullMessageComposer() {
             transition={{ duration: 0.3, ease: 'easeOut' }}
             className="mb-10 flex justify-center w-full"
           >
-            <p className="inline-flex items-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-500/12 px-4 py-2.5 text-center text-sm font-medium text-emerald-100 shadow-[0_12px_30px_rgba(16,185,129,0.15)]" role="status" aria-live="polite">
-              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+            <p className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 dark:border-emerald-400/30 bg-emerald-500/10 dark:bg-emerald-500/12 px-4 py-2.5 text-center text-sm font-medium text-emerald-900 dark:text-emerald-100 shadow-sm dark:shadow-[0_12px_30px_rgba(16,185,129,0.15)]" role="status" aria-live="polite">
+              <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
               {successNotice}
             </p>
           </motion.div>
