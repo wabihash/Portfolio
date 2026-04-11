@@ -27,9 +27,9 @@ const HERO_IMAGE_ALT = 'Fiery coding hero banner';
 
 export default function Home() {
   return (
-    <main id="home" className="min-h-screen bg-transparent text-[#dbe8ff]">
+    <main id="home" className="min-h-screen bg-transparent" style={{ color: 'var(--text-primary)' }}>
       <section className="w-full pt-0">
-        <div className="relative w-full overflow-hidden border-y border-white/10 bg-black/30 shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
+        <div className="relative w-full overflow-hidden border-y border-[var(--border-subtle)] bg-black/30 shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
           <Image
             src={HERO_IMAGE_SRC}
             alt={HERO_IMAGE_ALT}

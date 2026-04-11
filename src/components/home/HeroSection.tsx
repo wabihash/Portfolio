@@ -18,30 +18,27 @@ export function HeroSection() {
           className="pointer-events-auto p-2"
         >
           <div className="max-w-2xl rounded-2xl p-3 sm:p-4 md:p-6">
-            <p
-              className="text-[10px] font-semibold uppercase tracking-[0.24em] text-cyan-100/90 [text-shadow:0_2px_12px_rgba(2,8,20,0.85)] sm:text-xs sm:tracking-[0.28em]"
-            >
+            {/* Label */}
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-cyan-300 [text-shadow:0_2px_12px_rgba(2,8,20,0.85)] sm:text-xs sm:tracking-[0.28em]">
               Fullstack Developer
             </p>
 
-            <h1
-              className="mt-2 max-w-xl text-[1.55rem] font-bold leading-[1.15] text-white [text-shadow:0_6px_28px_rgba(2,8,20,0.92)] sm:text-3xl md:text-5xl"
-            >
+            {/* Headline */}
+            <h1 className="mt-2 max-w-xl text-[1.55rem] font-bold leading-[1.15] [text-shadow:0_6px_28px_rgba(2,8,20,0.92)] sm:text-3xl md:text-5xl" style={{ color: 'var(--text-primary)' }}>
               I build modern web products that feel fast, polished, and ready for real users.
             </h1>
 
-            <p
-              className="mt-3 max-w-lg text-sm leading-6 text-slate-100 [text-shadow:0_4px_18px_rgba(2,8,20,0.9)] sm:max-w-xl md:max-w-2xl md:text-base md:leading-7"
-            >
+            {/* Sub-copy */}
+            <p className="mt-3 max-w-lg text-sm leading-6 [text-shadow:0_4px_18px_rgba(2,8,20,0.9)] sm:max-w-xl md:max-w-2xl md:text-base md:leading-7" style={{ color: 'var(--text-secondary)' }}>
               Fullstack developer focused on React, Next.js, AI-powered features, and scalable backend delivery.
             </p>
 
-            <p
-              className="mt-3 inline-flex max-w-full rounded-full border border-cyan-200/35 bg-cyan-300/12 px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-cyan-100 sm:px-4 sm:text-xs sm:tracking-[0.08em]"
-            >
+            {/* Open-to badge */}
+            <p className="mt-3 inline-flex max-w-full rounded-full border border-cyan-200/35 bg-cyan-300/12 px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-[var(--text-primary)] sm:px-4 sm:text-xs sm:tracking-[0.08em]">
               {HERO_OPEN_TO_ROLES}
             </p>
 
+            {/* CTAs */}
             <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
                 href="#projects"
@@ -54,7 +51,8 @@ export function HeroSection() {
 
               <Link
                 href="/resume"
-                className="inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-white/16 bg-white/8 px-4 py-2 text-xs font-medium text-white transition hover:bg-white/12 sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
+                className="inline-flex w-full items-center justify-center gap-1.5 rounded-full border px-4 py-2 text-xs font-medium transition sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
+                style={{ borderColor: 'var(--border-strong)', backgroundColor: 'var(--surface)', color: 'var(--text-primary)' }}
               >
                 <span className="sm:hidden">CV</span>
                 <span className="hidden sm:inline">Resume</span>

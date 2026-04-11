@@ -3,8 +3,7 @@
 import { useRef } from 'react';
 import type { ComponentType, ReactNode } from 'react';
 import { Code2, Globe, PenTool } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { WORK_SKILLS, type WorkSkillIcon } from '@/shared/data/homeSections';
 
 type SkillBarProps = {
@@ -19,27 +18,27 @@ function SkillBar({ name, level, icon }: SkillBarProps) {
   const isInView = useInView(barRef, { once: true, amount: 0.5 });
 
   return (
-    <article className="rounded-xl border border-white/10 bg-black/20 p-4 backdrop-blur-lg md:p-5">
+    <article className="inset-card p-4 md:p-5">
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <span className="text-[#fb923c]">{icon}</span>
-          <h3 className="text-sm font-semibold text-white md:text-base">{name}</h3>
+          <span className="text-orange-500 dark:text-orange-400">{icon}</span>
+          <h3 className="text-sm font-semibold md:text-base" style={{ color: 'var(--text-primary)' }}>{name}</h3>
         </div>
-        <span className="text-sm font-semibold text-[#fdba74]">{level}%</span>
+        <span className="text-sm font-semibold text-orange-600 dark:text-orange-300">{level}%</span>
       </div>
 
-      <div ref={barRef} className="h-2.5 overflow-hidden rounded-full bg-[#0c1a3f]" aria-hidden="true">
+      <div ref={barRef} className="h-2.5 w-full overflow-hidden rounded-full bg-[var(--track-bg)]" aria-hidden="true">
         <motion.div
-          initial={{ width: 0 }}
-          animate={
-            shouldReduceMotion
-              ? { width: `${level}%` }
-              : isInView
-                ? { width: `${level}%` }
-                : { width: 0 }
-          }
-          transition={{ duration: shouldReduceMotion ? 0 : 0.9, ease: 'easeOut' }}
-          className="h-full rounded-full bg-[#f97316]"
+           initial={{ width: 0 }}
+           animate={
+             shouldReduceMotion
+               ? { width: `${level}%` }
+               : isInView
+                 ? { width: `${level}%` }
+                 : { width: 0 }
+           }
+           transition={{ duration: shouldReduceMotion ? 0 : 0.9, ease: 'easeOut' }}
+           className="h-full rounded-full bg-orange-500"
         />
       </div>
     </article>
@@ -62,10 +61,10 @@ export function WorkSkillsSection() {
         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-lg md:p-8"
+        className="section-card p-5 md:p-8"
       >
-        <h2 id="work-skills-heading" className="text-2xl font-bold text-white md:text-3xl">
-          Work <span className="text-[#fb923c]">Skills</span>
+        <h2 id="work-skills-heading" className="text-2xl font-bold md:text-3xl" style={{ color: 'var(--text-primary)' }}>
+          Work <span className="text-orange-500 dark:text-orange-400">Skills</span>
         </h2>
 
         <div className="mt-5 space-y-4">

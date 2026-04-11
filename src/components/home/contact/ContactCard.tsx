@@ -22,13 +22,13 @@ export function ContactCard({ href, label, value, icon: Icon, className }: Conta
 
   const content = (
     <>
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-linear-to-br from-[#1f2937] via-[#3f2a1f] to-[#754f17] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--border-subtle)] bg-linear-to-br from-[#1f2937] via-[#3f2a1f] to-[#754f17] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
         <Icon className="h-5 w-5 text-amber-300" />
       </div>
 
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-white">{label}</p>
-        <p className="truncate text-sm text-gray-400">{value}</p>
+        <p className="text-sm font-semibold text-[var(--text-primary)]">{label}</p>
+        <p className="truncate text-sm text-[var(--text-muted)]">{value}</p>
       </div>
     </>
   );

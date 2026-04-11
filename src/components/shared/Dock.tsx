@@ -19,12 +19,12 @@ export default function Dock() {
           <Link
             key={item.href}
             href={item.href}
-            className="relative p-3 rounded-xl transition-all duration-300 hover:bg-white/5 group"
+            className="relative p-3 rounded-xl transition-all duration-300 hover:bg-[var(--surface)] group"
           >
             <item.icon 
               className={cn(
                 "w-5 h-5 transition-colors duration-300",
-                isActive ? "text-indigo-400" : "text-white/40 group-hover:text-white/60"
+                isActive ? "text-indigo-400" : "text-white/40 group-hover:text-[var(--text-secondary)]"
               )} 
             />
             

@@ -13,8 +13,10 @@ export function ProjectsHeader() {
       transition={{ duration: 0.42, ease: 'easeOut' }}
       className="mb-6 md:mb-8"
     >
-      <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl">My Projects</h2>
-      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#c6d5f4] md:text-base">
+      <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl" style={{ color: 'var(--text-primary)' }}>
+        My Projects
+      </h2>
+      <p className="mt-2 max-w-2xl text-sm leading-relaxed md:text-base" style={{ color: 'var(--text-secondary)' }}>
         A selection of projects that reflect my experience building modern web applications with
         strong UI design, responsive layouts, and practical fullstack architecture.
       </p>

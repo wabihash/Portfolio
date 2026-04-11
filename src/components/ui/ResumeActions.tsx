@@ -23,7 +23,7 @@ export function ResumeActions() {
           },
           hash: 'contact',
         }}
-        className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/10"
+        className="inline-flex items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-white/6 px-4 py-2.5 text-sm font-medium text-[var(--text-primary)] transition hover:bg-[var(--surface-hover)]"
       >
         <Mail className="h-4 w-4" />
         Contact Me

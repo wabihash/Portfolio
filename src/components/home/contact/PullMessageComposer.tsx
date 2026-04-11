@@ -249,7 +249,7 @@ export function PullMessageComposer() {
       </AnimatePresence>
 
       <div className="mt-8 flex flex-col items-center">
-        <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-200/75 sm:text-xs sm:tracking-[0.22em]">
+        <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--text-secondary)] sm:text-xs sm:tracking-[0.22em]">
           Want to reach out?
         </p>
 
@@ -272,7 +272,7 @@ export function PullMessageComposer() {
                 }
           }
         >
-          <div className="h-14 w-px bg-linear-to-b from-indigo-200/50 to-transparent" aria-hidden="true" />
+          <div className="h-14 w-px bg-linear-to-b from-indigo-500/60 dark:from-indigo-200/50 to-transparent" aria-hidden="true" />
 
           <div className="relative">
             <AnimatePresence>
@@ -317,18 +317,18 @@ export function PullMessageComposer() {
                       boxShadow: { duration: 0.2, ease: 'easeOut' },
                     }
               }
-              className="relative inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/25 bg-[#0a1324]/85 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300/60 sm:h-16 sm:w-16"
+              className="relative inline-flex h-14 w-14 items-center justify-center rounded-full border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300/60 sm:h-16 sm:w-16"
             >
               <span
                 aria-hidden="true"
                 className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(165,180,252,0.35),transparent_66%)]"
               />
-              <span className="relative h-2.5 w-2.5 rounded-full border border-indigo-100/70 bg-indigo-200/35" />
+              <span className="relative h-2.5 w-2.5 rounded-full border border-[var(--border-strong)] bg-indigo-400/50" />
             </motion.button>
           </div>
         </motion.div>
 
-        <p className="mt-3 text-xs text-indigo-100/70 text-center">
+        <p className="mt-3 text-xs text-[var(--text-secondary)] text-center">
           {isPullHintActive
             ? 'Nice pull. Release to open the message composer.'
             : isFormOpen
@@ -349,14 +349,14 @@ export function PullMessageComposer() {
             animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0, height: 'auto' }}
             exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8, height: 0 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
-            className="mt-6 max-h-[84vh] overflow-hidden rounded-3xl border border-indigo-200/15 bg-[#07111f]/86 shadow-[0_24px_60px_rgba(0,0,0,0.42)] sm:max-h-none"
+            className="mt-6 max-h-[84vh] overflow-hidden rounded-3xl border border-indigo-200/15 bg-[var(--bg-base)] shadow-[0_24px_60px_rgba(0,0,0,0.42)] sm:max-h-none"
           >
             <div className="flex justify-center pt-3">
-              <div className="h-1.5 w-14 rounded-full bg-white/25" />
+              <div className="h-1.5 w-14 rounded-full bg-[var(--border-strong)]" />
             </div>
-            <div className="border-b border-white/10 px-5 pb-4 pt-2 sm:px-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-indigo-200/70">Message form is open</p>
-              <p className="mt-1 text-sm text-[#b8c8e6]">Share your details below. Drag the form up when you are done.</p>
+            <div className="border-b border-[var(--border-subtle)] px-5 pb-4 pt-2 sm:px-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-muted)]">Message form is open</p>
+              <p className="mt-1 text-sm text-[var(--text-secondary)]">Share your details below. Drag the form up when you are done.</p>
             </div>
             <div className="max-h-[65vh] overflow-y-auto px-4 pb-4 sm:max-h-none sm:px-6 sm:pb-5">
               <ContactForm autoFocusName onSubmitSuccess={handleContactSubmitSuccess} />

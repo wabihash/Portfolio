@@ -24,13 +24,13 @@ export function ContactSection() {
         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-lg sm:p-5 md:p-8"
+        className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-4 backdrop-blur-lg sm:p-5 md:p-8"
       >
         <header className="text-center">
-          <h2 id="contact-heading" className="text-2xl font-bold text-white sm:text-[1.75rem] md:text-3xl">
-            Get In <span className="text-[#fbbf24]">Touch</span>
+          <h2 id="contact-heading" className="text-2xl font-bold text-[var(--text-primary)] sm:text-[1.75rem] md:text-3xl">
+            Get In <span className="text-amber-500 dark:text-amber-400">Touch</span>
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-[#c8d8f7] md:text-base">
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-[var(--text-secondary)] md:text-base">
             I am available for freelance projects, product collaborations, and thoughtful technical discussions.
           </p>
         </header>

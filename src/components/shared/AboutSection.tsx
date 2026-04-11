@@ -11,9 +11,9 @@ const ROLES = [
 ] as const;
 
 const ROLE_COLORS: Record<(typeof ROLES)[number], string> = {
-  'Fullstack Developer': 'text-[#60a5fa]',
+  'Fullstack Developer':    'text-[#60a5fa]',
   'Computer Science Student': 'text-[#34d399]',
-  'AI/ML Enthusiast': 'text-[#c084fc]',
+  'AI/ML Enthusiast':       'text-[#c084fc]',
 };
 
 const ROLE_SWITCH_MS = 2200;
@@ -23,14 +23,10 @@ export function AboutSection() {
   const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
-    if (shouldReduceMotion) {
-      return;
-    }
-
+    if (shouldReduceMotion) return;
     const timer = setInterval(() => {
       setRoleIndex((current) => (current + 1) % ROLES.length);
     }, ROLE_SWITCH_MS);
-
     return () => clearInterval(timer);
   }, [shouldReduceMotion]);
 
@@ -41,9 +37,10 @@ export function AboutSection() {
         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md sm:p-5 md:p-8"
+        className="section-card p-4 sm:p-5 md:p-8"
       >
         <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[280px_1fr] md:gap-10">
+          {/* Portrait card */}
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.97 }}
             whileInView={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
@@ -52,27 +49,17 @@ export function AboutSection() {
             className="mx-auto perspective-[1000px]"
           >
             <motion.div
-              whileHover={
-                shouldReduceMotion
-                  ? undefined
-                  : {
-                      rotateX: 9,
-                      rotateY: -8,
-                      rotateZ: 4,
-                      y: -10,
-                      scale: 1.02,
-                    }
-              }
+              whileHover={shouldReduceMotion ? undefined : { rotateX: 9, rotateY: -8, rotateZ: 4, y: -10, scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 180, damping: 18, mass: 0.9 }}
               className="group relative h-48 w-40 transform-3d transform-[rotateX(20deg)_rotateY(-20deg)_rotateZ(10deg)] sm:h-56 sm:w-44 md:h-72 md:w-56"
             >
               <div className="pointer-events-none absolute inset-6 rounded-[1.75rem] bg-cyan-400/25 blur-3xl shadow-[0_0_60px_rgba(34,211,238,0.35)]" />
               <div className="pointer-events-none absolute inset-x-10 bottom-2 h-16 rounded-full bg-orange-400/20 blur-2xl shadow-[0_0_50px_rgba(251,146,60,0.25)]" />
 
-              <div className="absolute inset-0 rounded-[1.75rem] border border-white/12 bg-linear-to-br from-white/12 via-white/6 to-transparent shadow-[0_28px_60px_rgba(3,10,28,0.55)] backdrop-blur-md" />
+              <div className="absolute inset-0 rounded-[1.75rem] border border-[var(--border-subtle)] bg-linear-to-br from-white/12 via-white/6 to-transparent shadow-[0_28px_60px_rgba(3,10,28,0.55)] backdrop-blur-md" />
               <div className="absolute inset-px rounded-[1.65rem] border border-white/18 bg-linear-to-br from-white/20 via-transparent to-transparent" />
 
-              <div className="absolute inset-3 overflow-hidden rounded-[1.45rem] border border-white/10 bg-[#122047] shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
+              <div className="absolute inset-3 overflow-hidden rounded-[1.45rem] border border-[var(--border-subtle)] bg-[var(--surface-deep)] shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
                 <Image
                   src="/linkidln.jpg"
                   alt="Portrait of Wabi, fullstack developer"
@@ -89,13 +76,15 @@ export function AboutSection() {
             </motion.div>
           </motion.div>
 
+          {/* Copy */}
           <div className="text-center md:text-left">
             <motion.p
               initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ delay: 0.12, duration: 0.35 }}
-              className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#9db3e3]"
+              className="mb-3 text-xs font-semibold uppercase tracking-[0.22em]"
+              style={{ color: 'var(--text-label)' }}
             >
               About Me
             </motion.p>
@@ -106,7 +95,8 @@ export function AboutSection() {
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ delay: 0.16, duration: 0.35 }}
-              className="text-2xl font-bold text-white sm:text-3xl md:text-4xl"
+              className="text-2xl font-bold sm:text-3xl md:text-4xl"
+              style={{ color: 'var(--text-primary)' }}
             >
               Wabi
             </motion.h2>
@@ -116,9 +106,10 @@ export function AboutSection() {
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ delay: 0.2, duration: 0.35 }}
-              className="mt-1 text-base font-medium text-[#8cb0ff] sm:text-lg md:text-xl"
+              className="mt-1 text-base font-medium sm:text-lg md:text-xl"
+              style={{ color: 'var(--text-secondary)' }}
             >
-              <span className="text-white/70">Role:</span>{' '}
+              <span style={{ color: 'var(--text-muted)' }}>Role:</span>{' '}
               <span
                 aria-live="polite"
                 aria-atomic="true"
@@ -144,7 +135,8 @@ export function AboutSection() {
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ delay: 0.24, duration: 0.4 }}
-              className="mt-4 max-w-2xl text-sm leading-relaxed text-[#ccdaf7] sm:text-base"
+              className="mt-4 max-w-2xl text-sm leading-relaxed sm:text-base"
+              style={{ color: 'var(--text-secondary)' }}
             >
               I build modern fullstack products, from AI-powered web apps and social platforms to responsive
               dashboards and productivity tools. My approach blends thoughtful frontend design with reliable
@@ -157,7 +149,8 @@ export function AboutSection() {
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ delay: 0.3, duration: 0.35 }}
-              className="mt-4 text-sm font-medium text-[#9db3e3]"
+              className="mt-4 text-sm font-medium"
+              style={{ color: 'var(--text-label)' }}
             >
               Creating AI-ready digital experiences that are beautiful, practical, and built to scale.
             </motion.p>

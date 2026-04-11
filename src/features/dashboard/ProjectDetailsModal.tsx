@@ -37,7 +37,7 @@ const ACCENT_THEME: Record<Project['accentColor'], { glow: string; badge: string
   },
   cyan: {
     glow: 'shadow-[0_0_60px_rgba(34,211,238,0.2)]',
-    badge: 'bg-cyan-500/15 text-cyan-200 border-cyan-300/30',
+    badge: 'bg-cyan-500/15 text-[var(--text-primary)] border-cyan-300/30',
     ring: 'from-cyan-400/28 via-sky-300/14 to-transparent',
   },
 };
@@ -57,10 +57,10 @@ function DetailBlock({
   title: string;
 }): ReactElement {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/4 p-5 backdrop-blur-md">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-200/65">{eyebrow}</p>
-      <h4 className="mt-2 text-base font-semibold text-white">{title}</h4>
-      <p className="mt-2 text-sm leading-relaxed text-slate-300">{body}</p>
+    <div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-5 backdrop-blur-md">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--text-primary)]/65">{eyebrow}</p>
+      <h4 className="mt-2 text-base font-semibold text-[var(--text-primary)]">{title}</h4>
+      <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{body}</p>
     </div>
   );
 }
@@ -111,7 +111,7 @@ export function ProjectDetailsModal({
           type="button"
           aria-label="Close project details"
           onClick={onClose}
-          className="absolute inset-0 bg-[#020814]/85 backdrop-blur-sm"
+          className="absolute inset-0 bg-[var(--bg-base)]/85 backdrop-blur-sm"
         />
 
         <motion.div
@@ -119,7 +119,7 @@ export function ProjectDetailsModal({
           animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
           exit={shouldReduceMotion ? undefined : { opacity: 0, y: 12, scale: 0.98 }}
           transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-          className={`relative z-10 flex max-h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-4xl border border-white/10 bg-[#07111f]/92 ${accent.glow} backdrop-blur-2xl`}
+          className={`relative z-10 flex max-h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-4xl border border-[var(--border-subtle)] bg-[var(--bg-base)] ${accent.glow} backdrop-blur-2xl`}
           role="dialog"
           aria-modal="true"
           aria-labelledby={`${project.id}-title`}
@@ -127,7 +127,7 @@ export function ProjectDetailsModal({
           <button
             type="button"
             onClick={onClose}
-            className="absolute left-5 top-8 z-20 inline-flex items-center gap-2 rounded-full border border-cyan-200/45 bg-[#081423] px-4 py-2.5 text-sm font-medium text-white shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_14px_32px_rgba(2,8,20,0.48),0_0_26px_rgba(34,211,238,0.2)] backdrop-blur-md transition hover:-translate-y-0.5 hover:border-cyan-100/70 hover:bg-[#0c1a2b]"
+            className="absolute left-5 top-8 z-20 inline-flex items-center gap-2 rounded-full border border-cyan-200/45 bg-[var(--surface-hover)] px-4 py-2.5 text-sm font-medium text-[var(--text-primary)] shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_14px_32px_rgba(2,8,20,0.48),0_0_26px_rgba(34,211,238,0.2)] backdrop-blur-md transition hover:-translate-y-0.5 hover:border-cyan-100/70 hover:bg-[var(--surface-deep)]"
             aria-label="Go back to the project grid"
           >
             <ArrowLeft className="h-4 w-4 shrink-0" />
@@ -136,20 +136,20 @@ export function ProjectDetailsModal({
 
           <div className={`pointer-events-none absolute inset-x-0 top-0 h-56 bg-linear-to-br ${accent.ring} blur-3xl`} />
 
-          <div className="relative flex items-start justify-between gap-4 border-b border-white/10 px-5 py-4 pl-24 md:px-7 md:pl-28">
+          <div className="relative flex items-start justify-between gap-4 border-b border-[var(--border-subtle)] px-5 py-4 pl-24 md:px-7 md:pl-28">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-200/65">Project Detail</p>
-              <h3 id={`${project.id}-title`} className="mt-2 text-2xl font-semibold text-white md:text-3xl">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--text-primary)]/65">Project Detail</p>
+              <h3 id={`${project.id}-title`} className="mt-2 text-2xl font-semibold text-[var(--text-primary)] md:text-3xl">
                 {project.title}
               </h3>
-              {project.tagline && <p className="mt-2 text-sm text-slate-300">{project.tagline}</p>}
+              {project.tagline && <p className="mt-2 text-sm text-[var(--text-secondary)]">{project.tagline}</p>}
             </div>
           </div>
 
           <div className="relative overflow-y-auto px-5 pb-6 pt-5 md:px-7 md:pb-7">
             <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
               <div className="space-y-5">
-                <div className="relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#0b1730]">
+                <div className="relative overflow-hidden rounded-[1.6rem] border border-[var(--border-subtle)] bg-[var(--surface-inset)]">
                   <div className="relative aspect-16/10 w-full">
                     <Image
                       src={imageSrc}
@@ -171,25 +171,25 @@ export function ProjectDetailsModal({
               </div>
 
               <div className="space-y-5">
-                <div className="rounded-[1.6rem] border border-white/10 bg-white/4 p-5 backdrop-blur-md">
+                <div className="rounded-[1.6rem] border border-[var(--border-subtle)] bg-[var(--surface)] p-5 backdrop-blur-md">
                   <div className="flex flex-wrap items-center gap-3">
                     <span className={`rounded-full border px-3 py-1 text-xs font-medium ${accent.badge}`}>
                       {project.accentColor}
                     </span>
                     {project.featured && (
-                      <span className="rounded-full border border-white/12 bg-white/8 px-3 py-1 text-xs font-medium text-white/85">
+                      <span className="rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
                         Featured Work
                       </span>
                     )}
                   </div>
 
-                  <p className="mt-4 text-sm leading-relaxed text-slate-300">{project.description}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">{project.description}</p>
 
                   <div className="mt-5 flex flex-wrap gap-2">
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80"
+                        className="rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-1 text-xs text-[var(--text-secondary)]"
                       >
                         {tech}
                       </span>
@@ -212,7 +212,7 @@ export function ProjectDetailsModal({
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/10"
+                        className="inline-flex items-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-4 py-2.5 text-sm font-medium text-[var(--text-primary)] transition hover:bg-[var(--surface-hover)]"
                       >
                         <FaGithub className="h-4 w-4" />
                         GitHub
@@ -221,11 +221,11 @@ export function ProjectDetailsModal({
                   </div>
                 </div>
 
-                <div className="rounded-[1.6rem] border border-white/10 bg-white/4 p-5 backdrop-blur-md">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-200/65">Highlights</p>
+                <div className="rounded-[1.6rem] border border-[var(--border-subtle)] bg-[var(--surface)] p-5 backdrop-blur-md">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--text-primary)]/65">Highlights</p>
                   <ul className="mt-4 space-y-3">
                     {project.highlights.map((item) => (
-                      <li key={item} className="flex gap-3 text-sm leading-relaxed text-slate-300">
+                      <li key={item} className="flex gap-3 text-sm leading-relaxed text-[var(--text-secondary)]">
                         <span className="mt-1 h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.6)]" />
                         <span>{item}</span>
                       </li>

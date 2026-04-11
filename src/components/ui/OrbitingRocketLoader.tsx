@@ -18,7 +18,7 @@ export default function OrbitingRocketLoader() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.24, ease: 'easeOut' }}
-      className="fixed inset-0 z-[70] flex items-center justify-center overflow-hidden bg-[#020814]/92 px-6"
+      className="fixed inset-0 z-[70] flex items-center justify-center overflow-hidden bg-[var(--bg-base)]/92 px-6"
       role="status"
       aria-live="polite"
       aria-busy="true"
@@ -29,7 +29,7 @@ export default function OrbitingRocketLoader() {
         initial={{ y: 14, scale: 0.98 }}
         animate={{ y: 0, scale: 1 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="relative flex w-full max-w-md flex-col items-center rounded-[2rem] border border-white/10 bg-white/5 px-8 py-9 text-center shadow-[0_28px_90px_rgba(2,8,20,0.55)] backdrop-blur-xl"
+        className="relative flex w-full max-w-md flex-col items-center rounded-[2rem] border border-[var(--border-subtle)] bg-[var(--surface)] px-8 py-9 text-center shadow-[0_28px_90px_rgba(2,8,20,0.55)] backdrop-blur-xl"
       >
         <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-linear-to-r from-transparent via-white/35 to-transparent" />
         <div className="pointer-events-none absolute -top-8 h-24 w-24 rounded-full bg-cyan-400/18 blur-3xl" />
@@ -52,22 +52,22 @@ export default function OrbitingRocketLoader() {
             ))}
 
             <div className="absolute inset-0 [transform:rotate(0deg)]">
-              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/12 bg-[#07111f]/75 p-3 shadow-[0_0_28px_rgba(34,211,238,0.28),0_0_52px_rgba(249,115,22,0.16)] backdrop-blur-md">
-                <FaRocket className="h-4 w-4 -rotate-45 text-white" aria-hidden="true" />
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-base)] p-3 shadow-[0_0_28px_rgba(34,211,238,0.28),0_0_52px_rgba(249,115,22,0.16)] backdrop-blur-md">
+                <FaRocket className="h-4 w-4 -rotate-45 text-[var(--text-primary)]" aria-hidden="true" />
               </div>
             </div>
           </motion.div>
 
-          <div className="pointer-events-none absolute inset-8 rounded-full border border-white/10 bg-linear-to-br from-white/10 via-transparent to-transparent shadow-[inset_0_1px_0_rgba(255,255,255,0.14)]" />
+          <div className="pointer-events-none absolute inset-8 rounded-full border border-[var(--border-subtle)] bg-linear-to-br from-white/10 via-transparent to-transparent shadow-[inset_0_1px_0_rgba(255,255,255,0.14)]" />
           <div className="pointer-events-none absolute inset-[3.35rem] rounded-full border border-cyan-300/12" />
           <div className="pointer-events-none absolute h-20 w-20 rounded-full bg-cyan-300/10 blur-2xl" />
         </div>
 
-        <p className="mt-2 text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/70">
+        <p className="mt-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-primary)]/70">
           Initializing Route
         </p>
-        <h2 className="mt-3 text-2xl font-semibold text-white">Preparing the next scene</h2>
-        <p className="mt-3 max-w-sm text-sm leading-relaxed text-slate-300">
+        <h2 className="mt-3 text-2xl font-semibold text-[var(--text-primary)]">Preparing the next scene</h2>
+        <p className="mt-3 max-w-sm text-sm leading-relaxed text-[var(--text-secondary)]">
           Streaming your next view with a lightweight loading state so navigation still feels responsive.
         </p>
       </motion.div>

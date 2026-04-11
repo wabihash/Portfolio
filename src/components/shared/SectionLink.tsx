@@ -8,6 +8,7 @@ import { queueSectionScroll, setPendingSectionScroll } from '@/lib/sectionScroll
 type SectionLinkProps = {
   href: string;
   className?: string;
+  style?: React.CSSProperties;
   children: ReactNode;
   onNavigate?: () => void;
 };
@@ -22,7 +23,7 @@ function getSectionId(href: string): string | null {
   return sectionId.length > 0 ? sectionId : null;
 }
 
-export function SectionLink({ href, className, children, onNavigate }: SectionLinkProps) {
+export function SectionLink({ href, className, style, children, onNavigate }: SectionLinkProps) {
   const router = useRouter();
   const pathname = usePathname();
   const sectionId = getSectionId(href);
@@ -50,7 +51,7 @@ export function SectionLink({ href, className, children, onNavigate }: SectionLi
   }
 
   return (
-    <Link href={href} onClick={handleClick} scroll={false} className={className}>
+    <Link href={href} onClick={handleClick} scroll={false} className={className} style={style}>
       {children}
     </Link>
   );

@@ -67,26 +67,26 @@ function StoryStep({
       className={`rounded-2xl border p-4 backdrop-blur-md transition-colors duration-300 sm:p-5 md:p-6 ${
         isActive
           ? 'border-cyan-300/40 bg-cyan-300/10 shadow-[0_20px_48px_rgba(34,211,238,0.14)]'
-          : 'border-white/10 bg-white/5'
+          : 'border-[var(--border-subtle)] bg-[var(--surface)]'
       }`}
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-secondary)]">
         Step {index + 1}
       </p>
-      <h3 className="mt-3 text-xl font-semibold text-white sm:text-2xl">
+      <h3 className="mt-3 text-xl font-semibold text-[var(--text-primary)] sm:text-2xl">
         <KineticWords text={project.title} active={isActive} />
       </h3>
-      {project.tagline && <p className="mt-2 text-sm text-slate-300">{project.tagline}</p>}
+      {project.tagline && <p className="mt-2 text-sm text-[var(--text-secondary)]">{project.tagline}</p>}
 
-      <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300 sm:text-[0.95rem]">
+      <div className="mt-4 space-y-3 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-[0.95rem]">
         <p>
-          <span className="font-semibold text-cyan-100">Challenge:</span> {project.challenge}
+          <span className="font-semibold text-[var(--text-primary)]">Challenge:</span> {project.challenge}
         </p>
         <p>
-          <span className="font-semibold text-cyan-100">Solution:</span> {project.solution}
+          <span className="font-semibold text-[var(--text-primary)]">Solution:</span> {project.solution}
         </p>
         <p>
-          <span className="font-semibold text-cyan-100">Outcome:</span> {project.impact}
+          <span className="font-semibold text-[var(--text-primary)]">Outcome:</span> {project.impact}
         </p>
       </div>
     </motion.article>
@@ -124,19 +124,19 @@ export function ProjectStorySection() {
       className="relative z-0 mx-auto mb-4 w-full max-w-6xl px-4 py-8 md:mb-8 md:px-8 md:py-12"
     >
       <div className="mb-6 text-center md:mb-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.26em] text-cyan-200/75">Scrollytelling</p>
-        <h2 id="project-story-heading" className="mt-3 text-3xl font-bold text-white md:text-4xl">
+        <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[var(--text-primary)]/75">Scrollytelling</p>
+        <h2 id="project-story-heading" className="mt-3 text-3xl font-bold text-[var(--text-primary)] md:text-4xl">
           From Code View to Live Impact
         </h2>
-        <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
+        <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-[var(--text-secondary)] md:text-base">
           Scroll through featured project stories to see how each build moves from technical decisions to user-facing outcomes.
         </p>
       </div>
 
       <div className="grid gap-5 lg:grid-cols-[1fr_1.05fr] lg:gap-8">
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-950/75 backdrop-blur-md">
-            <div className="border-b border-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-slate-300">
+          <div className="overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-subtle)] backdrop-blur-md">
+            <div className="border-b border-[var(--border-subtle)] px-4 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-secondary)]">
               {activeProject.title} Preview
             </div>
 
@@ -167,8 +167,8 @@ export function ProjectStorySection() {
               <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#020814]/85 via-transparent to-[#020814]/20" />
 
               <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-4">
-                <div className="rounded-xl border border-cyan-200/20 bg-[#03101d]/75 p-2.5 font-mono text-[10px] leading-5 text-cyan-100 backdrop-blur-sm sm:p-3 sm:text-xs sm:leading-6">
-                  <p className="text-cyan-200/80">{`//`} Code View</p>
+                <div className="rounded-xl border border-cyan-200/20 bg-[var(--bg-subtle)] p-2.5 font-mono text-[10px] leading-5 text-[var(--text-primary)] backdrop-blur-sm sm:p-3 sm:text-xs sm:leading-6">
+                  <p className="text-[var(--text-secondary)]">{`//`} Code View</p>
                   <p className="mt-0.5 sm:mt-1">
                     const outcome = &quot;{activeProject.impact}&quot;;
                   </p>

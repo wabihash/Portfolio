@@ -8,7 +8,7 @@ export function Badge({ className, ...props }: BadgeProps): ReactElement {
     <span
       className={cn(
         'inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium',
-        'glass-card text-white/80',
+        'glass-card text-[var(--text-secondary)]',
         className
       )}
       {...props}

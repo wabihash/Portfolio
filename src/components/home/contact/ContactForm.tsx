@@ -151,14 +151,14 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-5 backdrop-blur-md md:p-6" noValidate>
-      <h3 className="text-lg font-semibold text-white">Send a Message</h3>
-      <p className="mt-1 text-sm text-gray-400">Share your project goals, timeline, and what you need help with.</p>
-      <p className="mt-1 text-xs text-gray-500">Typical response time: within 24 hours.</p>
+    <form onSubmit={handleSubmit} className="mt-6 rounded-2xl border border-[var(--border-subtle)] bg-black/40 p-5 backdrop-blur-md md:p-6" noValidate>
+      <h3 className="text-lg font-semibold text-[var(--text-primary)]">Send a Message</h3>
+      <p className="mt-1 text-sm text-[var(--text-muted)]">Share your project goals, timeline, and what you need help with.</p>
+      <p className="mt-1 text-xs text-[var(--text-label)]">Typical response time: within 24 hours.</p>
 
       <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="space-y-2 md:col-span-1">
-          <label htmlFor="contact-name" className="text-sm font-medium text-white/90">
+          <label htmlFor="contact-name" className="text-sm font-medium text-[var(--text-primary)]">
             Your Name
           </label>
           <input
@@ -169,7 +169,7 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
             onChange={(event) => handleChange('name', event.target.value)}
             autoFocus={autoFocusName}
             placeholder="John Doe"
-            className="w-full rounded-xl border border-gray-800 bg-black/50 px-4 py-3 text-sm text-white placeholder:text-gray-500 transition focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
+            className="w-full rounded-xl border border-gray-800 bg-black/50 px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-label)] transition focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
             aria-describedby={errors.name ? 'contact-name-error' : undefined}
             autoComplete="name"
             required
@@ -182,7 +182,7 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
         </div>
 
         <div className="space-y-2 md:col-span-1">
-          <label htmlFor="contact-email" className="text-sm font-medium text-white/90">
+          <label htmlFor="contact-email" className="text-sm font-medium text-[var(--text-primary)]">
             Your Email
           </label>
           <input
@@ -192,7 +192,7 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
             value={values.email}
             onChange={(event) => handleChange('email', event.target.value)}
             placeholder="john@example.com"
-            className="w-full rounded-xl border border-gray-800 bg-black/50 px-4 py-3 text-sm text-white placeholder:text-gray-500 transition focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
+            className="w-full rounded-xl border border-gray-800 bg-black/50 px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-label)] transition focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
             aria-describedby={errors.email ? 'contact-email-error' : undefined}
             autoComplete="email"
             required
@@ -205,7 +205,7 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
         </div>
 
         <div className="space-y-2 md:col-span-2">
-          <label htmlFor="contact-subject" className="text-sm font-medium text-white/90">
+          <label htmlFor="contact-subject" className="text-sm font-medium text-[var(--text-primary)]">
             Subject
           </label>
           <input
@@ -215,7 +215,7 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
             value={values.subject}
             onChange={(event) => handleChange('subject', event.target.value)}
             placeholder="Project inquiry"
-            className="w-full rounded-xl border border-gray-800 bg-black/50 px-4 py-3 text-sm text-white placeholder:text-gray-500 transition focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
+            className="w-full rounded-xl border border-gray-800 bg-black/50 px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-label)] transition focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
             aria-describedby={errors.subject ? 'contact-subject-error' : undefined}
             autoComplete="off"
             required
@@ -228,7 +228,7 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
         </div>
 
         <div className="space-y-2 md:col-span-2">
-          <label htmlFor="contact-message" className="text-sm font-medium text-white/90">
+          <label htmlFor="contact-message" className="text-sm font-medium text-[var(--text-primary)]">
             Message
           </label>
           <textarea
@@ -238,12 +238,12 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
             onChange={(event) => handleChange('message', event.target.value)}
             placeholder="Tell me about your goals, scope, and timeline."
             maxLength={MESSAGE_MAX_LENGTH}
-            className="min-h-36 w-full resize-y rounded-xl border border-gray-800 bg-black/50 px-4 py-3 text-sm text-white placeholder:text-gray-500 transition focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
+            className="min-h-36 w-full resize-y rounded-xl border border-gray-800 bg-black/50 px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-label)] transition focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
             aria-describedby={errors.message ? 'contact-message-error' : undefined}
             required
           />
           <div className="flex items-center justify-end">
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-[var(--text-label)]">
               {values.message.length}/{MESSAGE_MAX_LENGTH}
             </p>
           </div>
@@ -258,7 +258,7 @@ export function ContactForm({ autoFocusName = false, onSubmitSuccess }: ContactF
       <button
         type="submit"
         disabled={isSubmitting || isSuccess}
-        className={`mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-white transition active:scale-95 disabled:cursor-not-allowed ${
+        className={`mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--text-primary)] transition active:scale-95 disabled:cursor-not-allowed ${
           isSuccess 
             ? 'bg-emerald-600 hover:bg-emerald-600' 
             : 'bg-purple-600 hover:bg-purple-700 disabled:bg-purple-700/60 disabled:opacity-75'

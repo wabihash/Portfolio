@@ -67,20 +67,20 @@ export function TestimonialsSection() {
         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.18 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="relative isolate overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl md:p-8"
+        className="relative isolate overflow-hidden rounded-[32px] border border-[var(--border-subtle)] bg-[var(--surface)] p-6 backdrop-blur-xl md:p-8"
       >
         <div className="pointer-events-none absolute inset-0 glow-mesh opacity-35" />
         <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-yellow-500/10 blur-3xl" />
 
         <div className="relative text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#9db3e3]">How I Work</p>
-          <h2 id="feedback-heading" className="mt-3 text-3xl font-bold tracking-tight text-white md:text-4xl">
-            <span className="text-[#fbbf24]">How</span> I Work
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-secondary)]">How I Work</p>
+          <h2 id="feedback-heading" className="mt-3 text-3xl font-bold tracking-tight text-[var(--text-primary)] md:text-4xl">
+            <span className="text-amber-500 dark:text-amber-400">How</span> I Work
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[#c6d5f4] md:text-base">
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)] md:text-base">
             I focus on clean code and good file structure so every project is easier to scale and maintain.
           </p>
-          <p className="mx-auto mt-2 max-w-2xl text-xs leading-relaxed text-white/55 md:text-sm">
+          <p className="mx-auto mt-2 max-w-2xl text-xs leading-relaxed text-[var(--text-muted)] md:text-sm">
             Client testimonials will be added as collaborations grow.
           </p>
         </div>
@@ -106,7 +106,7 @@ export function TestimonialsSection() {
           </div>
 
           <div className="mt-6 flex items-center justify-center">
-            <div className="min-w-24 rounded-full border border-white/10 bg-black/20 px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.24em] text-white/60 backdrop-blur-md">
+            <div className="min-w-24 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-inset)] px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-secondary)] backdrop-blur-md">
               {String(activeIndex + 1).padStart(2, '0')} / {String(TESTIMONIALS.length).padStart(2, '0')}
             </div>
           </div>
@@ -127,7 +127,7 @@ export function TestimonialsSection() {
         </div>
 
         <div className="relative mt-8 flex flex-col items-center gap-3 text-center">
-          <p className="text-sm text-white/70">Ready to turn an idea into a polished product?</p>
+          <p className="text-sm text-[var(--text-secondary)]">Ready to turn an idea into a polished product?</p>
 
           <Button
             type="button"

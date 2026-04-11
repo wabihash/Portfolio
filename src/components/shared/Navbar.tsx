@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import { SectionLink } from '@/components/shared/SectionLink';
+import { ThemeToggle } from '@/components/shared/ThemeToggle';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/#home' },
@@ -34,7 +35,7 @@ export function Navbar() {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav className="fixed top-0 left-0 z-50 w-full border-b border-cyan-200/15 bg-linear-to-b from-[#020a1f]/95 via-[#061431]/90 to-[#030d24]/88 backdrop-blur-xl">
+    <nav className="fixed top-0 left-0 z-50 w-full border-b backdrop-blur-xl transition-colors duration-300" style={{ borderColor: 'var(--border-mid)', background: 'linear-gradient(to bottom, var(--nav-from), var(--nav-via), var(--nav-to))' }}>
       <div className="mx-auto flex h-11 max-w-7xl items-center justify-between px-3 sm:h-20 sm:px-6">
         {/* Left: Logo */}
         <SectionLink href="/#home" className="group flex items-center gap-1.5 sm:gap-2">
@@ -46,7 +47,7 @@ export function Navbar() {
           >
             W
           </motion.div>
-          <span className="bg-linear-to-r from-white to-cyan-100/80 bg-clip-text text-sm font-extrabold tracking-[-0.01em] text-transparent sm:text-xl">
+          <span className="bg-linear-to-r from-[var(--text-primary)] to-[var(--text-secondary)] bg-clip-text text-sm font-extrabold tracking-[-0.01em] text-transparent sm:text-xl">
             Wabi
           </span>
         </SectionLink>
@@ -57,7 +58,7 @@ export function Navbar() {
             <SectionLink
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-white/70 transition-all duration-300 hover:text-cyan-100 hover:brightness-110"
+              className="text-sm font-medium transition-all duration-300" style={{ color: 'var(--text-secondary)' }}
             >
               {item.label}
             </SectionLink>
@@ -65,31 +66,37 @@ export function Navbar() {
 
           <Link
             href="/resume"
-            className="text-sm font-medium text-white/70 transition-all duration-300 hover:text-cyan-100 hover:brightness-110"
+            className="text-sm font-medium transition-all duration-300" style={{ color: 'var(--text-secondary)' }}
           >
             Resume
           </Link>
+
+          <ThemeToggle />
         </div>
 
-        {/* Hamburger Button (Mobile Only) */}
-        <button
-          onClick={toggleMenu}
-          className="z-60 flex h-9 w-9 flex-col items-center justify-center gap-1 rounded-lg border border-cyan-200/20 bg-white/5 md:hidden"
-          aria-label="Toggle Menu"
-        >
-          <motion.span
-            animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-            className="block h-0.5 w-5 rounded-full bg-white transition-transform"
-          />
-          <motion.span
-            animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-            className="block h-0.5 w-5 rounded-full bg-white"
-          />
-          <motion.span
-            animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-            className="block h-0.5 w-5 rounded-full bg-white transition-transform"
-          />
-        </button>
+        {/* Right side controls (mobile): theme toggle + hamburger */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+
+          <button
+            onClick={toggleMenu}
+            className="z-60 flex h-9 w-9 flex-col items-center justify-center gap-1 rounded-lg border border-cyan-200/20 bg-[var(--surface)]"
+            aria-label="Toggle Menu"
+          >
+            <motion.span
+              animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+              className="block h-0.5 w-5 rounded-full transition-transform" style={{ backgroundColor: 'var(--text-primary)' }}
+            />
+            <motion.span
+              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+              className="block h-0.5 w-5 rounded-full" style={{ backgroundColor: 'var(--text-primary)' }}
+            />
+            <motion.span
+              animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+              className="block h-0.5 w-5 rounded-full transition-transform" style={{ backgroundColor: 'var(--text-primary)' }}
+            />
+          </button>
+        </div>
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-cyan-300/65 to-transparent" />
@@ -113,7 +120,7 @@ export function Navbar() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
               transition={{ type: 'spring', damping: 24, stiffness: 240 }}
-              className="fixed top-0 left-0 z-50 h-screen w-full bg-[#030b1f]/82 backdrop-blur-lg md:hidden"
+              className="fixed top-0 left-0 z-50 h-screen w-full bg-[var(--nav-from)] backdrop-blur-lg md:hidden"
             >
               <div className="flex h-full w-full flex-col items-center justify-start gap-3 px-5 pb-8 pt-16 sm:gap-5 sm:px-8 sm:pt-24">
                 {NAV_LINKS.map((item, idx) => (
@@ -127,7 +134,7 @@ export function Navbar() {
                     <SectionLink
                       href={item.href}
                       onNavigate={closeMenu}
-                      className="block w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-center text-lg font-semibold text-white/85 transition-all duration-300 hover:bg-white/10 hover:text-white hover:brightness-110 sm:text-2xl"
+                      className="block w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-4 py-2.5 text-center text-lg font-semibold text-[var(--text-secondary)] transition-all duration-300 hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)] hover:brightness-110 sm:text-2xl"
                     >
                       {item.label}
                     </SectionLink>
@@ -143,7 +150,7 @@ export function Navbar() {
                   <Link
                     href="/resume"
                     onClick={closeMenu}
-                    className="block w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-center text-lg font-semibold text-white/85 transition-all duration-300 hover:bg-white/10 hover:text-white hover:brightness-110 sm:text-2xl"
+                    className="block w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-4 py-2.5 text-center text-lg font-semibold text-[var(--text-secondary)] transition-all duration-300 hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)] hover:brightness-110 sm:text-2xl"
                   >
                     Resume
                   </Link>

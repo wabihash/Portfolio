@@ -40,7 +40,7 @@ const ACCENT_THEME: Record<Project['accentColor'], { ring: string; badge: string
   },
   cyan: {
     ring: 'from-cyan-400/40 to-transparent',
-    badge: 'text-cyan-200 border-cyan-300/40 bg-cyan-500/20',
+    badge: 'text-[var(--text-primary)] border-cyan-300/40 bg-[var(--surface-hover)]',
     primaryButton: 'bg-linear-to-r from-yellow-400 to-orange-500 hover:brightness-110',
   },
 };
@@ -69,7 +69,7 @@ export function ProjectCard({ onOpenDetails, project }: ProjectCardProps): React
       whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.22 }}
       transition={{ duration: 0.45, ease: 'easeOut' }}
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 shadow-[0_14px_36px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_44px_rgba(0,0,0,0.45)] focus-within:ring-2 focus-within:ring-white/30 sm:p-5"
+      className="group relative overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-4 shadow-[0_14px_36px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_44px_rgba(0,0,0,0.45)] focus-within:ring-2 focus-within:ring-white/30 sm:p-5"
     >
       <div className={`pointer-events-none absolute -top-20 -right-16 w-64 h-64 bg-linear-to-b ${accent.ring} blur-3xl`} />
 
@@ -91,7 +91,7 @@ export function ProjectCard({ onOpenDetails, project }: ProjectCardProps): React
             onClick={openDetails}
             onKeyDown={handleCardKeyDown}
             aria-label={`Open the ${project.title} case study`}
-            className="cursor-pointer rounded-full border border-cyan-300/25 bg-[#03101d]/75 px-3 py-1 text-[11px] font-medium tracking-wide text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.18)] backdrop-blur-sm transition hover:border-cyan-200/40 hover:bg-[#071726]/90 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/50"
+            className="cursor-pointer rounded-full border border-cyan-300/25 bg-[var(--bg-subtle)] px-3 py-1 text-[11px] font-medium tracking-wide text-[var(--text-primary)] shadow-[0_0_18px_rgba(34,211,238,0.18)] backdrop-blur-sm transition hover:border-cyan-200/40 hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/50"
           >
             View Case Study
           </button>
@@ -103,15 +103,15 @@ export function ProjectCard({ onOpenDetails, project }: ProjectCardProps): React
         )}
       </div>
 
-      <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-      {project.tagline && <p className="mt-1 text-sm text-gray-400">{project.tagline}</p>}
-      <p className="mt-2 text-sm text-white/70 leading-relaxed">{project.description}</p>
+      <h3 className="text-lg font-semibold text-[var(--text-primary)]">{project.title}</h3>
+      {project.tagline && <p className="mt-1 text-sm text-[var(--text-muted)]">{project.tagline}</p>}
+      <p className="mt-2 text-sm text-[var(--text-secondary)] leading-relaxed">{project.description}</p>
 
       <div className="flex flex-wrap gap-2 mt-3">
         {project.techStack.map((tech) => (
           <span
             key={tech}
-            className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80"
+            className="rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-1 text-xs text-[var(--text-secondary)]"
           >
             {tech}
           </span>
@@ -133,7 +133,7 @@ export function ProjectCard({ onOpenDetails, project }: ProjectCardProps): React
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex w-full items-center justify-center rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition duration-300 hover:scale-[1.03] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:w-auto"
+            className="inline-flex w-full items-center justify-center rounded-md border border-[var(--border-subtle)] bg-[var(--surface)] px-4 py-2 text-sm text-[var(--text-primary)] transition duration-300 hover:scale-[1.03] hover:bg-[var(--surface-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:w-auto"
           >
             GitHub
           </a>

@@ -10,12 +10,6 @@ const PILLAR_ICONS = {
   ai: Sparkles,
 } as const;
 
-const ACCENT_STYLES = {
-  cyan: 'border-cyan-300/20 bg-cyan-400/10 text-cyan-100 shadow-[0_14px_40px_rgba(34,211,238,0.12)]',
-  orange: 'border-orange-300/20 bg-orange-400/10 text-orange-50 shadow-[0_14px_40px_rgba(251,146,60,0.12)]',
-  emerald: 'border-emerald-300/20 bg-emerald-400/10 text-emerald-50 shadow-[0_14px_40px_rgba(52,211,153,0.12)]',
-} as const;
-
 export function ProofSection() {
   const shouldReduceMotion = useReducedMotion();
 
@@ -26,15 +20,18 @@ export function ProofSection() {
         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-5 backdrop-blur-xl md:p-8"
+        className="section-card overflow-hidden p-5 md:p-8"
       >
         <div className="grid gap-6 lg:grid-cols-[1.05fr_1.4fr] lg:items-start">
+          {/* Left: copy */}
           <div className="max-w-xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/70">Why Work With Me</p>
-            <h2 id="proof-heading" className="mt-4 text-2xl font-bold text-white md:text-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em]" style={{ color: 'var(--text-label)' }}>
+              Why Work With Me
+            </p>
+            <h2 id="proof-heading" className="mt-4 text-2xl font-bold md:text-3xl" style={{ color: 'var(--text-primary)' }}>
               A portfolio is better when it quickly shows what I build and where I can help.
             </h2>
-            <p className="mt-4 max-w-lg text-sm leading-7 text-[#c8d8f7] md:text-base">
+            <p className="mt-4 max-w-lg text-sm leading-7 md:text-base" style={{ color: 'var(--text-secondary)' }}>
               I focus on product-minded frontend work with enough backend depth to ship useful features, not just surface-level visuals.
             </p>
 
@@ -42,7 +39,8 @@ export function ProofSection() {
               {PROOF_BADGES.map((badge) => (
                 <span
                   key={badge}
-                  className="rounded-full border border-white/12 bg-black/20 px-4 py-2 text-sm text-[#d8e5ff] shadow-[0_8px_24px_rgba(3,8,22,0.22)]"
+                  className="rounded-full border px-4 py-2 text-sm"
+                  style={{ borderColor: 'var(--border-mid)', backgroundColor: 'var(--surface-inset)', color: 'var(--text-secondary)' }}
                 >
                   {badge}
                 </span>
@@ -50,6 +48,7 @@ export function ProofSection() {
             </div>
           </div>
 
+          {/* Right: pillar cards */}
           <div className="grid gap-4 md:grid-cols-3">
             {PROOF_PILLARS.map((pillar, index) => {
               const Icon = PILLAR_ICONS[pillar.id];
@@ -61,13 +60,16 @@ export function ProofSection() {
                   whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.25 }}
                   transition={{ duration: 0.35, delay: shouldReduceMotion ? 0 : index * 0.08, ease: 'easeOut' }}
-                  className={`rounded-2xl border p-5 backdrop-blur-lg ${ACCENT_STYLES[pillar.accent]}`}
+                  className="inset-card p-5"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/12 bg-black/15">
-                    <Icon className="h-5 w-5" />
+                  <div
+                    className="flex h-11 w-11 items-center justify-center rounded-2xl border"
+                    style={{ borderColor: 'var(--border-mid)', backgroundColor: 'var(--surface-inset)' }}
+                  >
+                    <Icon className="h-5 w-5" style={{ color: 'var(--text-secondary)' }} />
                   </div>
-                  <h3 className="mt-4 text-base font-semibold text-white">{pillar.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-inherit/80">{pillar.description}</p>
+                  <h3 className="mt-4 text-base font-semibold" style={{ color: 'var(--text-primary)' }}>{pillar.title}</h3>
+                  <p className="mt-3 text-sm leading-6" style={{ color: 'var(--text-secondary)' }}>{pillar.description}</p>
                 </motion.article>
               );
             })}

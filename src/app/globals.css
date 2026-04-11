@@ -6,55 +6,169 @@
   --color-primary: #6366f1;
   --color-secondary: #a855f7;
   --color-accent: #3b82f6;
-  
+
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
-  
+
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-@layer base {
-  :root {
-    --background: 0 0% 2%;
-    --foreground: 0 0% 100%;
-  }
+/* ─── Dark mode (default) ─────────────────────────────────────────── */
+:root,
+html.dark {
+  /* Base backgrounds */
+  --bg-base:           #020a1f;
+  --bg-subtle:         #040c22;
+  --bg-muted:          #061431;
 
+  /* Text */
+  --text-primary:      #dbe8ff;
+  --text-secondary:    rgba(219, 232, 255, 0.65);
+  --text-muted:        rgba(219, 232, 255, 0.40);
+  --text-label:        rgba(219, 232, 255, 0.55);
+
+  /* Borders */
+  --border-subtle:     rgba(255, 255, 255, 0.08);
+  --border-mid:        rgba(255, 255, 255, 0.14);
+  --border-strong:     rgba(255, 255, 255, 0.22);
+
+  /* Surfaces (cards, panels) */
+  --surface:           rgba(255, 255, 255, 0.05);
+  --surface-hover:     rgba(255, 255, 255, 0.09);
+  --surface-inset:     rgba(0, 0, 0, 0.30);        /* inner dark areas */
+  --surface-deep:      rgba(0, 0, 0, 0.40);        /* deeper inset */
+  --track-bg:          #0c1a3f;                    /* skill bar tracks */
+
+  /* Glows */
+  --glow-primary:      rgba(34, 211, 238, 0.28);
+
+  /* Navbar */
+  --nav-from:          rgba(2, 10, 31, 0.95);
+  --nav-via:           rgba(6, 20, 49, 0.90);
+  --nav-to:            rgba(3, 13, 36, 0.88);
+
+  /* Footer */
+  --footer-from:       #040c22;
+  --footer-via:        #030914;
+  --footer-to:         #01050c;
+
+  /* Ambient canvas gradients */
+  --ambient-1:         hsla(242, 85%, 60%, 0.15);
+  --ambient-2:         hsla(263, 70%, 50%, 0.15);
+  --ambient-3:         hsla(217, 91%, 60%, 0.15);
+}
+
+/* ─── Light mode ──────────────────────────────────────────────────── */
+html.light {
+  /* Base backgrounds */
+  --bg-base:           #f0f4ff;
+  --bg-subtle:         #e6ecff;
+  --bg-muted:          #d8e2ff;
+
+  /* Text */
+  --text-primary:      #0f172a;
+  --text-secondary:    rgba(15, 23, 42, 0.68);
+  --text-muted:        rgba(15, 23, 42, 0.42);
+  --text-label:        rgba(15, 23, 42, 0.52);
+
+  /* Borders */
+  --border-subtle:     rgba(15, 23, 42, 0.09);
+  --border-mid:        rgba(15, 23, 42, 0.16);
+  --border-strong:     rgba(15, 23, 42, 0.26);
+
+  /* Surfaces */
+  --surface:           rgba(255, 255, 255, 0.72);
+  --surface-hover:     rgba(255, 255, 255, 0.92);
+  --surface-inset:     rgba(15, 23, 42, 0.04);     /* light inner areas */
+  --surface-deep:      rgba(15, 23, 42, 0.07);
+  --track-bg:          #d8e2ff;                    /* skill bar tracks */
+
+  /* Glows */
+  --glow-primary:      rgba(99, 102, 241, 0.20);
+
+  /* Navbar */
+  --nav-from:          rgba(240, 244, 255, 0.96);
+  --nav-via:           rgba(236, 241, 255, 0.92);
+  --nav-to:            rgba(232, 238, 255, 0.90);
+
+  /* Footer */
+  --footer-from:       #e6ecff;
+  --footer-via:        #d8e2ff;
+  --footer-to:         #ccd6f8;
+
+  /* Ambient canvas gradients */
+  --ambient-1:         hsla(242, 85%, 60%, 0.06);
+  --ambient-2:         hsla(263, 70%, 50%, 0.06);
+  --ambient-3:         hsla(217, 91%, 60%, 0.06);
+}
+
+/* ─── Base styles ─────────────────────────────────────────────────── */
+@layer base {
   body {
-    @apply bg-[var(--color-background)] text-[var(--color-foreground)] overflow-x-hidden antialiased selection:bg-primary/30;
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    @apply overflow-x-hidden antialiased;
     font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &::selection,
+    *::selection {
+      background-color: rgba(99, 102, 241, 0.28);
+    }
   }
 }
 
+/* ─── Reusable component classes ─────────────────────────────────── */
 @layer components {
-  .glass-card {
-    @apply bg-white/5 border border-white/10 backdrop-blur-xl transition-all duration-300;
-  }
-  
-  .glass-card:hover {
-    @apply bg-white/10 border-white/20;
+  /* Section card wrapper — the main glass panel used everywhere */
+  .section-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border-subtle);
+    @apply rounded-2xl backdrop-blur-lg transition-colors duration-300;
   }
 
-  .ambient-gradient {
-    background: radial-gradient(
-      circle at center,
-      rgba(99, 102, 241, 0.15) 0%,
-      rgba(168, 85, 247, 0.05) 45%,
-      transparent 70%
-    );
+  /* Inset card inside a section card */
+  .inset-card {
+    background-color: var(--surface-inset);
+    border: 1px solid var(--border-subtle);
+    @apply rounded-xl backdrop-blur-md transition-colors duration-300;
+  }
+
+  .inset-card:hover {
+    background-color: var(--surface-deep);
+    border-color: var(--border-mid);
+  }
+
+  .glass-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border-subtle);
+    @apply backdrop-blur-xl transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--border-mid);
+  }
+
+  /* Skill/progress bar track */
+  .track-bar {
+    background-color: var(--track-bg);
+    @apply h-2.5 overflow-hidden rounded-full;
   }
 
   .glow-mesh {
-    background-image: 
-      radial-gradient(at 10% 20%, hsla(242, 85%, 60%, 0.15) 0px, transparent 50%),
-      radial-gradient(at 90% 10%, hsla(263, 70%, 50%, 0.15) 0px, transparent 50%),
-      radial-gradient(at 50% 90%, hsla(217, 91%, 60%, 0.15) 0px, transparent 50%);
+    background-image:
+      radial-gradient(at 10% 20%, var(--ambient-1) 0px, transparent 50%),
+      radial-gradient(at 90% 10%, var(--ambient-2) 0px, transparent 50%),
+      radial-gradient(at 50% 90%, var(--ambient-3) 0px, transparent 50%);
   }
 }
 
+/* ─── Keyframes ──────────────────────────────────────────────────── */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50%       { transform: translateY(-10px); }
 }
 
 .animate-float {

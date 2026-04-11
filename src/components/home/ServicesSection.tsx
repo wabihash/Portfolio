@@ -34,12 +34,13 @@ export function ServicesSection() {
         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-lg sm:p-5 md:p-8"
+        className="section-card p-4 sm:p-5 md:p-8"
       >
-        <h2 id="services-heading" className="text-2xl font-bold text-white sm:text-[1.75rem] md:text-3xl">
+        <h2 id="services-heading" className="text-2xl font-bold sm:text-[1.75rem] md:text-3xl" style={{ color: 'var(--text-primary)' }}>
           Interactive <span className="text-[#34d399]">Services</span>
         </h2>
 
+        {/* Mobile: grid of buttons */}
         <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 md:hidden sm:gap-4">
           {SERVICES.map((service, index) => {
             const Icon = ICONS[service.icon];
@@ -49,20 +50,22 @@ export function ServicesSection() {
               <button
                 key={service.id}
                 onClick={() => setActiveIndex(index)}
-                className={`rounded-xl border p-4 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-                  isActive
-                    ? 'scale-[1.01] border-[#34d399]/70 bg-black/35 shadow-[0_14px_28px_rgba(52,211,153,0.22)]'
-                    : 'border-white/10 bg-black/20'
-                }`}
+                className="rounded-xl border p-4 text-left transition focus-visible:outline-none focus-visible:ring-2"
+                style={{
+                  borderColor: isActive ? 'rgba(52,211,153,0.70)' : 'var(--border-subtle)',
+                  backgroundColor: isActive ? 'var(--surface-deep)' : 'var(--surface-inset)',
+                  boxShadow: isActive ? '0 14px 28px rgba(52,211,153,0.18)' : 'none',
+                }}
               >
                 <Icon className="mb-3 h-5 w-5 text-[#9ae6c7]" />
-                <p className="text-sm font-semibold text-white">{service.title}</p>
-                <p className="mt-1 text-xs leading-5 text-[#c8d8f7]">{service.description}</p>
+                <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{service.title}</p>
+                <p className="mt-1 text-xs leading-5" style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
               </button>
             );
           })}
         </div>
 
+        {/* Desktop: animated active panel */}
         <div className="relative mt-5 hidden md:block">
           <div className="overflow-hidden rounded-xl">
             <AnimatePresence mode="wait" initial={false}>
@@ -72,7 +75,12 @@ export function ServicesSection() {
                 animate={shouldReduceMotion ? undefined : { opacity: 1, x: 0 }}
                 exit={shouldReduceMotion ? undefined : { opacity: 0, x: -24 }}
                 transition={{ duration: 0.36, ease: 'easeOut' }}
-                className="rounded-xl border border-[#34d399]/70 bg-black/30 p-6 shadow-[0_16px_35px_rgba(52,211,153,0.2)]"
+                className="rounded-xl border p-6"
+                style={{
+                  borderColor: 'rgba(52,211,153,0.65)',
+                  backgroundColor: 'var(--surface-inset)',
+                  boxShadow: '0 16px 35px rgba(52,211,153,0.14)',
+                }}
               >
                 <div className="flex items-start gap-4">
                   {(() => {
@@ -80,14 +88,15 @@ export function ServicesSection() {
                     return <ActiveIcon className="mt-1 h-7 w-7 text-[#86efac]" />;
                   })()}
                   <div>
-                    <h3 className="text-lg font-semibold text-white sm:text-xl">{activeService.title}</h3>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#c8d8f7]">{activeService.description}</p>
+                    <h3 className="text-lg font-semibold sm:text-xl" style={{ color: 'var(--text-primary)' }}>{activeService.title}</h3>
+                    <p className="mt-2 max-w-2xl text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{activeService.description}</p>
                   </div>
                 </div>
               </motion.article>
             </AnimatePresence>
           </div>
 
+          {/* Dot nav */}
           <div className="mt-4 flex items-center justify-between">
             <div className="flex gap-2">
               {SERVICES.map((service, idx) => (
@@ -95,7 +104,8 @@ export function ServicesSection() {
                   key={service.id}
                   onClick={() => setActiveIndex(idx)}
                   aria-label={`Show ${service.title}`}
-                  className={`h-2.5 w-2.5 rounded-full transition ${idx === activeIndex ? 'bg-[#34d399]' : 'bg-white/25 hover:bg-white/45'}`}
+                  className="h-2.5 w-2.5 rounded-full transition"
+                  style={{ backgroundColor: idx === activeIndex ? '#34d399' : 'var(--border-mid)' }}
                 />
               ))}
             </div>
