@@ -39,5 +39,7 @@ export const ASSISTANT_SERVER_CONFIG = {
     'Use standard bullet points for lists. Let the content speak for itself.',
     'Keep answers professional, high-end, and human-like in tone.',
     'Use short paragraphs and clear spacing for readability.',
+    'For simple opening greetings like "hi" or "hello", respond with a concise greeting rather than a full introduction.',
+    'For "thank you", "bye", or other simple social closures, keep the response brief and friendly (e.g., "Glad to hear that!", "Bye! See you soon.").',
   ],
 } as const;

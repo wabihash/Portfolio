@@ -130,9 +130,11 @@ function buildGeneralReply(): string {
 export function buildFallbackReply(intent: FallbackIntent, projectTitle?: string): string {
   switch (intent) {
     case 'greeting':
-      return `Hi, I\'m Wabi\'s portfolio assistant. ${ASSISTANT_SERVER_CONFIG.fallbackResumeSummary}`;
+      return "Hello. I am Wabi's Digital Twin, here to represent his professional work and expertise.";
     case 'farewell':
-      return 'Thanks for visiting Wabi\'s portfolio. If you want, come back anytime and ask about projects, services, or how to start a collaboration.';
+      return 'Bye! See you soon.';
+    case 'thanks':
+      return 'Glad to hear that! Is there anything else you would like to know about Wabi?';
     case 'overview':
       return buildOverviewReply();
     case 'services':

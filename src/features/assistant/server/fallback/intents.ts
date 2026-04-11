@@ -11,6 +11,7 @@ export type FallbackIntent =
   | 'experience'
   | 'availability'
   | 'contact'
+  | 'thanks'
   | 'out-of-scope'
   | 'general';
 
@@ -38,6 +39,7 @@ const OUT_OF_SCOPE_KEYWORDS = [
 
 const GREETING_KEYWORDS = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening'];
 const FAREWELL_KEYWORDS = ['bye', 'goodbye', 'see you', 'cya', 'later'];
+const THANKS_KEYWORDS = ['thank you', 'thanks', 'thx', 'appreciate', 'grateful'];
 const IDENTITY_KEYWORDS = [
   'who are you',
   'what are you',
@@ -271,6 +273,10 @@ export function detectFallbackIntent(message: string): { intent: FallbackIntent;
 
   if (includesAny(normalized, FAREWELL_KEYWORDS)) {
     return { intent: 'farewell' };
+  }
+
+  if (includesAny(normalized, THANKS_KEYWORDS)) {
+    return { intent: 'thanks' };
   }
 
   // PRIORITIZE PORTFOLIO INTENTS to avoid false out-of-scope matches
