@@ -2,11 +2,11 @@ import type { Metadata, MetadataRoute } from 'next';
 
 const SITE_NAME = 'Wabi Portfolio';
 const SITE_AUTHOR = 'Wabi Dagim';
-const SOCIAL_IMAGE_PATH = '/images/fire.png';
+const SOCIAL_IMAGE_PATH = '/images/og-image.png';
 const SITE_DESCRIPTION =
-  'Portfolio of Wabi Dagim, a Full-Stack developer building modern React and Next.js experiences with clean architecture, practical backend systems, and AI-ready features.';
+  'Wabi Dagim | Full-Stack Developer specializing in high-performance React applications, scalable backend systems, and cutting-edge AI integrations.';
 const SITE_SOCIAL_DESCRIPTION =
-  'Full-Stack portfolio showcasing polished interfaces, practical backend architecture, and AI-powered product features.';
+  'Explore the portfolio of Wabi Dagim, featuring premium web experiences, robust architecture, and innovative AI solutions.';
 const SITE_KEYWORDS = [
   'Wabi Dagim',
   'Wabi portfolio',

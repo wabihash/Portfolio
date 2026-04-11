@@ -8,6 +8,12 @@ import { DigitalTwin } from "@/features/assistant/DigitalTwin";
 
 export const metadata = rootMetadata;
 
+export const viewport = {
+  themeColor: '#020a1f',
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
