@@ -22,35 +22,42 @@ export const metadata: Metadata = buildPageMetadata({
   path: '/',
 });
 
-const HERO_IMAGE_SRC = '/images/fire.png';
+const HERO_IMAGE_SRC = '/images/ChatGPT Image Apr 11, 2026, 01_32_26 PM.png';
 const HERO_IMAGE_ALT = 'Fiery coding hero banner';
 
 export default function Home() {
   return (
     <main id="home" className="min-h-screen bg-transparent" style={{ color: 'var(--text-primary)' }}>
       <section className="w-full pt-0">
-        <div className="relative w-full overflow-hidden border-y border-[var(--border-subtle)] bg-black/30 shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
+        <div className="relative w-full overflow-hidden border-y border-(--border-subtle) bg-black/60 shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
           <Image
             src={HERO_IMAGE_SRC}
             alt={HERO_IMAGE_ALT}
             width={1536}
             height={1024}
             priority
-            className="h-136 w-full object-cover saturate-125 contrast-110 sm:h-auto"
+            className="h-136 w-full object-cover saturate-90 contrast-90 opacity-60 sm:h-auto"
+            style={{ zIndex: 0 }}
+          />
+          {/* Strong dark overlay for readability */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/30 z-10"
+          />
+          {/* Subtle color overlays for accent */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(251,146,60,0.18),transparent_42%),radial-gradient(circle_at_50%_72%,rgba(220,38,38,0.12),transparent_45%)] mix-blend-screen z-20"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(251,146,60,0.32),transparent_42%),radial-gradient(circle_at_50%_72%,rgba(220,38,38,0.24),transparent_45%)] mix-blend-screen"
+            className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-amber-300/10 to-transparent z-20"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-amber-300/20 to-transparent"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-44 w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/10 blur-3xl z-20"
           />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-1/2 h-44 w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/18 blur-3xl"
-          />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-linear-to-t from-[#020a1f]/90 via-[#020a1f]/45 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-linear-to-t from-[#020a1f]/90 via-[#020a1f]/45 to-transparent z-20" />
           <HeroSection />
         </div>
       </section>

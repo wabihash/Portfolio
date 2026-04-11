@@ -192,7 +192,7 @@ export function CodeEditorHero() {
                   aria-hidden="true"
                   animate={shouldReduceMotion ? undefined : { opacity: [1, 0, 1] }}
                   transition={{ duration: 0.9, repeat: Number.POSITIVE_INFINITY }}
-                  className="ml-0.5 text-lime-200"
+                  className="ml-0.5 text-lime-200/60"
                 >
                   {cursor}
                 </motion.span>

@@ -1,0 +1,4 @@
+/* Add this CSS for the hero headline stroke effect */
+.hero-headline-stroke {
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.10);
+}
