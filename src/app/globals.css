@@ -64,6 +64,7 @@ html.dark {
   /* Console log preview color */
   --console-log-preview: #fff;
   --console-cursor: #fff;
+  --hero-headline-color: #64748b; /* slate-500 for dark mode (Tailwind exact) */
 }
 
 /* ─── Light mode ──────────────────────────────────────────────────── */
@@ -112,6 +113,7 @@ html.light {
   /* Console log preview color for light mode */
   --console-log-preview: #222831;
   --console-cursor: #222831;
+  --hero-headline-color: #94a3b8; /* slate-400 for light mode (Tailwind exact) */
 }
 
 /* Console log cursor dynamic color */
