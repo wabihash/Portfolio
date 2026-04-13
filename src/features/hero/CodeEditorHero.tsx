@@ -17,6 +17,15 @@ const CODE_TO_COPY = [
 ].join('\n');
 
 export function CodeEditorHero() {
+    // Get the CSS variable for the console log preview color
+    const [consoleLogColor, setConsoleLogColor] = useState<string>("#fff");
+
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        const color = getComputedStyle(document.documentElement).getPropertyValue('--console-log-preview').trim();
+        setConsoleLogColor(color || "#fff");
+      }
+    }, []);
   const shouldReduceMotion = useReducedMotion();
   const [typedText, setTypedText] = useState(shouldReduceMotion ? FULL_CONSOLE_LINE : '');
   const [isCopied, setIsCopied] = useState(false);
@@ -84,8 +93,8 @@ export function CodeEditorHero() {
         transition={{ duration: 5.5, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
         className="absolute -top-4 right-2 z-20"
       >
-        <div className="flex h-11 w-11 items-center justify-center rounded-md border border-cyan-200/45 bg-cyan-300/85 text-[#022026] shadow-[0_12px_28px_rgba(45,212,191,0.3)]">
-          <Sparkles className="h-5 w-5" />
+        <div className="flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-md border border-cyan-200/45 bg-cyan-300/85 text-[#022026] shadow-[0_12px_28px_rgba(45,212,191,0.3)]">
+          <Sparkles className="h-4 w-4 sm:h-5 sm:w-5" />
         </div>
       </motion.div>
 
@@ -94,16 +103,24 @@ export function CodeEditorHero() {
         transition={{ duration: 6.2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
         className="absolute -bottom-4 left-2 z-20"
       >
-        <div className="flex h-11 w-11 items-center justify-center rounded-md border border-fuchsia-200/45 bg-fuchsia-500/80 text-(--text-primary) shadow-[0_12px_28px_rgba(217,70,239,0.3)]">
-          <Zap className="h-5 w-5" />
+        <div className="flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-md border border-fuchsia-200/45 bg-fuchsia-500/80 text-(--text-primary) shadow-[0_12px_28px_rgba(217,70,239,0.3)]">
+          <Zap className="h-4 w-4 sm:h-5 sm:w-5" />
         </div>
       </motion.div>
 
       <div className="relative rounded-[1.3rem] bg-linear-to-br from-cyan-300/45 via-emerald-200/10 to-lime-400/45 p-px shadow-[0_26px_58px_rgba(2,8,20,0.6)]">
-        <div className="relative overflow-hidden rounded-[1.25rem] border border-(--border-subtle) bg-(--bg-subtle) backdrop-blur-md">
+        <div
+          className="relative rounded-[1.25rem] border border-(--border-subtle) bg-(--bg-subtle) backdrop-blur-md"
+          style={{
+            overflowX: 'auto',
+            minWidth: '315px',
+            maxWidth: '100%',
+            WebkitOverflowScrolling: 'touch',
+          }}
+        >
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[14px_14px]" />
 
-          <div className="relative flex items-center justify-between border-b border-(--border-subtle) bg-(--bg-subtle) px-4 py-3">
+          <div className="relative flex items-center justify-between border-b border-(--border-subtle) bg-(--bg-subtle) px-2 py-2 sm:px-4 sm:py-3 min-h-[36px] sm:min-h-[48px]">
             <div className="flex items-center gap-2">
               <span className="h-3 w-3 rounded-full bg-red-400" />
               <span className="h-3 w-3 rounded-full bg-yellow-300" />
@@ -118,7 +135,7 @@ export function CodeEditorHero() {
             <button
               type="button"
               onClick={handleCopy}
-              className="inline-flex items-center gap-1.5 rounded-md border border-cyan-200/40 bg-cyan-200/10 px-2.5 py-1.5 text-xs font-medium text-(--text-primary) transition hover:bg-cyan-200/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70"
+              className="inline-flex items-center gap-1.5 rounded-md border border-cyan-200/40 bg-cyan-200/10 px-2.5 py-1.5 text-xs sm:text-xs text-[11px] font-medium text-(--text-primary) transition hover:bg-cyan-200/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70"
             >
               {isCopied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
               {isCopied ? 'Copied' : 'Copy Code'}
@@ -170,7 +187,7 @@ export function CodeEditorHero() {
                 <span className="text-amber-300">&quot;Figma&quot;</span>
                 <span className="text-(--text-secondary)">, </span>
                 <span className="text-amber-300">&quot;Node&quot;</span>
-                <span className="text-[var(--text-secondary)]">, </span>
+                <span className="text-(--text-secondary)">, </span>
                 <span className="text-amber-300">&quot;Next.js&quot;</span>
                 <span className="text-(--text-primary)">]</span>
                 <span className="text-(--text-secondary)">,</span>
@@ -187,12 +204,12 @@ export function CodeEditorHero() {
                 <span className="text-(--text-primary)">.</span>
                 <span className="text-cyan-300">log</span>
                 <span className="text-(--text-primary)">(</span>
-                <span className="text-slate-100">{typedText}</span>
+                <span className="console-log-preview">{typedText}</span>
                 <motion.span
                   aria-hidden="true"
                   animate={shouldReduceMotion ? undefined : { opacity: [1, 0, 1] }}
                   transition={{ duration: 0.9, repeat: Number.POSITIVE_INFINITY }}
-                  className="ml-0.5 text-lime-200/60"
+                  className="ml-0.5 console-log-cursor"
                 >
                   {cursor}
                 </motion.span>

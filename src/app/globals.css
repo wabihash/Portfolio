@@ -1,3 +1,7 @@
+/* Console log preview dynamic color */
+.console-log-preview {
+  color: var(--console-log-preview);
+}
 @import "tailwindcss";
 
 @theme {
@@ -56,6 +60,10 @@ html.dark {
   --ambient-1:         hsla(242, 85%, 60%, 0.15);
   --ambient-2:         hsla(263, 70%, 50%, 0.15);
   --ambient-3:         hsla(217, 91%, 60%, 0.15);
+
+  /* Console log preview color */
+  --console-log-preview: #fff;
+  --console-cursor: #fff;
 }
 
 /* ─── Light mode ──────────────────────────────────────────────────── */
@@ -100,6 +108,15 @@ html.light {
   --ambient-1:         hsla(242, 85%, 60%, 0.06);
   --ambient-2:         hsla(263, 70%, 50%, 0.06);
   --ambient-3:         hsla(217, 91%, 60%, 0.06);
+
+  /* Console log preview color for light mode */
+  --console-log-preview: #222831;
+  --console-cursor: #222831;
+}
+
+/* Console log cursor dynamic color */
+.console-log-cursor {
+  color: var(--console-cursor);
 }
 
 /* ─── Base styles ─────────────────────────────────────────────────── */

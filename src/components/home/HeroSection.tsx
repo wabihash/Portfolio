@@ -28,7 +28,7 @@ export function HeroSection() {
 
             {/* Headline */}
             <h1
-              className={"mt-2 max-w-xl text-[1.55rem] font-bold leading-[1.15] text-slate-500 [text-shadow:0_6px_28px_rgba(0,0,0,0.98)] dark:text-(--text-primary) dark:[text-shadow:0_6px_28px_rgba(2,8,20,0.92)] sm:text-3xl md:text-5xl " + styles['hero-headline-stroke']}
+              className={"mt-2 max-w-xl text-[1.55rem] font-bold leading-[1.15] text-slate-400 [text-shadow:0_6px_28px_rgba(0,0,0,0.98)] dark:text-(--text-primary) dark:[text-shadow:0_6px_28px_rgba(2,8,20,0.92)] sm:text-3xl md:text-5xl " + styles['hero-headline-stroke']}
             >
               I build modern web products that feel fast, polished, and ready for real users.
             </h1>
