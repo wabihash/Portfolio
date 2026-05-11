@@ -17,15 +17,6 @@ const CODE_TO_COPY = [
 ].join('\n');
 
 export function CodeEditorHero() {
-    // Get the CSS variable for the console log preview color
-    const [consoleLogColor, setConsoleLogColor] = useState<string>("#fff");
-
-    useEffect(() => {
-      if (typeof window !== "undefined") {
-        const color = getComputedStyle(document.documentElement).getPropertyValue('--console-log-preview').trim();
-        setConsoleLogColor(color || "#fff");
-      }
-    }, []);
   const shouldReduceMotion = useReducedMotion();
   const [typedText, setTypedText] = useState(shouldReduceMotion ? FULL_CONSOLE_LINE : '');
   const [isCopied, setIsCopied] = useState(false);

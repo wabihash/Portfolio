@@ -30,7 +30,15 @@ const SLIDE_VARIANTS = {
   }),
 } as const;
 
-export function TestimonialsSection() {
+type TestimonialsSectionProps = {
+  /**
+   * If the section is lazy-mounted, a wrapper may provide the anchor id immediately.
+   * Pass `null` to omit the internal id and avoid duplicates.
+   */
+  sectionId?: string | null;
+};
+
+export function TestimonialsSection({ sectionId }: TestimonialsSectionProps) {
   const shouldReduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -61,7 +69,11 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section id="feedback" aria-labelledby="feedback-heading" className="mx-auto w-full max-w-6xl px-4 py-8 md:px-8 md:py-12">
+    <section
+      id={sectionId === null ? undefined : sectionId ?? 'feedback'}
+      aria-labelledby="feedback-heading"
+      className="mx-auto w-full max-w-6xl px-4 py-8 md:px-8 md:py-12"
+    >
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}

@@ -93,7 +93,11 @@ function StoryStep({
   );
 }
 
-export function ProjectStorySection() {
+type ProjectStorySectionProps = {
+  sectionId?: string | null;
+};
+
+export function ProjectStorySection({ sectionId }: ProjectStorySectionProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -118,7 +122,7 @@ export function ProjectStorySection() {
 
   return (
     <section
-      id="project-story"
+      id={sectionId === null ? undefined : sectionId ?? 'project-story'}
       ref={sectionRef}
       aria-labelledby="project-story-heading"
       className="relative z-0 mx-auto mb-4 w-full max-w-6xl px-4 py-8 md:mb-8 md:px-8 md:py-12"

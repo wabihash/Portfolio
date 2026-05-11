@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import AmbientIntelligence from '@/components/layout/AmbientIntelligence';
+import AmbientIntelligenceDeferred from '@/components/layout/AmbientIntelligenceDeferred';
 
 const sceneEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -37,8 +37,8 @@ export default function SceneWrapper({ children }: { children: React.ReactNode }
 
   return (
     <div className="relative isolate w-full min-h-screen">
-      <AmbientIntelligence />
-      <AnimatePresence mode="wait">
+      <AmbientIntelligenceDeferred />
+      <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={pathname}
           variants={sceneVariants}

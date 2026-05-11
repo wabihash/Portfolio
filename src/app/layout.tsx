@@ -1,12 +1,13 @@
 import "./globals.css";
 import { Navbar } from "@/components/shared/Navbar";
-import { Footer } from "@/components/shared/Footer";
+import { FooterDeferred } from "@/components/shared/FooterDeferred";
 import SceneWrapper from "@/components/layout/SceneWrapper";
 import { HashScrollManager } from "@/components/layout/HashScrollManager";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { ThemeScript } from "@/components/layout/ThemeScript";
+import { StructuredData } from "@/components/shared/StructuredData";
 import { rootMetadata } from "@/lib/metadata";
-import { DigitalTwin } from "@/features/assistant/DigitalTwin";
+import { DigitalTwinDeferred } from "@/features/assistant/components/DigitalTwinDeferred";
 
 export const metadata = rootMetadata;
 
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <ThemeScript />
+        <StructuredData />
       </head>
       <body
         className="flex min-h-screen flex-col antialiased"
@@ -36,8 +38,8 @@ export default function RootLayout({
           <div className="min-h-screen flex-1 pt-12 sm:pt-20">
             <SceneWrapper>{children}</SceneWrapper>
           </div>
-          <DigitalTwin />
-          <Footer />
+          <DigitalTwinDeferred />
+          <FooterDeferred />
         </ThemeProvider>
       </body>
     </html>
