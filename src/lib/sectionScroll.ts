@@ -1,7 +1,3 @@
-const NAVBAR_OFFSET_PX = 96;
-const RETRY_INTERVAL_MS = 120;
-const MAX_SCROLL_RETRIES = 30;
-
 function decodeSectionId(sectionId: string): string {
   try {
     return decodeURIComponent(sectionId);
@@ -21,26 +17,15 @@ function scrollToSection(sectionId: string, behavior: ScrollBehavior): boolean {
     return false;
   }
 
-  const y = Math.max(0, window.scrollY + element.getBoundingClientRect().top - NAVBAR_OFFSET_PX);
-  window.scrollTo({ top: y, behavior });
+  element.scrollIntoView({ behavior, block: 'start', inline: 'nearest' });
   return true;
 }
 
 export function queueSectionScroll(sectionId: string, behavior: ScrollBehavior = 'smooth'): void {
   const id = sectionId.replace(/^#/, '');
-  let attempts = 0;
-
-  const tryScroll = () => {
-    const didScroll = scrollToSection(id, behavior);
-    if (didScroll || attempts >= MAX_SCROLL_RETRIES) {
-      return;
-    }
-
-    attempts += 1;
-    window.setTimeout(tryScroll, RETRY_INTERVAL_MS);
-  };
-
-  window.requestAnimationFrame(tryScroll);
+  window.requestAnimationFrame(() => {
+    scrollToSection(id, behavior);
+  });
 }
 
 export function setPendingSectionScroll(sectionId: string): void {

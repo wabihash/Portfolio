@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 type Theme = 'dark' | 'light';
 
@@ -13,17 +13,14 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('dark');
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Read stored preference, then system preference
+    // Read stored preference, then fall back to dark mode for new visitors.
     const stored = localStorage.getItem('theme') as Theme | null;
-    const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const resolved: Theme = stored ?? system;
+    const resolved: Theme = stored ?? 'dark';
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(resolved);
     applyTheme(resolved);
-    setMounted(true);
   }, []);
 
   const toggleTheme = useCallback(() => {
@@ -37,8 +34,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {/* Prevent flash: no-op until mounted */}
-      {mounted ? children : <div style={{ visibility: 'hidden' }}>{children}</div>}
+      {children}
     </ThemeContext.Provider>
   );
 }

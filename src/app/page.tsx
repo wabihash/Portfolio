@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { buildPageMetadata } from '@/lib/metadata';
 import { LazyMount } from '@/components/shared/LazyMount';
+import heroImage from '../../public/images/hero.webp';
 import { HeroSection } from '../components/home/HeroSection';
 import { ProofSection } from '../components/home/ProofSection';
 import { AboutSection } from '../components/shared/AboutSection';
 import { CoreExpertiseSection } from '../components/home/CoreExpertiseSection';
-import { ServicesSection } from '../components/home/ServicesSection';
+import { ServicesSectionLazy } from '../components/home/ServicesSectionLazy';
 import { WorkSkillsSection } from '../components/home/WorkSkillsSection';
 import { FutureStackSection } from '../components/home/FutureStackSection';
 import { TestimonialsSectionLazy } from '../components/home/TestimonialsSectionLazy';
@@ -23,7 +24,6 @@ export const metadata: Metadata = buildPageMetadata({
   path: '/',
 });
 
-const HERO_IMAGE_SRC = '/images/hero.webp';
 const HERO_IMAGE_ALT = 'Fiery coding hero banner';
 
 export default function Home() {
@@ -32,14 +32,13 @@ export default function Home() {
       <section className="w-full pt-0">
         <div className="relative w-full overflow-hidden border-y border-(--border-subtle) bg-black/60 shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
           <Image
-            src={HERO_IMAGE_SRC}
+            src={heroImage}
             alt={HERO_IMAGE_ALT}
-            width={1536}
-            height={1024}
             priority
             fetchPriority="high"
-            sizes="100vw"
-            quality={75}
+            placeholder="blur"
+            sizes="(max-width: 768px) 100vw, 100vw"
+            quality={60}
             className="h-136 w-full object-cover saturate-90 contrast-90 opacity-60 sm:h-auto"
             style={{ zIndex: 0 }}
           />
@@ -73,7 +72,9 @@ export default function Home() {
       <ProofSection />
       <AboutSection />
       <CoreExpertiseSection />
-      <ServicesSection />
+      <LazyMount minHeightPx={520}>
+        <ServicesSectionLazy />
+      </LazyMount>
       <WorkSkillsSection />
       <FutureStackSection />
       <LazyMount id="feedback" minHeightPx={760}>
@@ -90,7 +91,9 @@ export default function Home() {
           <ProjectGridLazy />
         </LazyMount>
       </section>
-      <ContactSection />
+      <LazyMount id="contact" minHeightPx={900}>
+        <ContactSection sectionId={null} />
+      </LazyMount>
     </main>
   );
 }

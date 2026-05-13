@@ -33,6 +33,10 @@ export function PullMessageComposer() {
       return;
     }
 
+    if (isMobile) {
+      return;
+    }
+
     const AudioContextCtor = window.AudioContext || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     if (!AudioContextCtor) {
       return;

@@ -1,7 +1,4 @@
-'use client';
-
 import { BriefcaseBusiness, Layers3, Sparkles } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { PROOF_BADGES, PROOF_PILLARS } from '@/shared/data/homeSections';
 
 const PILLAR_ICONS = {
@@ -11,17 +8,9 @@ const PILLAR_ICONS = {
 } as const;
 
 export function ProofSection() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <section id="proof" aria-labelledby="proof-heading" className="mx-auto w-full max-w-6xl px-4 pt-8 md:px-8 md:pt-10">
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-        whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="section-card overflow-hidden p-5 md:p-8"
-      >
+      <div className="section-card overflow-hidden p-5 md:p-8">
         <div className="grid gap-6 lg:grid-cols-[1.05fr_1.4fr] lg:items-start">
           {/* Left: copy */}
           <div className="max-w-xl">
@@ -50,18 +39,11 @@ export function ProofSection() {
 
           {/* Right: pillar cards */}
           <div className="grid gap-4 md:grid-cols-3">
-            {PROOF_PILLARS.map((pillar, index) => {
+            {PROOF_PILLARS.map((pillar) => {
               const Icon = PILLAR_ICONS[pillar.id];
 
               return (
-                <motion.article
-                  key={pillar.id}
-                  initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
-                  whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.35, delay: shouldReduceMotion ? 0 : index * 0.08, ease: 'easeOut' }}
-                  className="inset-card p-5"
-                >
+                <article key={pillar.id} className="inset-card p-5 transition-transform duration-300 hover:-translate-y-0.5">
                   <div
                     className="flex h-11 w-11 items-center justify-center rounded-2xl border"
                     style={{ borderColor: 'var(--border-mid)', backgroundColor: 'var(--surface-inset)' }}
@@ -70,12 +52,12 @@ export function ProofSection() {
                   </div>
                   <h3 className="mt-4 text-base font-semibold" style={{ color: 'var(--text-primary)' }}>{pillar.title}</h3>
                   <p className="mt-3 text-sm leading-6" style={{ color: 'var(--text-secondary)' }}>{pillar.description}</p>
-                </motion.article>
+                </article>
               );
             })}
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

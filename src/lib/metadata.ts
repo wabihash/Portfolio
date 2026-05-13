@@ -23,6 +23,20 @@ const SITE_KEYWORDS = [
   'AI integrations',
 ];
 
+const INDEXABLE_ROBOTS: Metadata['robots'] = {
+  index: true,
+  follow: true,
+  nocache: false,
+  googleBot: {
+    index: true,
+    follow: true,
+    noimageindex: false,
+    'max-video-preview': -1,
+    'max-image-preview': 'large',
+    'max-snippet': -1,
+  },
+};
+
 const ROUTES = [
   { path: '/', changeFrequency: 'weekly', priority: 1 },
   { path: '/resume', changeFrequency: 'monthly', priority: 0.8 },
@@ -85,6 +99,7 @@ export function buildPageMetadata({
     title,
     description,
     alternates: siteUrl ? { canonical: absoluteUrl } : undefined,
+    robots: INDEXABLE_ROBOTS,
     openGraph: {
       title,
       description,
@@ -125,6 +140,7 @@ export const rootMetadata: Metadata = {
   category: 'technology',
   metadataBase,
   alternates: siteUrl ? { canonical: siteUrl } : undefined,
+  robots: INDEXABLE_ROBOTS,
   openGraph: {
     title: SITE_NAME,
     description: SITE_SOCIAL_DESCRIPTION,
@@ -148,10 +164,6 @@ export const rootMetadata: Metadata = {
     creator: '@AgituG632',
     site: '@AgituG632',
     images: [siteUrl ? `${siteUrl}${socialImage}` : socialImage],
-  },
-  robots: {
-    index: true,
-    follow: true,
   },
 };
 

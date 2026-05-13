@@ -1,7 +1,4 @@
-'use client';
-
 import type { ComponentType } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 type ContactCardProps = {
@@ -13,10 +10,9 @@ type ContactCardProps = {
 };
 
 export function ContactCard({ href, label, value, icon: Icon, className }: ContactCardProps) {
-  const shouldReduceMotion = useReducedMotion();
   const sharedClassName = cn(
     'group flex w-full items-center gap-4 rounded-2xl border border-gray-800/90 bg-black/40 p-4 backdrop-blur-md transition duration-300',
-    'hover:border-amber-300/40 hover:bg-black/50 hover:shadow-[0_14px_30px_rgba(251,191,36,0.14)]',
+    'hover:-translate-y-0.5 hover:border-amber-300/40 hover:bg-black/50 hover:shadow-[0_14px_30px_rgba(251,191,36,0.14)]',
     className,
   );
 
@@ -35,29 +31,25 @@ export function ContactCard({ href, label, value, icon: Icon, className }: Conta
 
   if (href) {
     return (
-      <motion.a
+      <a
         href={href}
         target={href.startsWith('mailto:') || href.startsWith('tel:') ? undefined : '_blank'}
         rel={href.startsWith('mailto:') || href.startsWith('tel:') ? undefined : 'noopener noreferrer'}
-        whileHover={shouldReduceMotion ? undefined : { y: -4 }}
-        transition={{ duration: 0.22, ease: 'easeOut' }}
         className={sharedClassName}
         aria-label={`${label}: ${value}`}
       >
         {content}
-      </motion.a>
+      </a>
     );
   }
 
   return (
-    <motion.div
-      whileHover={shouldReduceMotion ? undefined : { y: -4 }}
-      transition={{ duration: 0.22, ease: 'easeOut' }}
+    <div
       className={sharedClassName}
       role="group"
       aria-label={`${label}: ${value}`}
     >
       {content}
-    </motion.div>
+    </div>
   );
 }

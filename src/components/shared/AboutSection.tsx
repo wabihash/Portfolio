@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 
 const ROLES = [
   'Fullstack Developer',
@@ -19,40 +18,27 @@ const ROLE_COLORS: Record<(typeof ROLES)[number], string> = {
 const ROLE_SWITCH_MS = 2200;
 
 export function AboutSection() {
-  const shouldReduceMotion = useReducedMotion();
   const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    if (isMobile) {
+      return;
+    }
+
     const timer = setInterval(() => {
       setRoleIndex((current) => (current + 1) % ROLES.length);
     }, ROLE_SWITCH_MS);
     return () => clearInterval(timer);
-  }, [shouldReduceMotion]);
+  }, []);
 
   return (
     <section id="about" aria-labelledby="about-heading" className="mx-auto w-full max-w-6xl px-4 pt-8 md:px-8 md:pt-12">
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-        whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="section-card p-4 sm:p-5 md:p-8"
-      >
+      <div className="section-card p-4 sm:p-5 md:p-8">
         <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[280px_1fr] md:gap-10">
           {/* Portrait card */}
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.97 }}
-            whileInView={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.08, duration: 0.4 }}
-            className="mx-auto perspective-[1000px]"
-          >
-            <motion.div
-              whileHover={shouldReduceMotion ? undefined : { rotateX: 9, rotateY: -8, rotateZ: 4, y: -10, scale: 1.02 }}
-              transition={{ type: 'spring', stiffness: 180, damping: 18, mass: 0.9 }}
-              className="group relative h-48 w-40 transform-3d transform-[rotateX(20deg)_rotateY(-20deg)_rotateZ(10deg)] sm:h-56 sm:w-44 md:h-72 md:w-56"
-            >
+          <div className="mx-auto perspective-[1000px]">
+            <div className="group relative h-48 w-40 transform-3d transform-[rotateX(20deg)_rotateY(-20deg)_rotateZ(10deg)] transition-transform duration-300 hover:-translate-y-2 hover:rotate-[1deg] sm:h-56 sm:w-44 md:h-72 md:w-56">
               <div className="pointer-events-none absolute inset-6 rounded-[1.75rem] bg-cyan-400/25 blur-3xl shadow-[0_0_60px_rgba(34,211,238,0.35)]" />
               <div className="pointer-events-none absolute inset-x-10 bottom-2 h-16 rounded-full bg-orange-400/20 blur-2xl shadow-[0_0_50px_rgba(251,146,60,0.25)]" />
 
@@ -73,39 +59,27 @@ export function AboutSection() {
               </div>
 
               <div className="pointer-events-none absolute inset-x-6 top-4 h-px bg-linear-to-r from-transparent via-white/40 to-transparent" />
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Copy */}
           <div className="text-center md:text-left">
-            <motion.p
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
-              whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ delay: 0.12, duration: 0.35 }}
+            <p
               className="mb-3 text-xs font-semibold uppercase tracking-[0.22em]"
               style={{ color: 'var(--text-label)' }}
             >
               About Me
-            </motion.p>
+            </p>
 
-            <motion.h2
+            <h2
               id="about-heading"
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
-              whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ delay: 0.16, duration: 0.35 }}
               className="text-2xl font-bold sm:text-3xl md:text-4xl"
               style={{ color: 'var(--text-primary)' }}
             >
               Wabi
-            </motion.h2>
+            </h2>
 
-            <motion.p
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
-              whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ delay: 0.2, duration: 0.35 }}
+            <p
               className="mt-1 text-base font-medium sm:text-lg md:text-xl"
               style={{ color: 'var(--text-secondary)' }}
             >
@@ -115,26 +89,13 @@ export function AboutSection() {
                 aria-atomic="true"
                 className="relative inline-flex min-h-7 min-w-[11rem] items-center align-middle sm:min-w-56"
               >
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.span
-                    key={ROLES[roleIndex]}
-                    initial={shouldReduceMotion ? false : { opacity: 0, x: 10 }}
-                    animate={shouldReduceMotion ? undefined : { opacity: 1, x: 0 }}
-                    exit={shouldReduceMotion ? undefined : { opacity: 0, x: -10 }}
-                    transition={{ duration: 0.28, ease: 'easeOut' }}
-                    className={`absolute left-0 ${ROLE_COLORS[ROLES[roleIndex]]}`}
-                  >
+                <span key={ROLES[roleIndex]} className={`absolute left-0 transition-opacity duration-300 ${ROLE_COLORS[ROLES[roleIndex]]}`}>
                     {ROLES[roleIndex]}
-                  </motion.span>
-                </AnimatePresence>
+                </span>
               </span>
-            </motion.p>
+            </p>
 
-            <motion.p
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-              whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ delay: 0.24, duration: 0.4 }}
+            <p
               className="mt-4 max-w-2xl text-sm leading-relaxed sm:text-base"
               style={{ color: 'var(--text-secondary)' }}
             >
@@ -142,21 +103,17 @@ export function AboutSection() {
               dashboards and productivity tools. My approach blends thoughtful frontend design with reliable
               backend engineering to deliver fast, scalable, and intuitive experiences that feel polished on
               every device.
-            </motion.p>
+            </p>
 
-            <motion.p
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
-              whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ delay: 0.3, duration: 0.35 }}
+            <p
               className="mt-4 text-sm font-medium"
               style={{ color: 'var(--text-label)' }}
             >
               Creating AI-ready digital experiences that are beautiful, practical, and built to scale.
-            </motion.p>
+            </p>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -1,7 +1,4 @@
-'use client';
-
 import { Clapperboard, PenTool, Video, WandSparkles } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 
 type FutureSkill = {
   id: string;
@@ -63,17 +60,9 @@ const GROWTH_SKILLS: GrowthSkill[] = [
 ];
 
 export function FutureStackSection() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <section id="future-skills" aria-labelledby="future-skills-heading" className="mx-auto w-full max-w-6xl px-4 pt-8 md:px-8 md:pt-10">
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
-        whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="section-card p-5 md:p-8"
-      >
+      <div className="section-card p-5 md:p-8">
         {/* Heading */}
         <div className="flex flex-wrap items-center gap-3">
           <h2 id="future-skills-heading" className="text-2xl font-bold sm:text-[1.75rem] md:text-3xl" style={{ color: 'var(--text-primary)' }}>
@@ -121,7 +110,7 @@ export function FutureStackSection() {
             return (
               <article
                 key={item.id}
-                className="inset-card group relative overflow-hidden p-4 transition duration-300 hover:scale-[1.01] hover:border-purple-300/30"
+                className="inset-card group relative overflow-hidden p-4 transition duration-300 hover:-translate-y-0.5 hover:border-purple-300/30"
               >
                 <span className="absolute top-3 right-3 rounded-full bg-linear-to-r from-purple-500 to-blue-500 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--text-primary)]">
                   Coming Soon
@@ -148,13 +137,10 @@ export function FutureStackSection() {
                 <span className="text-xs font-semibold text-cyan-600 dark:text-cyan-400">{skill.level}%</span>
               </div>
 
-              <div className="h-2.5 w-full overflow-hidden rounded-full bg-[var(--track-bg)]" aria-hidden="true">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  viewport={{ once: true, amount: 0.6 }}
-                  transition={{ duration: shouldReduceMotion ? 0 : 0.85, ease: 'easeOut' }}
-                  className="h-full rounded-full bg-linear-to-r from-cyan-400 to-purple-400"
+                <div className="h-2.5 w-full overflow-hidden rounded-full bg-[var(--track-bg)]" aria-hidden="true">
+                <div
+                  className="h-full rounded-full bg-linear-to-r from-cyan-400 to-purple-400 transition-[width] duration-700 ease-out"
+                  style={{ width: `${skill.level}%` }}
                 />
               </div>
 
@@ -162,7 +148,7 @@ export function FutureStackSection() {
             </article>
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -1,7 +1,4 @@
-'use client';
-
 import type { ComponentType } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { SectionLink } from '@/components/shared/SectionLink';
 import { SOCIAL_LINKS } from '@/shared/constants/socialLinks';
 
@@ -22,7 +19,9 @@ const FOOTER_SOCIAL_IDS = new Set(['whatsapp', 'email', 'telegram', 'x']);
 function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col items-center gap-4 text-center md:items-start md:text-left">
-      <p className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: 'var(--text-muted)' }}>{title}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: 'var(--text-muted)' }}>
+        {title}
+      </p>
       {children}
     </div>
   );
@@ -38,42 +37,38 @@ function SocialIcon({
   icon: ComponentType<{ className?: string }>;
 }) {
   return (
-    <motion.a
+    <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      whileHover={{ y: -2, scale: 1.1 }}
-      whileTap={{ scale: 0.97 }}
-      className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--text-secondary)] shadow-[0_8px_22px_rgba(0,0,0,0.25)] backdrop-blur-sm transition duration-300 hover:border-cyan-300/45 hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)] hover:shadow-[0_12px_28px_rgba(34,211,238,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/60"
+      className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--text-secondary)] shadow-[0_8px_22px_rgba(0,0,0,0.25)] backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-cyan-300/45 hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)] hover:shadow-[0_12px_28px_rgba(34,211,238,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/60"
     >
       <span className="sr-only">{label}</span>
       <Icon className="h-5 w-5 transition-transform duration-300 group-hover:rotate-6" />
-    </motion.a>
+    </a>
   );
 }
 
 export function Footer() {
-  const shouldReduceMotion = useReducedMotion();
   const year = new Date().getFullYear();
   const footerSocialLinks = SOCIAL_LINKS.filter((item) => FOOTER_SOCIAL_IDS.has(item.id));
 
   return (
-    <footer className="relative mt-14 w-full overflow-hidden border-t transition-colors duration-300" style={{ borderColor: 'var(--border-subtle)', background: 'linear-gradient(to bottom, var(--footer-from), var(--footer-via), var(--footer-to))' }}>
+    <footer
+      className="relative mt-14 w-full overflow-hidden border-t transition-colors duration-300"
+      style={{ borderColor: 'var(--border-subtle)', background: 'linear-gradient(to bottom, var(--footer-from), var(--footer-via), var(--footer-to))' }}
+    >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-cyan-300/60 to-transparent" />
       <div className="pointer-events-none absolute -top-16 left-1/2 h-32 w-2xl -translate-x-1/2 rounded-full bg-cyan-300/10 blur-3xl" />
 
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-        whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="relative mx-auto w-full max-w-6xl px-4 py-12 md:px-8 md:py-14"
-      >
+      <div className="relative mx-auto w-full max-w-6xl px-4 py-12 md:px-8 md:py-14">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
           <FooterColumn title="Brand">
             <div>
-              <p className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Wabi</p>
+              <p className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+                Wabi
+              </p>
               <p className="mt-3 max-w-xs text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Building modern fullstack experiences.
               </p>
@@ -107,10 +102,10 @@ export function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-2 border-t pt-5 text-xs md:flex-row" style={{ borderColor: 'var(--border-subtle)', color: 'var(--text-muted)' }}>
-          <p>© {year} Wabi. All rights reserved.</p>
+          <p>&copy; {year} Wabi. All rights reserved.</p>
           <p>Built with Next.js &amp; Tailwind</p>
         </div>
-      </motion.div>
+      </div>
     </footer>
   );
 }

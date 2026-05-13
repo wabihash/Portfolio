@@ -1,23 +1,13 @@
-'use client';
-
 import Link from 'next/link';
 import styles from './HeroSection.module.css';
-import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import { HERO_OPEN_TO_ROLES } from '@/shared/data/homeSections';
 
 export function HeroSection() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <div className="pointer-events-none absolute inset-0 z-10 flex items-start">
       <div className="mx-auto w-full max-w-6xl px-4 pb-4 pt-0 sm:pb-7 sm:pt-6 md:px-8 md:pb-10 md:pt-14 lg:pt-18">
-        <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-          animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: 'easeOut' }}
-          className="pointer-events-auto p-2"
-        >
+        <div className="hero-shell pointer-events-auto p-2">
           <div className="max-w-2xl rounded-2xl p-3 sm:p-4 md:p-6">
             {/* Label */}
 
@@ -64,7 +54,7 @@ export function HeroSection() {
               </Link>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

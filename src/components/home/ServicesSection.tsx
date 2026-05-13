@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { ComponentType } from 'react';
 import { BrainCircuit, Code2, LayoutTemplate, Palette } from 'lucide-react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { SERVICES, type ServiceIcon } from '@/shared/data/homeSections';
 
 const ICONS: Record<ServiceIcon, ComponentType<{ className?: string }>> = {
@@ -14,28 +13,26 @@ const ICONS: Record<ServiceIcon, ComponentType<{ className?: string }>> = {
 };
 
 export function ServicesSection() {
-  const shouldReduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const activeService = useMemo(() => SERVICES[activeIndex], [activeIndex]);
 
   useEffect(() => {
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    if (isMobile) {
+      return;
+    }
+
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % SERVICES.length);
-    }, shouldReduceMotion ? 5000 : 3200);
+    }, 3200);
 
     return () => clearInterval(timer);
-  }, [shouldReduceMotion]);
+  }, []);
 
   return (
     <section id="services" aria-labelledby="services-heading" className="mx-auto w-full max-w-6xl px-4 pt-8 md:px-8 md:pt-10">
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-        whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="section-card p-4 sm:p-5 md:p-8"
-      >
+      <div className="section-card p-4 sm:p-5 md:p-8">
         <h2 id="services-heading" className="text-2xl font-bold sm:text-[1.75rem] md:text-3xl" style={{ color: 'var(--text-primary)' }}>
           Interactive <span className="text-[#34d399]">Services</span>
         </h2>
@@ -68,32 +65,26 @@ export function ServicesSection() {
         {/* Desktop: animated active panel */}
         <div className="relative mt-5 hidden md:block">
           <div className="overflow-hidden rounded-xl">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.article
-                key={activeService.id}
-                initial={shouldReduceMotion ? false : { opacity: 0, x: 24 }}
-                animate={shouldReduceMotion ? undefined : { opacity: 1, x: 0 }}
-                exit={shouldReduceMotion ? undefined : { opacity: 0, x: -24 }}
-                transition={{ duration: 0.36, ease: 'easeOut' }}
-                className="rounded-xl border p-6"
-                style={{
-                  borderColor: 'rgba(52,211,153,0.65)',
-                  backgroundColor: 'var(--surface-inset)',
-                  boxShadow: '0 16px 35px rgba(52,211,153,0.14)',
-                }}
-              >
-                <div className="flex items-start gap-4">
-                  {(() => {
-                    const ActiveIcon = ICONS[activeService.icon];
-                    return <ActiveIcon className="mt-1 h-7 w-7 text-[#86efac]" />;
-                  })()}
-                  <div>
-                    <h3 className="text-lg font-semibold sm:text-xl" style={{ color: 'var(--text-primary)' }}>{activeService.title}</h3>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{activeService.description}</p>
-                  </div>
+            <article
+              key={activeService.id}
+              className="rounded-xl border p-6 transition-colors duration-300"
+              style={{
+                borderColor: 'rgba(52,211,153,0.65)',
+                backgroundColor: 'var(--surface-inset)',
+                boxShadow: '0 16px 35px rgba(52,211,153,0.14)',
+              }}
+            >
+              <div className="flex items-start gap-4">
+                {(() => {
+                  const ActiveIcon = ICONS[activeService.icon];
+                  return <ActiveIcon className="mt-1 h-7 w-7 text-[#86efac]" />;
+                })()}
+                <div>
+                  <h3 className="text-lg font-semibold sm:text-xl" style={{ color: 'var(--text-primary)' }}>{activeService.title}</h3>
+                  <p className="mt-2 max-w-2xl text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{activeService.description}</p>
                 </div>
-              </motion.article>
-            </AnimatePresence>
+              </div>
+            </article>
           </div>
 
           {/* Dot nav */}
@@ -112,16 +103,13 @@ export function ServicesSection() {
           </div>
         </div>
 
-        <motion.button
+        <button
           key={activeService.id}
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
-          animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="mt-6 w-full rounded-full bg-linear-to-r from-teal-400 to-pink-500 px-5 py-2.5 text-sm font-semibold text-[#041224] shadow-[0_10px_24px_rgba(45,212,191,0.28)] sm:w-auto"
+          className="mt-6 w-full rounded-full bg-linear-to-r from-teal-400 to-pink-500 px-5 py-2.5 text-sm font-semibold text-[#041224] shadow-[0_10px_24px_rgba(45,212,191,0.28)] transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto"
         >
           Explore {activeService.title}
-        </motion.button>
-      </motion.div>
+        </button>
+      </div>
     </section>
   );
 }
