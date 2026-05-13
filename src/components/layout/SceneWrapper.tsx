@@ -1,55 +1,64 @@
 'use client';
 
-import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import AmbientIntelligenceDeferred from '@/components/layout/AmbientIntelligenceDeferred';
 
-const sceneEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-export const sceneVariants: Variants = {
-  initial: {
-    opacity: 0,
-    y: 10,
-    scale: 0.99,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: sceneEase,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -10,
-    scale: 0.99,
-    transition: {
-      duration: 0.3,
-      ease: sceneEase,
-    },
-  },
+type NavigatorConnection = {
+  saveData?: boolean;
+  effectiveType?: string;
 };
+
+const SceneTransition = dynamic(() => import('@/components/layout/SceneTransition'), {
+  ssr: false,
+  loading: () => null,
+});
+
+function shouldEnableTransitions(): boolean {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) {
+    return false;
+  }
+
+  const connection = (navigator as unknown as { connection?: NavigatorConnection }).connection;
+  if (connection?.saveData) {
+    return false;
+  }
+
+  const effectiveType = connection?.effectiveType;
+  if (effectiveType === 'slow-2g' || effectiveType === '2g' || effectiveType === '3g') {
+    return false;
+  }
+
+  // Mobile devices get the biggest perf win by skipping transition JS.
+  if (window.innerWidth < 768) {
+    return false;
+  }
+
+  return true;
+}
 
 export default function SceneWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [transitionsEnabled, setTransitionsEnabled] = useState(false);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => setTransitionsEnabled(shouldEnableTransitions()));
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   return (
     <div className="relative isolate w-full min-h-screen">
       <AmbientIntelligenceDeferred />
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={pathname}
-          variants={sceneVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          className="relative z-10 w-full min-h-screen"
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
+      {transitionsEnabled ? (
+        <SceneTransition pathname={pathname}>{children}</SceneTransition>
+      ) : (
+        <div className="relative z-10 w-full min-h-screen">{children}</div>
+      )}
     </div>
   );
 }

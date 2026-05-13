@@ -47,6 +47,7 @@ function SocialIcon({
       whileTap={{ scale: 0.97 }}
       className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--text-secondary)] shadow-[0_8px_22px_rgba(0,0,0,0.25)] backdrop-blur-sm transition duration-300 hover:border-cyan-300/45 hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)] hover:shadow-[0_12px_28px_rgba(34,211,238,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/60"
     >
+      <span className="sr-only">{label}</span>
       <Icon className="h-5 w-5 transition-transform duration-300 group-hover:rotate-6" />
     </motion.a>
   );

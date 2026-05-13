@@ -39,7 +39,7 @@ export default function Home() {
             priority
             fetchPriority="high"
             sizes="100vw"
-            unoptimized
+            quality={75}
             className="h-136 w-full object-cover saturate-90 contrast-90 opacity-60 sm:h-auto"
             style={{ zIndex: 0 }}
           />

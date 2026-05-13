@@ -21,6 +21,7 @@ export default function Dock() {
             href={item.href}
             className="relative p-3 rounded-xl transition-all duration-300 hover:bg-[var(--surface)] group"
           >
+            <span className="sr-only">{item.label}</span>
             <item.icon 
               className={cn(
                 "w-5 h-5 transition-colors duration-300",

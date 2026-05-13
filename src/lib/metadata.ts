@@ -52,6 +52,7 @@ function resolveSiteUrl() {
   // Use VERCEL_PROJECT_PRODUCTION_URL or NEXT_PUBLIC_SITE_URL to get the canonical domain
   const rawUrl = 
     process.env.NEXT_PUBLIC_SITE_URL ??
+    process.env.NEXT_PUBLIC_APP_URL ??
     process.env.SITE_URL ??
     process.env.VERCEL_PROJECT_PRODUCTION_URL ??
     // process.env.VERCEL_URL is often a deployment URL (branch-xyz.vercel.app)
@@ -161,7 +162,8 @@ export function buildRobots(): MetadataRoute.Robots {
       allow: '/',
     },
     sitemap: siteUrl ? `${siteUrl}/sitemap.xml` : undefined,
-    host: siteUrl,
+    // Some parsers treat `Host: https://...` as invalid; provide hostname only.
+    host: siteUrl ? new URL(siteUrl).host : undefined,
   };
 }
 

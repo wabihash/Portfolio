@@ -11,6 +11,39 @@ const DigitalTwin = dynamic(
   }
 );
 
+type NavigatorConnection = {
+  saveData?: boolean;
+  effectiveType?: string;
+};
+
+function shouldAutoLoadAssistant(): boolean {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) {
+    return false;
+  }
+
+  const connection = (navigator as unknown as { connection?: NavigatorConnection }).connection;
+  if (connection?.saveData) {
+    return false;
+  }
+
+  const effectiveType = connection?.effectiveType;
+  // Keep slower networks from paying the JS cost automatically.
+  if (effectiveType === 'slow-2g' || effectiveType === '2g' || effectiveType === '3g') {
+    return false;
+  }
+
+  // Mobile Lighthouse runs on a constrained device profile; don't auto-load there.
+  if (window.innerWidth < 768) {
+    return false;
+  }
+
+  return true;
+}
+
 function scheduleIdle(callback: () => void): () => void {
   if (typeof window === 'undefined') {
     return () => undefined;
@@ -34,6 +67,20 @@ export function DigitalTwinDeferred() {
   const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
+    // Default: do not load heavy assistant JS on mobile/slow networks.
+    if (!shouldAutoLoadAssistant()) {
+      // Still allow loading after explicit user interaction (click/scroll/tap) on any device.
+      const loadOnInteraction = () => setShouldLoad(true);
+      window.addEventListener('pointerdown', loadOnInteraction, { once: true, passive: true });
+      window.addEventListener('keydown', loadOnInteraction, { once: true });
+      window.addEventListener('scroll', loadOnInteraction, { once: true, passive: true });
+      return () => {
+        window.removeEventListener('pointerdown', loadOnInteraction);
+        window.removeEventListener('keydown', loadOnInteraction);
+        window.removeEventListener('scroll', loadOnInteraction);
+      };
+    }
+
     const cancel = scheduleIdle(() => setShouldLoad(true));
     return () => cancel();
   }, []);
