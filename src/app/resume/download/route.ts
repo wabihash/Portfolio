@@ -1,9 +1,12 @@
-import { buildResumePdf, RESUME_FILENAME } from '@/lib/resumePdf';
+import { readFile } from 'fs/promises';
+import path from 'path';
+import { RESUME_FILENAME } from '@/lib/resumePdf';
 
 export const runtime = 'nodejs';
 
 export async function GET() {
-  const pdf = buildResumePdf();
+  const pdfPath = path.join(process.cwd(), 'public', RESUME_FILENAME);
+  const pdf = await readFile(pdfPath);
 
   return new Response(pdf, {
     headers: {
