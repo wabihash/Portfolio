@@ -7,6 +7,13 @@ export const CORE_EXPERTISE_BADGES = [
   'Tailwind CSS',
   'Bootstrap',
   'Node.js',
+  'FastAPI',
+  'Vite',
+  'SQLModel',
+  'PostgreSQL',
+  'Alembic',
+  'Clerk',
+  'PWA',
   'Framer Motion',
   'Accessibility',
 ] as const;

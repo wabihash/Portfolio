@@ -1,5 +1,5 @@
 export const RESUME_SUMMARY =
-  'Full-Stack developer building modern web experiences with thoughtful UI, reliable backend logic, and practical AI-powered features. Delivered 6+ real-world projects using React, Next.js, Node.js, and AI integrations across social, e-commerce, and PWA products.';
+  'Full-Stack developer building modern web experiences with thoughtful UI, reliable backend logic, and practical AI-powered features. Delivered 7+ real-world projects using React, Next.js, Node.js, Python, and AI integrations across social, e-commerce, workforce, and PWA products.';
 
 export const RESUME_FOCUS_AREAS = [
   'Modern React and Next.js interfaces',
